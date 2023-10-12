@@ -1,6 +1,7 @@
 .container {
+    max-width: calc(100vw - 4rem);
+    overflow-x: auto;
     padding: 2rem;
-    min-height: 100vh;
     margin-top: 1rem;
 }
 
@@ -15,7 +16,7 @@
     min-width: 400px;
     gap: 1rem;
     padding: 2vw;
-    border: 1px solid #212121;
+    border: 1px solid #3f3f3f;
     border-radius: 8px;
 }
 
