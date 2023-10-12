@@ -1,0 +1,8 @@
+.dragged {
+    transform: translate(var(--delta-x), var(--delta-y));
+}
+
+.autoMove {
+    transform: translateY(var(--delta-y));
+    transition: transform 0.3s;
+}
