@@ -107,9 +107,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 	);
 
 	const dropHandler = useCallback(() => {
-		const isInserted = !!Object.values(positions)
-			.filter(el => el.status === hoveredColumn)
-			.find(el => el.top > positions[draggedId].top);
+		const isInserted = Object.values(positions).filter(el => el.status === hoveredColumn).length > 1;
 		setConfig(prevState =>
 			isInserted ? updateConfigInsert(prevState, positions) : updateConfigAdd(prevState, draggedId, hoveredColumn)
 		);
