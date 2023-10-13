@@ -1,17 +1,17 @@
 import { DragEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ColCoords, Positions, Status, TaskItem } from '@/types';
+import { INTERSECTION_RATIO } from '@/constants';
 import { ascent } from '@/utils/ascent';
 import { recalculatePositions } from '@/utils/recalculatePositions';
 import { getInitPositions } from '@/utils/getInitPositions';
 import { updateConfigInsert } from '@/utils/updateConfigInsert';
 import { updateConfigAdd } from '@/utils/updateConfigAdd';
-import { INTERSECTION_RATIO } from '../../constants';
-import { ColCoords, Positions, Status, TaskItem } from '../../types';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [config, setConfig] = useState<TaskItem[]>(tasks);
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<Status | null>(null);
-	const [leftSiteIndex, setLeftSiteIndex] = useState<number>(0);
+	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
 	const [hoveredColumn, setHoveredColumn] = useState<Status | undefined>();
 	const [hoveredId, setHoveredId] = useState<number>(0);
 	const [positions, setPositions] = useState<Positions>({});
@@ -47,19 +47,28 @@ export const useDrag = (tasks: TaskItem[]) => {
 		setHoveredId(foundHoveredTask ? +foundHoveredTask : 0);
 		if (hoveredCol && hoveredCol !== positions[draggedId].status) {
 			setLeftSiteStatus(positions[draggedId].status);
-			setLeftSiteIndex(positions[draggedId].index);
+			setLeftSiteTop(positions[draggedId].top + positions[draggedId].dY);
 		}
-		setHoveredColumn(hoveredCol);
+		if (hoveredCol) setHoveredColumn(hoveredCol);
 	}, [colCoords, draggedDX, draggedDY, draggedId, positions]);
 
 	useEffect(() => {
-		setPositions(prevState => ascent(prevState, leftSiteStatus, leftSiteIndex));
-	}, [leftSiteIndex, leftSiteStatus]);
+		setPositions(prevState => ascent(prevState, leftSiteStatus, leftSiteTop));
+	}, [leftSiteTop, leftSiteStatus]);
 
 	useEffect(() => {
 		if (!draggedId || !hoveredId) return;
 		setPositions(recalculatePositions({ draggedId, hoveredId }));
 	}, [draggedId, hoveredId]);
+
+	useEffect(() => {
+		if (hoveredColumn) {
+			setPositions(prevState => ({
+				...prevState,
+				[draggedId]: { ...prevState[draggedId], status: hoveredColumn },
+			}));
+		}
+	}, [draggedId, hoveredColumn]);
 
 	useLayoutEffect(() => {
 		if (!ref.current) return;
@@ -72,7 +81,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 			setDraggedDX(0);
 			setDraggedDY(0);
 			setLeftSiteStatus(null);
-			setLeftSiteIndex(0);
+			setLeftSiteTop(0);
+			setHoveredColumn(undefined);
 			offsetX.current = 0;
 			offsetY.current = 0;
 		};
@@ -99,7 +109,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const dropHandler = useCallback(() => {
 		const isInserted = !!Object.values(positions)
 			.filter(el => el.status === hoveredColumn)
-			.find(el => el.index > positions[draggedId].index);
+			.find(el => el.top > positions[draggedId].top);
 		setConfig(prevState =>
 			isInserted ? updateConfigInsert(prevState, positions) : updateConfigAdd(prevState, draggedId, hoveredColumn)
 		);

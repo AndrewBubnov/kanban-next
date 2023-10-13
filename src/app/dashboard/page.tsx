@@ -1,8 +1,8 @@
 import { prisma } from '@/db';
 import { Desk } from '@/components/Desk/Desk';
 import { Header } from '@/components/Header/Header';
-import { TaskItem } from '../../../types';
-import { columns } from '../../../constants';
+import { TaskItem } from '../../types';
+import { columns } from '../../constants';
 import styles from './Dashboard.module.css';
 
 const userId = '1';

@@ -1,4 +1,4 @@
-import { ColumnName, Status } from './types';
+import { ColumnName, Status } from '@/types';
 
 export const DELTA_X = '--delta-x';
 export const DELTA_Y = '--delta-y';

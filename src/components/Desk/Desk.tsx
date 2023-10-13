@@ -2,8 +2,8 @@
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable/Draggable';
 import { Task } from '@/components/Task/Task';
-import { ColumnNameDTO } from '../../../constants';
-import { DeskProps, Status } from '../../../types';
+import { ColumnNameDTO } from '@/constants';
+import { DeskProps, Status } from '@/types';
 import styles from './Desk.module.css';
 
 export function Desk({ tasks, columns }: DeskProps) {
@@ -48,10 +48,8 @@ export function Desk({ tasks, columns }: DeskProps) {
 	);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.columnWrapper} ref={ref}>
-				{columns.map(renderMapper)}
-			</div>
+		<div className={styles.container} ref={ref}>
+			{columns.map(renderMapper)}
 		</div>
 	);
 }

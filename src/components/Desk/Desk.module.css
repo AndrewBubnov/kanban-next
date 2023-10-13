@@ -1,19 +1,15 @@
 .container {
-    max-width: calc(100vw - 4rem);
-    overflow-x: auto;
-    padding: 2rem;
-    margin-top: 1rem;
-}
-
-.columnWrapper {
     display: flex;
     gap: 1rem;
+    max-width: calc(100vw - 4rem);
+    padding: 2rem;
+    margin-top: 1rem;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    min-width: 400px;
+    flex: 1;
     gap: 1rem;
     padding: 2vw;
     border: 1px solid #3f3f3f;
