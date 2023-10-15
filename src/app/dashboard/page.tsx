@@ -1,26 +1,20 @@
 import { prisma } from '@/db';
 import { Desk } from '@/components/Desk/Desk';
 import { Header } from '@/components/Header/Header';
-import { TaskItem } from '../../types';
-import { columns } from '../../constants';
+import { auth } from '@clerk/nextjs';
+import { TaskItem } from '@/types';
+import { columns } from '@/constants';
 import styles from './Dashboard.module.css';
 
-const userId = '1';
-
-// const newUser = await prisma.user.create({         // register new userId
-//     data: {
-//         userId,
-//     },
-// });
-
 export default async function Dashboard() {
+	const userId = auth().userId as string;
+	const existingUser = await prisma.user.findUnique({ where: { userId } });
+	if (!existingUser) await prisma.user.create({ data: { userId } });
 	// await prisma.task.deleteMany()
-	const tasks = (await prisma.task.findMany({
-		where: { userId },
-	})) as TaskItem[];
+	const tasks = (await prisma.task.findMany({ where: { userId } })) as TaskItem[];
 	return (
 		<div className={styles.wrapper}>
-			<Header />
+			<Header userId={userId} />
 			<Desk tasks={tasks} columns={columns} />
 		</div>
 	);

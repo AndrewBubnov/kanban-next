@@ -1,28 +1,25 @@
-'use client'
-import { useState } from "react";
-import styles from "./Header.module.css";
-import {Modal} from "@/components/Modal/Modal";
-import {addTask} from "@/prismaActions/addTask";
+'use client';
+import { useState } from 'react';
+import { AddTaskModal } from '@/components/AddTaskModal/AddTaskModal';
+import { addTask } from '@/prismaActions/addTask';
+import { AppBar } from '@mui/material';
+import { StyledAddButton, StyledToolbar } from '@/components/StyledComponents';
 
-const userId = '1';
-
-export const Header = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const toggleOpenHandler = () => setOpenModal((prevState) => !prevState);
-  const confirmHandler = async (task: { title: string; body: string }) => {
-    await addTask(task, userId);
-    setOpenModal(false);
-  };
-  return (
-    <header className={styles.header}>
-      <button className={styles.addButton} onClick={toggleOpenHandler}>
-        Add new
-      </button>
-      <Modal
-        open={openModal}
-        onConfirm={confirmHandler}
-        onCancel={toggleOpenHandler}
-      />
-    </header>
-  );
+export const Header = ({ userId }: { userId: string }) => {
+	const [openModal, setOpenModal] = useState<boolean>(false);
+	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
+	const confirmHandler = async (task: { title: string; body: string }) => {
+		await addTask(task, userId);
+		setOpenModal(false);
+	};
+	return (
+		<AppBar position="static" color="transparent">
+			<StyledToolbar>
+				<StyledAddButton variant="text" onClick={toggleOpenHandler}>
+					Add new
+				</StyledAddButton>
+				<AddTaskModal open={openModal} onConfirm={confirmHandler} onCancel={toggleOpenHandler} />
+			</StyledToolbar>
+		</AppBar>
+	);
 };

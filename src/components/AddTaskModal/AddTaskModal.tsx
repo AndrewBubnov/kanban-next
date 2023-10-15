@@ -3,10 +3,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import { ModalProps } from '../../types';
-import { StyledButton, StyledDialog, StyledDialogActions } from '@/components/Modal/StyledComponents';
+import { ModalProps } from '@/types';
+import { StyledModalButton, StyledDialog, StyledDialogActions } from '@/components/StyledComponents';
 
-export const Modal = ({ open, onConfirm, onCancel }: ModalProps) => {
+export const AddTaskModal = ({ open, onConfirm, onCancel }: ModalProps) => {
 	const [title, setTitle] = useState<string>('');
 	const [body, setBody] = useState<string>('');
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
@@ -22,12 +22,12 @@ export const Modal = ({ open, onConfirm, onCancel }: ModalProps) => {
 				<TextField onChange={bodyHandler} margin="dense" variant="outlined" fullWidth multiline rows={4} />
 			</DialogContent>
 			<StyledDialogActions>
-				<StyledButton variant="text" onClick={onCancel}>
+				<StyledModalButton variant="text" onClick={onCancel}>
 					Cancel
-				</StyledButton>
-				<StyledButton variant="text" onClick={confirmHandler}>
+				</StyledModalButton>
+				<StyledModalButton variant="text" onClick={confirmHandler}>
 					Confirm
-				</StyledButton>
+				</StyledModalButton>
 			</StyledDialogActions>
 		</StyledDialog>
 	);
