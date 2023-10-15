@@ -1,3 +1,4 @@
+'use client';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -24,7 +25,11 @@ export const StyledModalButton = styled(Button)(() => ({
 
 export const StyledAddButton = styled(Button)(() => ({
 	'textTransform': 'none',
-	'color': 'darkgray',
+	'fontSize': '1rem',
+	'color': 'lightgray',
+	'&:hover': {
+		color: '#fff',
+	},
 	'&:focus': {
 		outline: 'none',
 	},

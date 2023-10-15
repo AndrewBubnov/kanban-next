@@ -4,7 +4,8 @@ import { Header } from '@/components/Header/Header';
 import { auth } from '@clerk/nextjs';
 import { TaskItem } from '@/types';
 import { columns } from '@/constants';
-import styles from './Dashboard.module.css';
+import { AddTask } from '@/components/AddTask/AddTask';
+import { Box } from '@mui/material';
 
 export default async function Dashboard() {
 	const userId = auth().userId as string;
@@ -13,9 +14,16 @@ export default async function Dashboard() {
 	// await prisma.task.deleteMany()
 	const tasks = (await prisma.task.findMany({ where: { userId } })) as TaskItem[];
 	return (
-		<div className={styles.wrapper}>
+		<Box
+			sx={{
+				height: '100vh',
+				overflowY: 'auto',
+				padding: '1rem',
+			}}
+		>
 			<Header userId={userId} />
+			<AddTask userId={userId} />
 			<Desk tasks={tasks} columns={columns} />
-		</div>
+		</Box>
 	);
 }

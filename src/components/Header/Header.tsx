@@ -1,25 +1,25 @@
-'use client';
-import { useState } from 'react';
-import { AddTaskModal } from '@/components/AddTaskModal/AddTaskModal';
-import { addTask } from '@/prismaActions/addTask';
 import { AppBar } from '@mui/material';
-import { StyledAddButton, StyledToolbar } from '@/components/StyledComponents';
-import { TaskContent } from '@/types';
+import { StyledToolbar } from '@/components/StyledComponents';
+import Link from 'next/link';
+import { UserButton } from '@clerk/nextjs';
+import styles from './Header.module.css';
 
 export const Header = ({ userId }: { userId: string }) => {
-	const [openModal, setOpenModal] = useState<boolean>(false);
-	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
-	const confirmHandler = async (task: TaskContent) => {
-		await addTask(task, userId);
-		setOpenModal(false);
-	};
 	return (
 		<AppBar position="static" color="transparent">
 			<StyledToolbar>
-				<StyledAddButton variant="text" onClick={toggleOpenHandler}>
-					Add new
-				</StyledAddButton>
-				<AddTaskModal open={openModal} onConfirm={confirmHandler} onCancel={toggleOpenHandler} />
+				{userId ? (
+					<UserButton />
+				) : (
+					<>
+						<Link href="/sign-in" className={styles.link}>
+							Sign in
+						</Link>
+						<Link href="/sign-up" className={styles.link}>
+							Sign up
+						</Link>
+					</>
+				)}
 			</StyledToolbar>
 		</AppBar>
 	);
