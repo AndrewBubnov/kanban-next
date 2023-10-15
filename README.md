@@ -1,6 +1,6 @@
 # kanban-next
 
-**kanban-next** is a personal project created by Andrew Bubnov with Next.js, Material-UI, and custom drag-and-drop functionality to build a Kanban-style task management application. It features user authentication with multiple options, including Google, Facebook, or email and password registration.
+**kanban-next** is a personal project created by Andrew Bubnov with Next 13, Material-UI, and custom drag-and-drop functionality to build a Kanban-style task management application. It features user authentication with multiple options, including Google, Facebook, or email and password registration.
 
 ## Features
 
