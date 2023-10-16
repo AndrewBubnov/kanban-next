@@ -32,8 +32,3 @@ export const StyledAddButton = styled(Button)(() => ({
 		outline: 'none',
 	},
 }));
-
-export const StyledToolbar = styled(Toolbar)(() => ({
-	display: 'flex',
-	flexDirection: 'row-reverse',
-}));

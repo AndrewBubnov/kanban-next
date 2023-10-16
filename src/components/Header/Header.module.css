@@ -1,9 +1,17 @@
 .link {
     font-size: 1rem;
     color: darkgrey;
+    margin-right: 2rem;
     transition: color .3s;
 }
 
 .link:hover {
     color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 4rem;
 }

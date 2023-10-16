@@ -21,7 +21,7 @@ export const AddTask = ({ userId }: { userId: string }) => {
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	return (
 		<>
-			<Grid container mt={1}>
+			<Grid container>
 				<StyledAddButton variant="text" onClick={toggleOpenHandler}>
 					Add new
 				</StyledAddButton>
