@@ -10,11 +10,11 @@ export interface DeskProps {
 	columns: Status[];
 }
 
-export type TaskContent = { title: string; body: string };
+export type TaskContent = { title: string; description: string; id: number };
 
 export type TaskItem = {
 	title: string;
-	body: string;
+	description: string;
 	id: number;
 	status: Status;
 };
@@ -55,4 +55,9 @@ export interface ModalProps {
 	open: boolean;
 	onConfirm(arg: TaskContent): void;
 	onCancel(): void;
+}
+
+export interface CardFormProps {
+	onCancel: () => void;
+	onConfirm: ((formData: FormData) => void) | undefined;
 }

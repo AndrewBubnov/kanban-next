@@ -11,7 +11,7 @@ export default async function Dashboard() {
 	const userId = auth().userId as string;
 	const existingUser = await prisma.user.findUnique({ where: { userId } });
 	if (!existingUser) await prisma.user.create({ data: { userId } });
-	// await prisma.task.deleteMany()
+	// await prisma.task.deleteMany();
 	const tasks = (await prisma.task.findMany({ where: { userId } })) as TaskItem[];
 	return (
 		<Box

@@ -25,7 +25,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 			<span className={styles.columnName}>{ColumnNameDTO[status]}</span>
 			{config
 				.filter(card => card.status === status)
-				.map(({ title, body, id }) => {
+				.map(({ title, description, id }) => {
 					const cardId = `${status}-${id}`;
 					const isDragged = id === draggedId;
 					return (
@@ -40,7 +40,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 							id={cardId}
 							configUpdated={configUpdated}
 						>
-							<Task title={title} body={body} />
+							<Task title={title} description={description} id={id} />
 						</Draggable>
 					);
 				})}

@@ -1,31 +1,17 @@
-import styles from './Task.module.css';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { StyledCard, StyledCardContent } from '@/components/StyledComponents';
 import { TaskContent } from '@/types';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 
-export const StyledCard = styled(Card)(() => ({
-	height: 150,
-}));
-
-export const StyledCardContent = styled(CardContent)(() => ({
-	'& .MuiTypography-root': {
-		maxWidth: 180,
-		overflow: 'hidden',
-		whiteSpace: 'nowrap',
-		textOverflow: 'ellipsis',
-	},
-}));
-
-export const Task = ({ title, body }: TaskContent) => (
+export const Task = ({ id, title, description }: TaskContent) => (
 	<StyledCard>
 		<StyledCardContent>
-			<Typography gutterBottom>{title}</Typography>
-			<Typography>{body}</Typography>
+			<Box component="span" sx={{ color: 'darkgrey', fontWeight: 600 }}>
+				{id}.&nbsp;
+			</Box>
+			<Box component="span" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>
+				{title}
+			</Box>
+			<Typography mt={1}>{description}</Typography>
 		</StyledCardContent>
 	</StyledCard>
-	// <div className={styles.card}>
-	//   <div>{title}</div>
-	//   <div>{body}</div>
-	// </div>
 );

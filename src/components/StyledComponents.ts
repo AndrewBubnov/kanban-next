@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { Toolbar } from '@mui/material';
+import { Card, CardContent, Toolbar } from '@mui/material';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -30,5 +30,18 @@ export const StyledAddButton = styled(Button)(() => ({
 	},
 	'&:focus': {
 		outline: 'none',
+	},
+}));
+
+export const StyledCard = styled(Card)(() => ({
+	height: 150,
+}));
+
+export const StyledCardContent = styled(CardContent)(() => ({
+	'& .MuiTypography-root': {
+		maxWidth: 180,
+		overflow: 'hidden',
+		whiteSpace: 'nowrap',
+		textOverflow: 'ellipsis',
 	},
 }));
