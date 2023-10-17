@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { Card, CardContent, Toolbar } from '@mui/material';
+import { Box, Card, CardContent } from '@mui/material';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -33,8 +33,21 @@ export const StyledAddButton = styled(Button)(() => ({
 	},
 }));
 
-export const StyledCard = styled(Card)(() => ({
+export const StyledTaskMini = styled(Card)(() => ({
 	height: 150,
+}));
+
+export const StyledTaskDetails = styled(Card)(() => ({
+	minWidth: '50%',
+	minHeight: '40%',
+}));
+
+export const Wrapper = styled(Box)(() => ({
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	height: '100vh',
+	width: '100vw',
 }));
 
 export const StyledCardContent = styled(CardContent)(() => ({

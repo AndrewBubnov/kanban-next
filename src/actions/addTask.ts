@@ -1,16 +1,13 @@
 'use server';
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
+import { auth } from '@clerk/nextjs';
+import { getUser } from '@/actions/getUser';
 
-export const addTask = async (task: { title: string; description: string }, userId: string) => {
-	const user = await prisma.user.findUnique({
-		where: {
-			userId,
-		},
-		include: {
-			tasks: true,
-		},
-	});
+export const addTask = async (task: { title: string; description: string }) => {
+	const userId = auth().userId as string;
+
+	const user = await getUser(userId);
 
 	if (!user) return;
 
@@ -33,5 +30,5 @@ export const addTask = async (task: { title: string; description: string }, user
 			},
 		},
 	});
-	revalidatePath('/');
+	revalidatePath('/dashboard');
 };

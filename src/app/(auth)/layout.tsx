@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import styles from './layout.module.css';
+import { Wrapper } from '@/components/StyledComponents';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-	return <div className={styles.wrapper}>{children}</div>;
+	return <Wrapper>{children}</Wrapper>;
 }

@@ -6,6 +6,7 @@ import { recalculatePositions } from '@/utils/recalculatePositions';
 import { getInitPositions } from '@/utils/getInitPositions';
 import { updateConfigInsert } from '@/utils/updateConfigInsert';
 import { updateConfigAdd } from '@/utils/updateConfigAdd';
+import { updateAllTasks } from '@/actions/updateAllTasks';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [config, setConfig] = useState<TaskItem[]>(tasks);
@@ -106,12 +107,14 @@ export const useDrag = (tasks: TaskItem[]) => {
 		[draggedId, positions]
 	);
 
-	const dropHandler = useCallback(() => {
+	const dropHandler = useCallback(async () => {
 		const isInserted = Object.values(positions).filter(el => el.status === hoveredColumn).length > 1;
-		setConfig(prevState =>
-			isInserted ? updateConfigInsert(prevState, positions) : updateConfigAdd(prevState, draggedId, hoveredColumn)
-		);
-	}, [draggedId, hoveredColumn, positions]);
+		const newConfig = isInserted
+			? updateConfigInsert(config, positions)
+			: updateConfigAdd(config, draggedId, hoveredColumn);
+		await updateAllTasks(newConfig);
+		setConfig(newConfig);
+	}, [config, draggedId, hoveredColumn, positions]);
 
 	return {
 		positions,

@@ -10,7 +10,11 @@ export interface DeskProps {
 	columns: Status[];
 }
 
-export type TaskContent = { title: string; description: string; id: number };
+export type TaskContent = { title: string; description: string; status: Status; id: number };
+
+export type EditedTaskContent = Omit<TaskContent, 'id'>;
+
+export type TaskMiniProps = Omit<TaskContent, 'status'>;
 
 export type TaskItem = {
 	title: string;
@@ -47,17 +51,17 @@ export enum ColumnName {
 
 export type ColCoords = Record<Status, DOMRect>;
 
-export interface HeaderProps {
-	onAddNewTask(arg: TaskContent): void;
-}
-
-export interface ModalProps {
-	open: boolean;
-	onConfirm(arg: TaskContent): void;
-	onCancel(): void;
-}
-
-export interface CardFormProps {
+export interface CardFormCreateProps {
 	onCancel: () => void;
-	onConfirm: ((formData: FormData) => void) | undefined;
+}
+
+export interface CardFormUpdateProps {
+	initTitle: string;
+	initDescription: string;
+	initStatus: Status;
+	taskId: number;
+}
+
+export interface TaskIdParam {
+	params: { taskId: string };
 }

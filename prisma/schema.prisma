@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Task {
+model TaskMini {
   id           Int    @id @default(autoincrement())
   userId       String
   title        String

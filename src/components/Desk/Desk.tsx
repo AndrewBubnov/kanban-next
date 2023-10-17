@@ -1,7 +1,7 @@
 'use client';
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable/Draggable';
-import { Task } from '@/components/Task/Task';
+import { TaskMini } from '@/components/TaskMini/TaskMini';
 import { ColumnNameDTO } from '@/constants';
 import { DeskProps, Status } from '@/types';
 import styles from './Desk.module.css';
@@ -40,7 +40,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 							id={cardId}
 							configUpdated={configUpdated}
 						>
-							<Task title={title} description={description} id={id} />
+							<TaskMini title={title} description={description} id={id} />
 						</Draggable>
 					);
 				})}

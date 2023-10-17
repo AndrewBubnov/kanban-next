@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
 	title: 'Kanban desk',
-	description: 'Task manager',
+	description: 'TaskMini manager',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
