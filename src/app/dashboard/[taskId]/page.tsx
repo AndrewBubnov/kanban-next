@@ -7,8 +7,9 @@ import {
 	Wrapper,
 	Module,
 	TitleText,
+	FlexContainer,
 } from '@/components/StyledComponents';
-import { Box, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import { CardActions, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -24,7 +25,7 @@ const TaskDetails = async ({ params: { taskId } }: TaskIdParam) => {
 			<StyledTaskDetails>
 				<CardContent>
 					<Module>
-						<Grid container justifyContent="space-between">
+						<FlexContainer>
 							<TitleContainer>
 								<DarkGreyText>{task?.id}.&nbsp;</DarkGreyText>
 								<TitleText>{task?.title}</TitleText>
@@ -37,7 +38,7 @@ const TaskDetails = async ({ params: { taskId } }: TaskIdParam) => {
 									<ArrowBackIcon />
 								</Link>
 							</IconContainer>
-						</Grid>
+						</FlexContainer>
 					</Module>
 					<Module>
 						<DarkGreyText>Status</DarkGreyText>

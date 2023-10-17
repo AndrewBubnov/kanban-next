@@ -57,6 +57,12 @@ export const IconContainer = styled(Grid)(() => ({
 	width: 70,
 }));
 
+export const FlexContainer = styled(Box)(() => ({
+	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center',
+}));
+
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
