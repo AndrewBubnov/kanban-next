@@ -52,9 +52,11 @@ export const Wrapper = styled(Box)(() => ({
 
 export const StyledCardContent = styled(CardContent)(() => ({
 	'& .MuiTypography-root': {
-		maxWidth: 180,
-		overflow: 'hidden',
-		whiteSpace: 'nowrap',
-		textOverflow: 'ellipsis',
+		'display': '-webkit-box',
+		'maxWidth': 180,
+		'-webkit-box-orient': 'vertical',
+		'-webkit-line-clamp': '3',
+		'wordBreak': 'break-word',
+		'overflow': 'hidden',
 	},
 }));
