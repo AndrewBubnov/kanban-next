@@ -2,25 +2,22 @@
 import { auth } from '@clerk/nextjs';
 import { getUser } from '@/actions/getUser';
 import { prisma } from '@/db';
-import { EditedTaskContent, TaskItem } from '@/types';
+import { TaskItem } from '@/types';
 import { revalidatePath } from 'next/cache';
 
-export const updateAllTasks = async (updatedTaskData: EditedTaskContent[]) => {
+export const updateAllTasks = async (updatedTaskData: TaskItem[]) => {
 	const userId = auth().userId as string;
 
 	const user = await getUser(userId);
 
 	if (user) {
-		for (let i = 0; i < user.tasks.length; i++) {
-			const taskId = user.tasks[i].id;
-			const updatedData: EditedTaskContent | undefined = updatedTaskData.find((_, index) => index === i);
-
+		for (const task of updatedTaskData) {
 			await prisma.task.update({
-				where: { id: taskId },
+				where: { id: task.id },
 				data: {
-					title: updatedData?.title || '',
-					description: updatedData?.description || '',
-					status: updatedData?.status || null,
+					title: task.title,
+					description: task.description,
+					status: task.status,
 				},
 			});
 		}
