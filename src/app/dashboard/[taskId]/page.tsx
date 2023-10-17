@@ -18,7 +18,6 @@ import { ColumnNameDTO } from '@/constants';
 
 const TaskDetails = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
-	console.log(task);
 
 	return (
 		<Wrapper>
