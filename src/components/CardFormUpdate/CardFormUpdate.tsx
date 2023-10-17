@@ -21,7 +21,7 @@ export const CardFormUpdate = ({ taskId, initTitle, initStatus, initDescription 
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value as Status);
-	const cancelHandler = () => push('/dashboard');
+	const cancelHandler = () => push(`/dashboard/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
 		await updateSingleTask(taskId, { title, description, status });
