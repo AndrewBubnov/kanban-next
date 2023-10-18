@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
 import { StyledDialog, StyledAddButton } from '@/components/StyledComponents';
-import { CardFormCreate } from '@/components/CardFormCreate/CardFormCreate';
+import { CardFormCreate } from '@/components/CardFormCreate';
 
 export const AddTask = ({ userId }: { userId: string }) => {
 	const [openModal, setOpenModal] = useState<boolean>(false);

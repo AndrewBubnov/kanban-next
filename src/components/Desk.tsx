@@ -1,7 +1,7 @@
 'use client';
 import { useDrag } from '@/hooks/useDrag';
-import { Draggable } from '@/components/Draggable/Draggable';
-import { TaskMini } from '@/components/TaskMini/TaskMini';
+import { Draggable } from '@/components/Draggable';
+import { TaskMini } from '@/components/TaskMini';
 import { ColumnNameDTO } from '@/constants';
 import { DeskProps, Status } from '@/types';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';

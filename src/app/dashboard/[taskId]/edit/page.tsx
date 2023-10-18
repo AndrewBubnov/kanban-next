@@ -2,7 +2,7 @@ import { IconContainer, StyledTaskDetails, Wrapper } from '@/components/StyledCo
 import { CardContent, Grid } from '@mui/material';
 import { TaskIdParam } from '@/types';
 import { getTaskById } from '@/actions/getTaskById';
-import { CardFormUpdate } from '@/components/CardFormUpdate/CardFormUpdate';
+import { CardFormUpdate } from '@/components/CardFormUpdate';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TableIcon from '@mui/icons-material/ViewWeekOutlined';

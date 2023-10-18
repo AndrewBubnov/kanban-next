@@ -1,8 +1,8 @@
-import { Desk } from '@/components/Desk/Desk';
-import { Header } from '@/components/Header/Header';
+import { Desk } from '@/components/Desk';
+import { Header } from '@/components/Header';
 import { auth } from '@clerk/nextjs';
 import { columns } from '@/constants';
-import { AddTask } from '@/components/AddTask/AddTask';
+import { AddTask } from '@/components/AddTask';
 import { getTasks } from '@/actions/getTasks';
 import { MainContainer } from '@/components/StyledComponents';
 import { sortByIndices } from '@/utils/sortByIndices';
