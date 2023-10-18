@@ -57,6 +57,12 @@ export const IconContainer = styled(Grid)(() => ({
 	width: 70,
 }));
 
+export const MainContainer = styled(Box)(() => ({
+	height: '100vh',
+	overflowY: 'auto',
+	padding: '1rem',
+}));
+
 export const FlexContainer = styled(Box)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
