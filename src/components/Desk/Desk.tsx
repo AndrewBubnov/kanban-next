@@ -4,7 +4,7 @@ import { Draggable } from '@/components/Draggable/Draggable';
 import { TaskMini } from '@/components/TaskMini/TaskMini';
 import { ColumnNameDTO } from '@/constants';
 import { DeskProps, Status } from '@/types';
-import styles from './Desk.module.css';
+import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 
 export function Desk({ tasks, columns }: DeskProps) {
 	const {
@@ -21,8 +21,8 @@ export function Desk({ tasks, columns }: DeskProps) {
 	} = useDrag(tasks);
 
 	const renderMapper = (status: Status) => (
-		<div className={styles.column} key={status} id={status}>
-			<span className={styles.columnName}>{ColumnNameDTO[status]}</span>
+		<Column key={status} id={status}>
+			<ColumnName component="span">{ColumnNameDTO[status]}</ColumnName>
 			{config
 				.filter(card => card.status === status)
 				.map(({ title, description, id }) => {
@@ -44,12 +44,8 @@ export function Desk({ tasks, columns }: DeskProps) {
 						</Draggable>
 					);
 				})}
-		</div>
+		</Column>
 	);
 
-	return (
-		<div className={styles.container} ref={ref}>
-			{columns.map(renderMapper)}
-		</div>
-	);
+	return <DeskContainer ref={ref}>{columns.map(renderMapper)}</DeskContainer>;
 }

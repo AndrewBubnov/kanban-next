@@ -1,6 +1,6 @@
 import { ReactElement, DragEvent, CSSProperties } from 'react';
-import styles from './Draggable.module.css';
 import { DELTA_X, DELTA_Y } from '@/constants';
+import { DraggableBox } from '@/components/StyledComponents';
 
 interface DraggableProps {
 	children: ReactElement;
@@ -32,32 +32,19 @@ export const Draggable = ({
 		evt.preventDefault();
 	};
 
-	const { dragged, autoMove } = styles;
-	const autoMoveStyle = configUpdated ? '' : autoMove;
-
 	return (
-		<div
+		<DraggableBox
 			draggable
 			id={id}
+			isDragged={isDragged}
+			isConfigUpdated={configUpdated}
 			onDragStart={onDragStart}
 			onDrag={onDrag}
 			onDrop={onDrop}
 			onDragOver={dragOverHandler}
-			className={`${isDragged ? dragged : autoMoveStyle}`}
 			style={style}
 		>
 			{children}
-		</div>
+		</DraggableBox>
 	);
-
-	// return cloneElement(children, {
-	//   draggable: true,
-	//   id,
-	//   onDragStart,
-	//   onDrag,
-	//   onDrop,
-	//   onDragOver: dragOverHandler,
-	//   className: `${isDragged ? dragged : autoMoveStyle}`,
-	//   style,
-	// });
 };

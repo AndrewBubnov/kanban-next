@@ -1,25 +1,17 @@
-import { Box } from '@mui/material';
-import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
-import styles from './Header.module.css';
+import { HeaderContainer, HeaderLink } from '@/components/StyledComponents';
 
 export const Header = ({ userId }: { userId: string }) => {
 	return (
-		<Box className={styles.container}>
-			{/*<StyledToolbar>*/}
+		<HeaderContainer>
 			{userId ? (
 				<UserButton />
 			) : (
 				<>
-					<Link href="/sign-in" className={styles.link}>
-						Sign in
-					</Link>
-					<Link href="/sign-up" className={styles.link}>
-						Sign up
-					</Link>
+					<HeaderLink href="/sign-in">Sign in</HeaderLink>
+					<HeaderLink href="/sign-up">Sign up</HeaderLink>
 				</>
 			)}
-			{/*</StyledToolbar>*/}
-		</Box>
+		</HeaderContainer>
 	);
 };

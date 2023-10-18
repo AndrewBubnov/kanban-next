@@ -3,6 +3,9 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid } from '@mui/material';
+import Link from 'next/link';
+import { DraggableBoxProps } from '@/types';
+import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -67,6 +70,56 @@ export const FlexContainer = styled(Box)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
+}));
+
+export const DeskContainer = styled(Box)(() => ({
+	gap: '1rem',
+	maxWidth: 'calc(100vw - 4rem)',
+	padding: '2rem',
+	display: 'flex',
+}));
+
+export const Column = styled(Box)`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	gap: 1rem;
+	padding: 2vw;
+	border: 1px solid #3f3f3f;
+	border-radius: 8px;
+`;
+
+export const DraggableBox = styled(({ isDragged, isConfigUpdated, ...props }: DraggableBoxProps) => (
+	<Box {...props} />
+))<DraggableBoxProps>`
+	transform: ${({ isDragged, isConfigUpdated }) => {
+		const commonTranslate = isConfigUpdated ? '' : COMMON_TRANSLATE;
+		return isDragged ? DRAGGED_TRANSLATE : commonTranslate;
+	}};
+	transition: ${({ isDragged, isConfigUpdated }) => (isDragged || isConfigUpdated ? '' : COMMON_TRANSITION)};
+`;
+
+export const ColumnName = styled(Box)(() => ({
+	color: 'lightgray',
+	fontSize: '1.25rem',
+	textAlign: 'center',
+}));
+
+export const HeaderContainer = styled(Box)(() => ({
+	display: 'flex',
+	flexDirection: 'row-reverse',
+	alignItems: 'center',
+	height: '4rem',
+}));
+
+export const HeaderLink = styled(Link)(() => ({
+	'fontSize': '1rem',
+	'color': 'darkgrey',
+	'marginRight': '2rem',
+	'transition': 'color .3s',
+	'&:hover': {
+		color: '#fff',
+	},
 }));
 
 export const TitleContainer = styled(Box)(() => ({

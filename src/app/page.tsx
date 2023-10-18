@@ -9,7 +9,7 @@ export default async function Home() {
 			<Header userId={userId} />
 			{userId ? null : (
 				<Grid container justifyContent="center" mt={20} sx={{ color: '#fff', fontSize: '1.5rem' }}>
-					Please sign in to continue
+					Please register or sign in to continue
 				</Grid>
 			)}
 		</>

@@ -1,3 +1,5 @@
+import { HTMLAttributes, ReactNode } from 'react';
+
 export enum Status {
 	NEW = 'new',
 	PROGRESS = 'progress',
@@ -65,4 +67,10 @@ export interface CardFormUpdateProps {
 
 export interface TaskIdParam {
 	params: { taskId: string };
+}
+
+export interface DraggableBoxProps extends HTMLAttributes<HTMLDivElement> {
+	isDragged: boolean;
+	isConfigUpdated: boolean;
+	children: ReactNode;
 }
