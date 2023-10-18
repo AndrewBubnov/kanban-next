@@ -12,13 +12,10 @@ export const updateAllTasks = async (updatedTaskData: TaskItem[]) => {
 
 	if (user) {
 		for (const task of updatedTaskData) {
+			const { id, status, index, description, title } = task;
 			await prisma.task.update({
-				where: { id: task.id },
-				data: {
-					title: task.title,
-					description: task.description,
-					status: task.status,
-				},
+				where: { id },
+				data: { title, description, status, index },
 			});
 		}
 	}

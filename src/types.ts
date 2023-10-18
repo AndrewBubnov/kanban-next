@@ -21,6 +21,7 @@ export type TaskItem = {
 	description: string;
 	id: number;
 	status: Status;
+	index: number;
 };
 
 interface StoreItem {

@@ -16,6 +16,7 @@ export const addTask = async (task: { title: string; description: string }) => {
 			userId,
 			title: task.title,
 			description: task.description,
+			index: 0,
 		},
 	});
 	user.tasks.push(newTask);

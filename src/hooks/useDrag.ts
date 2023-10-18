@@ -7,9 +7,9 @@ import { getInitPositions } from '@/utils/getInitPositions';
 import { updateConfigInsert } from '@/utils/updateConfigInsert';
 import { updateConfigAdd } from '@/utils/updateConfigAdd';
 import { updateAllTasks } from '@/actions/updateAllTasks';
+import { updateIndices } from '@/utils/updateIndices';
 
 export const useDrag = (tasks: TaskItem[]) => {
-	const [config, setConfig] = useState<TaskItem[]>(tasks);
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<Status | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
@@ -24,8 +24,6 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const offsetX = useRef(0);
 	const offsetY = useRef(0);
 	const ref = useRef<HTMLDivElement>(null);
-
-	useEffect(() => setConfig(tasks), [tasks]);
 
 	useEffect(() => {
 		const positionKeys = Object.keys(positions);
@@ -87,7 +85,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 			offsetX.current = 0;
 			offsetY.current = 0;
 		};
-	}, [config]);
+	}, [tasks]);
 
 	const dragStartHandler = (id: number) => (event: DragEvent<HTMLDivElement>) => {
 		if (!positions) return;
@@ -110,15 +108,14 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const dropHandler = useCallback(async () => {
 		const isInserted = Object.values(positions).filter(el => el.status === hoveredColumn).length > 1;
 		const newConfig = isInserted
-			? updateConfigInsert(config, positions)
-			: updateConfigAdd(config, draggedId, hoveredColumn);
-		await updateAllTasks(newConfig);
-		setConfig(newConfig);
-	}, [config, draggedId, hoveredColumn, positions]);
+			? updateConfigInsert(tasks, positions)
+			: updateConfigAdd(tasks, draggedId, hoveredColumn);
+		await updateAllTasks(updateIndices(newConfig, positions));
+	}, [tasks, draggedId, hoveredColumn, positions]);
 
 	return {
 		positions,
-		config,
+		config: tasks,
 		draggedDX,
 		draggedDY,
 		ref,

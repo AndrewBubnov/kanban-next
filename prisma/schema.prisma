@@ -7,12 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model TaskMini {
-  id           Int    @id @default(autoincrement())
+model Task {
+  id           Int      @id @default(autoincrement())
   userId       String
   title        String
   description  String
-  status       String? @default("new")
+  index        Int
+  status       String?  @default("new")
   userSpecificData User @relation(fields: [userId], references: [userId])
 }
 

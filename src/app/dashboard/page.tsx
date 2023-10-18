@@ -5,6 +5,7 @@ import { columns } from '@/constants';
 import { AddTask } from '@/components/AddTask/AddTask';
 import { getTasks } from '@/actions/getTasks';
 import { MainContainer } from '@/components/StyledComponents';
+import { sortByIndices } from '@/utils/sortByIndices';
 
 export default async function Dashboard() {
 	const userId = auth().userId as string;
@@ -13,7 +14,7 @@ export default async function Dashboard() {
 		<MainContainer>
 			<Header userId={userId} />
 			<AddTask userId={userId} />
-			<Desk tasks={tasks} columns={columns} />
+			<Desk tasks={tasks.sort(sortByIndices)} columns={columns} />
 		</MainContainer>
 	);
 }
