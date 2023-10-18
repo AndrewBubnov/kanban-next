@@ -25,8 +25,6 @@ export const Draggable = ({
 	onDrop,
 	configUpdated,
 }: DraggableProps) => {
-	const style = { [DELTA_X]: `${dX}px`, [DELTA_Y]: `${dY}px` } as CSSProperties;
-
 	const dragOverHandler = (evt: DragEvent) => {
 		evt.stopPropagation();
 		evt.preventDefault();
@@ -42,7 +40,7 @@ export const Draggable = ({
 			onDrag={onDrag}
 			onDrop={onDrop}
 			onDragOver={dragOverHandler}
-			style={style}
+			style={{ [DELTA_X]: `${dX}px`, [DELTA_Y]: `${dY}px` } as CSSProperties}
 		>
 			{children}
 		</DraggableBox>
