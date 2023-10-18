@@ -1,6 +1,6 @@
 # kanban-next
 
-**kanban-next** is a personal project created by Andrew Bubnov with Next 13, Material-UI, and custom drag-and-drop functionality to build a Kanban-style task management application. It features user authentication with multiple options, including Google, Facebook, or email and password registration.
+**kanban-next** is a full-stack personal project created by Andrew Bubnov using Next.js 13, Prisma ORM, Material-UI, and custom drag-and-drop functionality to build a Kanban-style task management application. It features user authentication with multiple options, including Google, Facebook, or email and password registration.
 
 ## Features
 
@@ -10,18 +10,24 @@
   - Email and password registration.
   - Google Sign-In.
   - Facebook Sign-In.
+ 
+- **Server Actions and Prisma**: This application utilizes server actions, a feature provided by Next.js 13, for direct database access, powered by the Prisma ORM. This enables efficient data operations and interactions with the backend.
+ 
+- **Task Management**: In addition to drag-and-drop functionality, users can view task details and edit them, providing a comprehensive task management experience.
 
 - **Material-UI Integration:** The project leverages Material-UI for a sleek and modern user interface design. Material-UI provides a wide range of components to create a consistent and responsive user experience.
 
 Usage
-Once you have your application running, you can create tasks, drag and drop them to organize, and manage your workflow.
-Users can register and log in using their preferred authentication method.
+Once you have your application running, you can create tasks, drag and drop them to organize, manage your workflow, view task details, and make edits. Users can register and log in using their preferred authentication method.
 
-Contributing
+Contributing:
+
 Contributions are welcome! If you'd like to improve this project, please create an issue or submit a pull request.
 
-License
+License:
+
 This project is open-source and available under the MIT License.
 
-Acknowledgments
+Acknowledgments:
+
 Special thanks to the open-source community for the various tools and libraries used in this project.
