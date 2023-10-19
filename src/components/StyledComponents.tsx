@@ -79,15 +79,13 @@ export const DeskContainer = styled(Box)(() => ({
 	display: 'flex',
 }));
 
-export const Column = styled(Box)`
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	gap: 1rem;
-	padding: 2vw;
-	border: 1px solid #3f3f3f;
-	border-radius: 8px;
-`;
+export const Column = styled(Box)(() => ({
+	display: 'flex',
+	flexDirection: 'column',
+	flex: 1,
+	gap: '1rem',
+	padding: '2vw',
+}));
 
 export const DraggableBox = styled(({ isDragged, isConfigUpdated, ...props }: DraggableBoxProps) => (
 	<Box {...props} />

@@ -8,6 +8,7 @@ import { updateConfigInsert } from '@/utils/updateConfigInsert';
 import { updateConfigAdd } from '@/utils/updateConfigAdd';
 import { updateAllTasks } from '@/actions/updateAllTasks';
 import { updateIndices } from '@/utils/updateIndices';
+import { applyHoveredColumn } from '@/utils/applyHoveredColumn';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
@@ -51,9 +52,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 		if (hoveredCol) setHoveredColumn(hoveredCol);
 	}, [colCoords, draggedDX, draggedDY, draggedId, positions]);
 
-	useEffect(() => {
-		setPositions(prevState => ascent(prevState, leftSiteStatus, leftSiteTop));
-	}, [leftSiteTop, leftSiteStatus]);
+	useEffect(() => setPositions(ascent(leftSiteStatus, leftSiteTop)), [leftSiteTop, leftSiteStatus]);
 
 	useEffect(() => {
 		if (!draggedId || !hoveredId) return;
@@ -61,12 +60,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 	}, [draggedId, hoveredId]);
 
 	useEffect(() => {
-		if (hoveredColumn) {
-			setPositions(prevState => ({
-				...prevState,
-				[draggedId]: { ...prevState[draggedId], status: hoveredColumn },
-			}));
-		}
+		if (hoveredColumn) setPositions(applyHoveredColumn(draggedId, hoveredColumn));
 	}, [draggedId, hoveredColumn]);
 
 	useLayoutEffect(() => {
@@ -87,8 +81,9 @@ export const useDrag = (tasks: TaskItem[]) => {
 		};
 	}, [tasks]);
 
-	const dragStartHandler = (id: number) => (event: DragEvent<HTMLDivElement>) => {
+	const dragStartHandler = (id: number) => async (event: DragEvent<HTMLDivElement>) => {
 		if (!positions) return;
+
 		event.dataTransfer.setDragImage(new Image(), 0, 0);
 		setDraggedId(id);
 		offsetX.current = event.clientX - positions[id].left;

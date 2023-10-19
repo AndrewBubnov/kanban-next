@@ -1,6 +1,6 @@
 import { Positions, Status } from '@/types';
 
-export const ascent = (positions: Positions, leftSiteStatus: Status | null, leftSiteTop: number) => {
+export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (positions: Positions) => {
 	if (!leftSiteStatus) return positions;
 	return Object.keys(positions).reduce((acc, el) => {
 		const id = +el;
