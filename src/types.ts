@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { DragEvent, HTMLAttributes, ReactElement, ReactNode } from 'react';
 
 export enum Status {
 	NEW = 'new',
@@ -25,6 +25,18 @@ export type TaskItem = {
 	status: Status;
 	index: number;
 };
+
+export interface DraggableProps {
+	children: ReactElement;
+	onDragStart(event: DragEvent<HTMLDivElement>): void;
+	onDrag(evt: DragEvent): void;
+	onDrop(): void;
+	isDragged: boolean;
+	configUpdated: boolean;
+	dX: number;
+	dY: number;
+	id: string;
+}
 
 interface StoreItem {
 	top: number;

@@ -1,18 +1,7 @@
-import { ReactElement, DragEvent, CSSProperties } from 'react';
-import { DELTA_X, DELTA_Y } from '@/constants';
+import { DragEvent, CSSProperties } from 'react';
 import { DraggableBox } from '@/components/StyledComponents';
-
-interface DraggableProps {
-	children: ReactElement;
-	onDragStart(event: DragEvent<HTMLDivElement>): void;
-	onDrag(evt: DragEvent): void;
-	onDrop(): void;
-	isDragged: boolean;
-	configUpdated: boolean;
-	dX: number;
-	dY: number;
-	id: string;
-}
+import { DELTA_X, DELTA_Y } from '@/constants';
+import { DraggableProps } from '@/types';
 
 export const Draggable = ({
 	children,
