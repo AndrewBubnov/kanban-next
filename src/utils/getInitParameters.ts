@@ -1,7 +1,9 @@
-import { ColCoords, Positions, Status } from '@/types';
+import { ColCoords, Parameters, Status } from '@/types';
+import { toJpeg } from 'html-to-image';
 
-export const getInitPositions = (ref: HTMLDivElement) => {
+export const getInitParameters = async (ref: HTMLDivElement) => {
 	const columnDOMRects = {} as ColCoords;
+	const elementList: { id: number; element: HTMLDivElement }[] = [];
 
 	const cardPositions = Array.from(ref.children)
 		.map(columnElement => {
@@ -12,6 +14,7 @@ export const getInitPositions = (ref: HTMLDivElement) => {
 			el.reduce((acc, card) => {
 				const [status, cardId] = card.id.split('-');
 				const cardElement = card as HTMLDivElement;
+				elementList.push({ id: +cardId, element: cardElement });
 				acc[+cardId] = {
 					top: cardElement.offsetTop,
 					left: cardElement.offsetLeft,
@@ -19,14 +22,19 @@ export const getInitPositions = (ref: HTMLDivElement) => {
 					height: cardElement.clientHeight,
 					dX: 0,
 					dY: 0,
+					imgSrc: '',
 					status: status as Status,
 				};
 				return acc;
-			}, {} as Positions)
+			}, {} as Parameters)
 		)
 		.reduce((acc, cur) => {
 			acc = { ...acc, ...cur };
 			return acc;
-		}, {} as Positions);
+		}, {} as Parameters);
+	for (const item of elementList) {
+		const imgSrc = await toJpeg(item.element);
+		cardPositions[item.id] = { ...cardPositions[item.id], imgSrc };
+	}
 	return { cardPositions, columnDOMRects };
 };

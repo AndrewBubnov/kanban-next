@@ -32,13 +32,13 @@ export interface DraggableProps {
 	onDrag(evt: DragEvent): void;
 	onDrop(): void;
 	isDragged: boolean;
-	configUpdated: boolean;
+	isConfigUpdated: boolean;
 	dX: number;
 	dY: number;
 	id: string;
 }
 
-interface StoreItem {
+interface ParameterItem {
 	top: number;
 	left: number;
 	width: number;
@@ -46,11 +46,10 @@ interface StoreItem {
 	dX: number;
 	dY: number;
 	status: Status;
+	imgSrc: string;
 }
 
-export type Positions = {
-	[key: number]: StoreItem;
-};
+export type Parameters = Record<number, ParameterItem>;
 
 export type RecalculateProps = {
 	draggedId: number;
@@ -85,4 +84,12 @@ export interface DraggableBoxProps extends HTMLAttributes<HTMLDivElement> {
 	isDragged: boolean;
 	isConfigUpdated: boolean;
 	children: ReactNode;
+}
+
+export interface DraggableImageProps {
+	imageParameters: {
+		width: number;
+		height: number;
+		imgSrc: string;
+	};
 }

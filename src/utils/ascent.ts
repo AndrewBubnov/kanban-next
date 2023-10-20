@@ -1,6 +1,6 @@
-import { Positions, Status } from '@/types';
+import { Parameters, Status } from '@/types';
 
-export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (positions: Positions) => {
+export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (positions: Parameters) => {
 	if (!leftSiteStatus) return positions;
 	return Object.keys(positions).reduce((acc, el) => {
 		const id = +el;
@@ -13,5 +13,5 @@ export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (p
 		}
 		acc[id] = positions[id];
 		return acc;
-	}, {} as Positions);
+	}, {} as Parameters);
 };

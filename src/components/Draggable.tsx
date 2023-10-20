@@ -12,7 +12,7 @@ export const Draggable = ({
 	id,
 	isDragged,
 	onDrop,
-	configUpdated,
+	isConfigUpdated,
 }: DraggableProps) => {
 	const dragOverHandler = (evt: DragEvent) => {
 		evt.stopPropagation();
@@ -24,7 +24,7 @@ export const Draggable = ({
 			draggable
 			id={id}
 			isDragged={isDragged}
-			isConfigUpdated={configUpdated}
+			isConfigUpdated={isConfigUpdated}
 			onDragStart={onDragStart}
 			onDrag={onDrag}
 			onDrop={onDrop}

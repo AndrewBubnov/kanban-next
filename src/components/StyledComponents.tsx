@@ -6,6 +6,7 @@ import { Box, Card, CardContent, Grid } from '@mui/material';
 import Link from 'next/link';
 import { DraggableBoxProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -128,6 +129,21 @@ export const TitleContainer = styled(Box)(() => ({
 export const TitleText = styled(Box)(() => ({
 	fontSize: '1.1rem',
 	fontWeight: 600,
+}));
+
+export const ShortTitleText = styled(Box)(() => ({
+	width: 150,
+	textOverflow: 'ellipsis',
+	overflow: 'hidden',
+	whiteSpace: 'nowrap',
+	fontSize: '1.1rem',
+	fontWeight: 600,
+}));
+
+export const ShowFullViewIcon = styled(OpenInFullIcon)(() => ({
+	width: '0.8rem',
+	height: '0.8rem',
+	marginLeft: '0.8rem',
 }));
 
 export const Module = styled(Box)(() => ({

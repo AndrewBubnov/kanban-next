@@ -1,8 +1,8 @@
-import { Positions, RecalculateProps } from '@/types';
+import { Parameters, RecalculateProps } from '@/types';
 
 export const recalculatePositions =
 	({ draggedId, hoveredId }: RecalculateProps) =>
-	(prevState: Positions) => {
+	(prevState: Parameters) => {
 		const { status: draggedColumn, top: draggedTop, dY: draggedDY } = prevState[draggedId];
 		const { status: hoveredColumn, top: hoveredTop, dY: hoveredDY } = prevState[hoveredId];
 		if (draggedColumn === hoveredColumn) {
@@ -30,5 +30,5 @@ export const recalculatePositions =
 			}
 			acc[id] = prevState[id];
 			return acc;
-		}, {} as Positions);
+		}, {} as Parameters);
 	};

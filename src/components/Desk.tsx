@@ -5,10 +5,11 @@ import { TaskMini } from '@/components/TaskMini';
 import { ColumnNameDTO } from '@/constants';
 import { DeskProps, Status } from '@/types';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
+import { DraggableImage } from '@/components/DraggableImage';
 
 export function Desk({ tasks, columns }: DeskProps) {
 	const {
-		positions,
+		parameters,
 		config,
 		draggedDX,
 		draggedDY,
@@ -17,7 +18,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 		dragStartHandler,
 		dragHandler,
 		dropHandler,
-		configUpdated,
+		isConfigUpdated,
 	} = useDrag(tasks);
 
 	const renderMapper = (status: Status) => (
@@ -28,6 +29,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 				.map(({ title, description, id }) => {
 					const cardId = `${status}-${id}`;
 					const isDragged = id === draggedId;
+					const imageParameters = parameters[draggedId];
 					return (
 						<Draggable
 							key={cardId}
@@ -35,12 +37,16 @@ export function Desk({ tasks, columns }: DeskProps) {
 							onDrag={dragHandler}
 							onDrop={dropHandler}
 							isDragged={isDragged}
-							dX={isDragged ? draggedDX : positions[id]?.dX}
-							dY={isDragged ? draggedDY : positions[id]?.dY}
+							dX={isDragged ? draggedDX : parameters[id]?.dX}
+							dY={isDragged ? draggedDY : parameters[id]?.dY}
 							id={cardId}
-							configUpdated={configUpdated}
+							isConfigUpdated={isConfigUpdated}
 						>
-							<TaskMini title={title} description={description} id={id} />
+							{isDragged && imageParameters ? (
+								<DraggableImage imageParameters={imageParameters} />
+							) : (
+								<TaskMini title={title} description={description} id={id} />
+							)}
 						</Draggable>
 					);
 				})}
