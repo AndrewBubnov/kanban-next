@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Typography } from '@mui/material';
 import {
 	StyledTaskMini,
@@ -7,21 +6,27 @@ import {
 	DarkGreyText,
 	ShortTitleText,
 	ShowFullViewIcon,
+	Assignee,
+	CenteredLink,
 } from '@/components/StyledComponents';
 import { TaskMiniProps } from '@/types';
 
-export const TaskMini = ({ id, title, description }: TaskMiniProps) => (
+export const TaskMini = ({ id, title, description, username, email }: TaskMiniProps) => (
 	<StyledTaskMini>
 		<StyledCardContent>
 			<FlexContainer>
-				<FlexContainer>
-					<DarkGreyText>{id}.&nbsp;</DarkGreyText>
-					<ShortTitleText>{title}</ShortTitleText>
-				</FlexContainer>
-				<Link href={`/dashboard/${id}`}>
+				<Assignee>
+					{username} {email}
+				</Assignee>
+				<CenteredLink href={`/dashboard/${id}`}>
 					<ShowFullViewIcon />
-				</Link>
+				</CenteredLink>
 			</FlexContainer>
+			<FlexContainer>
+				<DarkGreyText>{id.slice(0, 4)}&nbsp;</DarkGreyText>
+				<ShortTitleText>{title}</ShortTitleText>
+			</FlexContainer>
+
 			<Typography mt={1}>{description}</Typography>
 		</StyledCardContent>
 	</StyledTaskMini>

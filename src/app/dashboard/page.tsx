@@ -10,6 +10,7 @@ import { sortByIndices } from '@/utils/sortByIndices';
 export default async function Dashboard() {
 	const userId = auth().userId as string;
 	const tasks = await getTasks(userId);
+	console.log(tasks);
 	return (
 		<MainContainer>
 			<Header userId={userId} />

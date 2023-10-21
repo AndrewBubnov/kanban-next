@@ -12,19 +12,19 @@ export interface DeskProps {
 	columns: Status[];
 }
 
-export type TaskContent = { title: string; description: string; status: Status; id: number };
-
-export type EditedTaskContent = Omit<TaskContent, 'id'>;
-
-export type TaskMiniProps = Omit<TaskContent, 'status'>;
-
 export type TaskItem = {
 	title: string;
 	description: string;
-	id: number;
+	id: string;
 	status: Status;
 	index: number;
+	username: string;
+	email: string;
 };
+
+export type EditedTaskContent = Omit<TaskItem, 'id' | 'index'>;
+
+export type TaskMiniProps = Omit<TaskItem, 'status' | 'index'>;
 
 export interface DraggableProps {
 	children: ReactElement;
@@ -49,11 +49,11 @@ interface ParameterItem {
 	imgSrc: string;
 }
 
-export type Parameters = Record<number, ParameterItem>;
+export type Parameters = Record<string, ParameterItem>;
 
 export type RecalculateProps = {
-	draggedId: number;
-	hoveredId: number;
+	draggedId: string;
+	hoveredId: string;
 };
 
 export enum ColumnName {

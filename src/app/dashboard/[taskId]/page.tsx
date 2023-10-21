@@ -18,6 +18,7 @@ import { ColumnNameDTO } from '@/constants';
 
 const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
+	console.log(task);
 
 	return (
 		<Wrapper>
@@ -26,7 +27,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 					<Module>
 						<FlexContainer>
 							<TitleContainer>
-								<DarkGreyText>{task?.id}.&nbsp;</DarkGreyText>
+								<DarkGreyText>{task?.id.slice(0, 4)}&nbsp;</DarkGreyText>
 								<TitleText>{task?.title}</TitleText>
 							</TitleContainer>
 							<IconContainer>

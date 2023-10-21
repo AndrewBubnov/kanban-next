@@ -71,6 +71,7 @@ export const FlexContainer = styled(Box)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
+	marginBottom: '0.5rem',
 }));
 
 export const DeskContainer = styled(Box)(() => ({
@@ -121,6 +122,11 @@ export const HeaderLink = styled(Link)(() => ({
 	},
 }));
 
+export const CenteredLink = styled(Link)(() => ({
+	display: 'flex',
+	alignItems: 'center',
+}));
+
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
@@ -153,6 +159,15 @@ export const Module = styled(Box)(() => ({
 export const DarkGreyText = styled(Box)(() => ({
 	color: 'darkgrey',
 	fontWeight: 600,
+}));
+
+export const Assignee = styled(Box)(() => ({
+	maxWidth: 170,
+	whiteSpace: 'nowrap',
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+	color: 'darkgrey',
+	fontSize: '0.7rem',
 }));
 
 export const HeroContainer = styled(Grid)(() => ({

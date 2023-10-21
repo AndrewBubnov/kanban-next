@@ -1,6 +1,6 @@
 import { Status, TaskItem } from '@/types';
 
-export const updateConfigAdd = (config: TaskItem[], draggedId: number, status?: Status): TaskItem[] => {
+export const updateConfigAdd = (config: TaskItem[], draggedId: string, status?: Status): TaskItem[] => {
 	if (!status) return config;
 	const element = config.find(el => el.id === draggedId);
 	if (!element) return config;

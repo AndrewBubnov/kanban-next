@@ -3,6 +3,7 @@ import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { auth } from '@clerk/nextjs';
 import { getUser } from '@/actions/getUser';
+import { Status } from '@/types';
 
 export const addTask = async (task: { title: string; description: string }) => {
 	const userId = auth().userId as string;
@@ -16,6 +17,7 @@ export const addTask = async (task: { title: string; description: string }) => {
 			userId,
 			title: task.title,
 			description: task.description,
+			status: Status.NEW,
 			index: 0,
 		},
 	});

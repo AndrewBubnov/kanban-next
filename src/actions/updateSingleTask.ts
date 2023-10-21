@@ -4,13 +4,13 @@ import { auth } from '@clerk/nextjs';
 import { EditedTaskContent } from '@/types';
 import { revalidatePath } from 'next/cache';
 
-export const updateSingleTask = async (taskId: number, updatedTaskData: EditedTaskContent) => {
+export const updateSingleTask = async (taskId: string, updatedTaskData: EditedTaskContent) => {
 	const userId = auth().userId as string;
 
 	const existingTask = await prisma.task.findFirst({
 		where: {
 			id: taskId,
-			userSpecificData: {
+			assignee: {
 				userId: userId,
 			},
 		},

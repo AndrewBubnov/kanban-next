@@ -26,8 +26,8 @@ export function Desk({ tasks, columns }: DeskProps) {
 			<ColumnName component="span">{ColumnNameDTO[status]}</ColumnName>
 			{config
 				.filter(card => card.status === status)
-				.map(({ title, description, id }) => {
-					const cardId = `${status}-${id}`;
+				.map(({ title, description, id, email, username }) => {
+					const cardId = `${status}:${id}`;
 					const isDragged = id === draggedId;
 					const imageParameters = parameters[draggedId];
 					return (
@@ -45,7 +45,13 @@ export function Desk({ tasks, columns }: DeskProps) {
 							{isDragged && imageParameters ? (
 								<DraggableImage imageParameters={imageParameters} />
 							) : (
-								<TaskMini title={title} description={description} id={id} />
+								<TaskMini
+									title={title}
+									description={description}
+									id={id}
+									email={email}
+									username={username}
+								/>
 							)}
 						</Draggable>
 					);

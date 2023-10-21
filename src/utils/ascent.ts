@@ -3,15 +3,14 @@ import { Parameters, Status } from '@/types';
 export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (positions: Parameters) => {
 	if (!leftSiteStatus) return positions;
 	return Object.keys(positions).reduce((acc, el) => {
-		const id = +el;
-		if (positions[id].status === leftSiteStatus && positions[id].top + positions[id].dY > leftSiteTop) {
-			acc[id] = {
-				...positions[id],
-				dY: positions[id].dY - 166,
+		if (positions[el].status === leftSiteStatus && positions[el].top + positions[el].dY > leftSiteTop) {
+			acc[el] = {
+				...positions[el],
+				dY: positions[el].dY - 166,
 			};
 			return acc;
 		}
-		acc[id] = positions[id];
+		acc[el] = positions[el];
 		return acc;
 	}, {} as Parameters);
 };

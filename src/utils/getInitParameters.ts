@@ -3,7 +3,7 @@ import { toJpeg } from 'html-to-image';
 
 export const getInitParameters = async (ref: HTMLDivElement) => {
 	const columnDOMRects = {} as ColCoords;
-	const elementList: { id: number; element: HTMLDivElement }[] = [];
+	const elementList: { id: string; element: HTMLDivElement }[] = [];
 
 	const cardPositions = Array.from(ref.children)
 		.map(columnElement => {
@@ -12,10 +12,10 @@ export const getInitParameters = async (ref: HTMLDivElement) => {
 		})
 		.map(el =>
 			el.reduce((acc, card) => {
-				const [status, cardId] = card.id.split('-');
+				const [status, cardId] = card.id.split(':');
 				const cardElement = card as HTMLDivElement;
-				elementList.push({ id: +cardId, element: cardElement });
-				acc[+cardId] = {
+				elementList.push({ id: cardId, element: cardElement });
+				acc[cardId] = {
 					top: cardElement.offsetTop,
 					left: cardElement.offsetLeft,
 					width: cardElement.clientWidth,

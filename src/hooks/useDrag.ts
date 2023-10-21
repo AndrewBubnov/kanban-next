@@ -15,11 +15,11 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const [leftSiteStatus, setLeftSiteStatus] = useState<Status | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
 	const [hoveredColumn, setHoveredColumn] = useState<Status | undefined>();
-	const [hoveredId, setHoveredId] = useState<number>(0);
+	const [hoveredId, setHoveredId] = useState<string>('');
 	const [parameters, setParameters] = useState<Parameters>({});
 	const [draggedDX, setDraggedDX] = useState<number>(0);
 	const [draggedDY, setDraggedDY] = useState<number>(0);
-	const [draggedId, setDraggedId] = useState<number>(0);
+	const [draggedId, setDraggedId] = useState<string>('');
 
 	const isConfigUpdated = useRef<boolean>(false);
 	const offsetX = useRef(0);
@@ -37,14 +37,13 @@ export const useDrag = (tasks: TaskItem[]) => {
 		});
 
 		const foundHoveredTask = positionKeys
-			.filter(el => parameters[+el].status === hoveredCol && +el !== draggedId)
+			.filter(el => parameters[el].status === hoveredCol && el !== draggedId)
 			.find(el => {
-				const key = +el;
 				const draggedPosition = parameters[draggedId].top + draggedDY;
-				const keyPosition = parameters[key].top + parameters[key].dY;
-				return Math.abs(draggedPosition - keyPosition) < parameters[+el].height * INTERSECTION_RATIO;
+				const keyPosition = parameters[el].top + parameters[el].dY;
+				return Math.abs(draggedPosition - keyPosition) < parameters[el].height * INTERSECTION_RATIO;
 			});
-		setHoveredId(foundHoveredTask ? +foundHoveredTask : 0);
+		setHoveredId(foundHoveredTask ? foundHoveredTask : '');
 		if (hoveredCol && hoveredCol !== parameters[draggedId].status) {
 			setLeftSiteStatus(parameters[draggedId].status);
 			setLeftSiteTop(parameters[draggedId].top + parameters[draggedId].dY);
@@ -66,7 +65,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const resetState = useCallback(() => {
 		isConfigUpdated.current = true;
 		setParameters({});
-		setDraggedId(0);
+		setDraggedId('');
+		setHoveredId('');
 		setDraggedDX(0);
 		setDraggedDY(0);
 		setLeftSiteStatus(null);
@@ -86,8 +86,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 		return resetState;
 	}, [resetState, tasks]);
 
-	const dragStartHandler = (id: number) => async (event: DragEvent<HTMLDivElement>) => {
-		if (!parameters) return;
+	const dragStartHandler = (id: string) => async (event: DragEvent<HTMLDivElement>) => {
+		if (!parameters[id]) return;
 		event.dataTransfer.setDragImage(new Image(0, 0), 0, 0);
 		setDraggedId(id);
 		offsetX.current = event.clientX - parameters[id].left;
@@ -96,7 +96,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 
 	const dragHandler = useCallback(
 		(evt: DragEvent) => {
-			if (!parameters) return;
+			if (!parameters[draggedId]) return;
 			isConfigUpdated.current = false;
 			setDraggedDX(evt.clientX - parameters[draggedId].left - offsetX.current);
 			setDraggedDY(evt.clientY - parameters[draggedId].top - offsetY.current);
