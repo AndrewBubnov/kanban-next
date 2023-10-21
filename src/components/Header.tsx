@@ -5,7 +5,7 @@ export const Header = ({ userId }: { userId: string }) => {
 	return (
 		<HeaderContainer>
 			{userId ? (
-				<UserButton />
+				<UserButton afterSignOutUrl="/" />
 			) : (
 				<>
 					<HeaderLink href="/sign-in">Sign in</HeaderLink>
