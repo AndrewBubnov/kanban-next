@@ -155,6 +155,14 @@ export const DarkGreyText = styled(Box)(() => ({
 	fontWeight: 600,
 }));
 
+export const HeroContainer = styled(Grid)(() => ({
+	display: 'flex',
+	justifyContent: 'center',
+	color: '#fff',
+	fontSize: '1.5rem',
+	marginTop: '10rem',
+}));
+
 export const StyledCardContent = styled(CardContent)(() => ({
 	'& .MuiTypography-root': {
 		display: '-webkit-box',

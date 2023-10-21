@@ -16,7 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Status, TaskIdParam } from '@/types';
 import { ColumnNameDTO } from '@/constants';
 
-const TaskDetails = async ({ params: { taskId } }: TaskIdParam) => {
+const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
 
 	return (
@@ -53,4 +53,4 @@ const TaskDetails = async ({ params: { taskId } }: TaskIdParam) => {
 		</Wrapper>
 	);
 };
-export default TaskDetails;
+export default Dashboard;
