@@ -79,6 +79,8 @@ export enum ColumnName {
 export type ColCoords = Record<Status, DOMRect>;
 
 export interface CardFormCreateProps {
+	userIdsArray: UserIdsArrayItem[];
+	isAdmin: boolean;
 	onCancel: () => void;
 }
 
@@ -121,3 +123,14 @@ export interface SwitchProps {
 	tasks: TaskItem[];
 	userIdsArray: UserIdsArrayItem[];
 }
+
+export interface AddTaskProps {
+	userIdsArray: UserIdsArrayItem[];
+	isAdmin: boolean;
+}
+
+export type AddTaskAction = {
+	userId: string;
+	title: string;
+	description: string;
+};

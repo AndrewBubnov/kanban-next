@@ -10,11 +10,16 @@ import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import DialogContent from '@mui/material/DialogContent';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
 		minWidth: '50%',
 	},
+}));
+
+export const StyledDialogContent = styled(DialogContent)(() => ({
+	paddingTop: '5px !important',
 }));
 
 export const StyledModalButton = styled(Button)(() => ({

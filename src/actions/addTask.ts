@@ -1,22 +1,19 @@
 'use server';
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
-import { auth } from '@clerk/nextjs';
 import { getUser } from '@/actions/getUser';
-import { Status } from '@/types';
+import { AddTaskAction, Status } from '@/types';
 
-export const addTask = async (task: { title: string; description: string }) => {
-	const userId = auth().userId as string;
-
-	const user = await getUser(userId);
+export const addTask = async ({ userId, title, description }: AddTaskAction) => {
+	const user = await getUser();
 
 	if (!user) return;
 
 	const newTask = await prisma.task.create({
 		data: {
 			userId,
-			title: task.title,
-			description: task.description,
+			title,
+			description,
 			status: Status.NEW,
 			index: 0,
 		},
@@ -24,14 +21,8 @@ export const addTask = async (task: { title: string; description: string }) => {
 	user.tasks.push(newTask);
 
 	await prisma.user.update({
-		where: {
-			userId,
-		},
-		data: {
-			tasks: {
-				connect: { id: newTask.id },
-			},
-		},
+		where: { userId },
+		data: { tasks: { connect: { id: newTask.id } } },
 	});
 	revalidatePath('/dashboard');
 };

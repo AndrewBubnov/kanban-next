@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
-import { StyledDialog, StyledAddButton } from '@/components/StyledComponents';
+import { StyledDialog, StyledAddButton, StyledDialogContent } from '@/components/StyledComponents';
 import { CardFormCreate } from '@/components/CardFormCreate';
+import { AddTaskProps } from '@/types';
 
-export const AddTask = ({ userId }: { userId: string }) => {
+export const AddTask = ({ userIdsArray, isAdmin }: AddTaskProps) => {
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
 	return (
@@ -18,9 +18,9 @@ export const AddTask = ({ userId }: { userId: string }) => {
 			</Grid>
 			<StyledDialog open={openModal} onClose={toggleOpenHandler}>
 				<DialogTitle>Create new task</DialogTitle>
-				<DialogContent>
-					<CardFormCreate onCancel={toggleOpenHandler} />
-				</DialogContent>
+				<StyledDialogContent>
+					<CardFormCreate userIdsArray={userIdsArray} isAdmin={isAdmin} onCancel={toggleOpenHandler} />
+				</StyledDialogContent>
 			</StyledDialog>
 		</>
 	);

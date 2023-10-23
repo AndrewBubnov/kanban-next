@@ -1,5 +1,4 @@
 import { prisma } from '@/db';
-import { ALL_USERNAMES } from '@/constants';
 
 export const getMappedUserIds = async () => {
 	const users = await prisma.user.findMany({
@@ -9,11 +8,8 @@ export const getMappedUserIds = async () => {
 		},
 	});
 
-	return [
-		{ userId: '', username: ALL_USERNAMES },
-		...users.map(user => ({
-			userId: user.userId,
-			username: user.username,
-		})),
-	];
+	return users.map(user => ({
+		userId: user.userId,
+		username: user.username,
+	}));
 };

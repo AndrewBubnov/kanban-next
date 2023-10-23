@@ -7,7 +7,7 @@ import { SwitchProps } from '@/types';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { ALL_USERNAMES } from '@/constants';
 
-export const Switch = ({ tasks, userIdsArray }: SwitchProps) => {
+export const AssigneeSelect = ({ tasks, userIdsArray }: SwitchProps) => {
 	const { setFilteredTasks } = useFilteredStore();
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
@@ -18,9 +18,9 @@ export const Switch = ({ tasks, userIdsArray }: SwitchProps) => {
 	}, [setFilteredTasks, tasks, userId]);
 	const changeHandler = (event: SelectChangeEvent<unknown>) => {
 		const value = event.target.value as string;
-		const currentId = userIdsArray.find(item => value === item.username)?.userId || '';
+		const currentUserId = userIdsArray.find(item => value === item.username)?.userId || '';
 		setUsername(value);
-		setUserId(currentId);
+		setUserId(currentUserId);
 	};
 
 	return (

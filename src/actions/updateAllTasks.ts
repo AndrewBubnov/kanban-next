@@ -6,9 +6,7 @@ import { TaskItem } from '@/types';
 import { revalidatePath } from 'next/cache';
 
 export const updateAllTasks = async (updatedTaskData: TaskItem[]) => {
-	const userId = auth().userId as string;
-
-	const user = await getUser(userId);
+	const user = await getUser();
 
 	if (user) {
 		for (const task of updatedTaskData) {
