@@ -12,19 +12,32 @@ export interface DeskProps {
 	columns: Status[];
 }
 
+type Assignee = {
+	id: number;
+	userId: string;
+	email: string;
+	username: string;
+	isAdmin: boolean;
+};
+
 export type TaskItem = {
 	title: string;
 	description: string;
 	id: string;
 	status: Status;
 	index: number;
+	assignee: Assignee;
+};
+
+export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee'>;
+
+export type TaskMiniProps = {
+	title: string;
+	description: string;
+	id: string;
 	username: string;
 	email: string;
 };
-
-export type EditedTaskContent = Omit<TaskItem, 'id' | 'index'>;
-
-export type TaskMiniProps = Omit<TaskItem, 'status' | 'index'>;
 
 export interface DraggableProps {
 	children: ReactElement;
@@ -73,7 +86,7 @@ export interface CardFormUpdateProps {
 	initTitle: string;
 	initDescription: string;
 	initStatus: Status;
-	taskId: number;
+	taskId: string;
 }
 
 export interface TaskIdParam {
@@ -92,4 +105,19 @@ export interface DraggableImageProps {
 		height: number;
 		imgSrc: string;
 	};
+}
+
+export interface UseTasks {
+	filteredTasks: TaskItem[];
+	setFilteredTasks(arg: TaskItem[]): void;
+}
+
+interface UserIdsArrayItem {
+	userId: string;
+	username: string;
+}
+
+export interface SwitchProps {
+	tasks: TaskItem[];
+	userIdsArray: UserIdsArrayItem[];
 }

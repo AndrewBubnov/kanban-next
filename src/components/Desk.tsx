@@ -1,13 +1,15 @@
 'use client';
 import { useDrag } from '@/hooks/useDrag';
+import { useFilteredStore } from '@/store';
 import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
-import { ColumnNameDTO } from '@/constants';
-import { DeskProps, Status } from '@/types';
+import { ColumnNameDTO, columns } from '@/constants';
+import { Status } from '@/types';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 
-export function Desk({ tasks, columns }: DeskProps) {
+export function Desk() {
+	const { filteredTasks: tasks } = useFilteredStore();
 	const {
 		parameters,
 		config,
@@ -26,7 +28,7 @@ export function Desk({ tasks, columns }: DeskProps) {
 			<ColumnName component="span">{ColumnNameDTO[status]}</ColumnName>
 			{config
 				.filter(card => card.status === status)
-				.map(({ title, description, id, email, username }) => {
+				.map(({ title, description, id, assignee: { email, username } }) => {
 					const cardId = `${status}:${id}`;
 					const isDragged = id === draggedId;
 					const imageParameters = parameters[draggedId];

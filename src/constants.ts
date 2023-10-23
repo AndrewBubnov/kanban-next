@@ -16,3 +16,4 @@ export const DRAGGED_TRANSLATE = 'translate(var(--delta-x), var(--delta-y))';
 export const COMMON_TRANSITION = 'transform 0.3s';
 export const COMMON_TRANSLATE = 'translateY(var(--delta-y))';
 export const ADMINS_LIST = [{ email: 'andrew.bubnov75@gmail.com' }];
+export const ALL_USERNAMES = 'All';

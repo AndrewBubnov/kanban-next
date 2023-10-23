@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { DraggableBoxProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -105,11 +108,43 @@ export const ColumnName = styled(Box)(() => ({
 	textAlign: 'center',
 }));
 
+export const LightInputLabel = styled(InputLabel)(() => ({
+	'color': 'lightgray',
+	'&.Mui-focused': {
+		color: '#fff',
+	},
+}));
+
+export const LightSelect = styled(Select)(() => ({
+	'color': 'lightgray',
+	'&.Mui-focused': {
+		color: '#fff',
+	},
+	'.MuiOutlinedInput-notchedOutline': {
+		borderColor: 'darkgray',
+	},
+	'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+		borderColor: '#fff',
+	},
+	'&:hover .MuiOutlinedInput-notchedOutline': {
+		borderColor: 'darkgray',
+	},
+	'.MuiSvgIcon-root ': {
+		fill: 'lightgray !important',
+	},
+}));
+
 export const HeaderContainer = styled(Box)(() => ({
 	display: 'flex',
 	flexDirection: 'row-reverse',
 	alignItems: 'center',
 	height: '4rem',
+}));
+
+export const ControlsContainer = styled(Box)(() => ({
+	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center',
 }));
 
 export const HeaderLink = styled(Link)(() => ({
@@ -120,6 +155,10 @@ export const HeaderLink = styled(Link)(() => ({
 	'&:hover': {
 		color: '#fff',
 	},
+}));
+
+export const StyledFormControl = styled(FormControl)(() => ({
+	minWidth: 200,
 }));
 
 export const CenteredLink = styled(Link)(() => ({
