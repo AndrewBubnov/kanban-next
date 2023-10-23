@@ -1,14 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useFilteredStore } from '@/store';
+import { useContext, useEffect, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import { LightInputLabel, LightSelect, StyledFormControl } from '@/components/StyledComponents';
-import { SwitchProps } from '@/types';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { ALL_USERNAMES } from '@/constants';
+import { DashboardContext } from '@/components/DashboardProvider';
 
-export const AssigneeSelect = ({ tasks, userIdsArray }: SwitchProps) => {
-	const { setFilteredTasks } = useFilteredStore();
+export const AssigneeSelect = () => {
+	const { tasks, extendedUserIdsArray, setFilteredTasks } = useContext(DashboardContext);
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
 
@@ -16,9 +15,10 @@ export const AssigneeSelect = ({ tasks, userIdsArray }: SwitchProps) => {
 		const filtered = tasks.filter(el => el.assignee.userId.includes(userId));
 		setFilteredTasks(filtered);
 	}, [setFilteredTasks, tasks, userId]);
+
 	const changeHandler = (event: SelectChangeEvent<unknown>) => {
 		const value = event.target.value as string;
-		const currentUserId = userIdsArray.find(item => value === item.username)?.userId || '';
+		const currentUserId = extendedUserIdsArray.find(item => value === item.username)?.userId || '';
 		setUsername(value);
 		setUserId(currentUserId);
 	};
@@ -27,7 +27,7 @@ export const AssigneeSelect = ({ tasks, userIdsArray }: SwitchProps) => {
 		<StyledFormControl>
 			<LightInputLabel id="assignee">Assignee</LightInputLabel>
 			<LightSelect value={username} label="Assignee" onChange={changeHandler}>
-				{userIdsArray.map(el => (
+				{extendedUserIdsArray.map(el => (
 					<MenuItem key={el.userId} value={el.username}>
 						{el.username}
 					</MenuItem>

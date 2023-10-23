@@ -1,4 +1,4 @@
-import { DragEvent, HTMLAttributes, ReactElement, ReactNode } from 'react';
+import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
 
 export enum Status {
 	NEW = 'new',
@@ -119,18 +119,25 @@ interface UserIdsArrayItem {
 	username: string;
 }
 
-export interface SwitchProps {
-	tasks: TaskItem[];
-	userIdsArray: UserIdsArrayItem[];
-}
-
-export interface AddTaskProps {
-	userIdsArray: UserIdsArrayItem[];
-	isAdmin: boolean;
-}
-
 export type AddTaskAction = {
 	userId: string;
 	title: string;
 	description: string;
 };
+
+export interface DashboardProviderProps {
+	children: ReactNode;
+	userIdsArray: UserIdsArrayItem[];
+	extendedUserIdsArray: UserIdsArrayItem[];
+	isAdmin: boolean;
+	tasks: TaskItem[];
+}
+
+export interface DashboardContextProps {
+	userIdsArray: UserIdsArrayItem[];
+	extendedUserIdsArray: UserIdsArrayItem[];
+	isAdmin: boolean;
+	tasks: TaskItem[];
+	filteredTasks: TaskItem[];
+	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
+}

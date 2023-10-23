@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
 import { StyledDialog, StyledAddButton, StyledDialogContent } from '@/components/StyledComponents';
 import { CardFormCreate } from '@/components/CardFormCreate';
-import { AddTaskProps } from '@/types';
+import { DashboardContext } from '@/components/DashboardProvider';
 
-export const AddTask = ({ userIdsArray, isAdmin }: AddTaskProps) => {
+export const AddTask = () => {
+	const { userIdsArray, isAdmin } = useContext(DashboardContext);
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
 	return (
