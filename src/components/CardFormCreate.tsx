@@ -1,20 +1,18 @@
 import { Box, Grid } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { StyledModalButton } from '@/components/StyledComponents';
+import { ButtonContainer, StyledButton } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
 import { CardFormCreateProps } from '@/types';
 import { addTask } from '@/actions/addTask';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { useUser } from '@clerk/nextjs';
 
 export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
 	const { user } = useUser();
 	const userId = user?.id || '';
-	const [assigneeId, setAssigneeId] = useState<string>(userId);
+	const [assigneeId, setAssigneeId] = useState<string>('');
 	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
+
 	const [title, setTitle] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
@@ -26,26 +24,16 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 		await addTask({ title, description, userId: assigneeId });
 		onCancel();
 	};
-	const changeHandler = (event: SelectChangeEvent<unknown>) => {
-		const value = event.target.value as string;
-		const currentUserId = userIdsArray.find(item => value === item.username)?.userId || '';
-		setUsername(value);
-		setAssigneeId(currentUserId);
-	};
 
 	return (
 		<form action={confirmHandler}>
 			{isAdmin && (
-				<FormControl fullWidth>
-					<InputLabel id="assignee">Assignee</InputLabel>
-					<Select value={username} label="Assignee" onChange={changeHandler}>
-						{userIdsArray.map(el => (
-							<MenuItem key={el.userId} value={el.username}>
-								{el.username}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
+				<CardAssigneeSelect
+					username={username}
+					setUsername={setUsername}
+					setAssigneeId={setAssigneeId}
+					userIdsArray={userIdsArray}
+				/>
 			)}
 			<Box mt={2}>Title</Box>
 			<TextField onChange={titleHandler} value={title} name="title" margin="dense" fullWidth />
@@ -61,14 +49,14 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 				rows={4}
 			/>
 			<Grid container flexDirection="row-reverse">
-				<Grid item>
-					<StyledModalButton variant="text" onClick={onCancel}>
+				<ButtonContainer item>
+					<StyledButton size="small" variant="outlined" onClick={onCancel}>
 						Cancel
-					</StyledModalButton>
-					<StyledModalButton type="submit" variant="text">
+					</StyledButton>
+					<StyledButton type="submit" size="small" variant="outlined">
 						Confirm
-					</StyledModalButton>
-				</Grid>
+					</StyledButton>
+				</ButtonContainer>
 			</Grid>
 		</form>
 	);

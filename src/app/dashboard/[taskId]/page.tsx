@@ -23,21 +23,22 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 		<Wrapper>
 			<StyledTaskDetails>
 				<CardContent>
+					<FlexContainer>
+						<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
+						<IconContainer>
+							<Link href={`/dashboard/${taskId}/edit`}>
+								<EditIcon />
+							</Link>
+							<Link href={'/dashboard'}>
+								<ArrowBackIcon />
+							</Link>
+						</IconContainer>
+					</FlexContainer>
 					<Module>
-						<FlexContainer>
-							<TitleContainer>
-								<DarkGreyText>{task?.id.slice(0, 4)}&nbsp;</DarkGreyText>
-								<TitleText>{task?.title}</TitleText>
-							</TitleContainer>
-							<IconContainer>
-								<Link href={`/dashboard/${taskId}/edit`}>
-									<EditIcon />
-								</Link>
-								<Link href={'/dashboard'}>
-									<ArrowBackIcon />
-								</Link>
-							</IconContainer>
-						</FlexContainer>
+						<TitleContainer>
+							<DarkGreyText>{task?.id.slice(0, 4)}&nbsp;</DarkGreyText>
+							<TitleText>{task?.title}</TitleText>
+						</TitleContainer>
 					</Module>
 					<Module>
 						<DarkGreyText>Status</DarkGreyText>

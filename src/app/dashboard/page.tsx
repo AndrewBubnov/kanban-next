@@ -5,7 +5,6 @@ import { getTasks } from '@/actions/getTasks';
 import { ControlsContainer, MainContainer } from '@/components/StyledComponents';
 import { DashboardAssigneeSelect } from '@/components/DashboardAssigneeSelect';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
-import { SELECT_ALL_USERS } from '@/constants';
 import { getUser } from '@/actions/getUser';
 import { DashboardProvider } from '@/components/DashboardProvider';
 

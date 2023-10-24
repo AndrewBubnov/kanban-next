@@ -1,7 +1,7 @@
 'use client';
 import { Box, Grid } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { StyledModalButton } from '@/components/StyledComponents';
+import { ButtonContainer, StyledButton } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
 import { CardFormUpdateProps, Status } from '@/types';
 import { updateSingleTask } from '@/actions/updateSingleTask';
@@ -11,9 +11,22 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ColumnNameDTO, columns } from '@/constants';
+import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 
-export const CardFormUpdate = ({ taskId, initTitle, initStatus, initDescription }: CardFormUpdateProps) => {
+export const CardFormUpdate = ({
+	task: {
+		id: taskId,
+		title: initTitle,
+		description: initDescription,
+		status: initStatus,
+		assignee: { userId },
+	},
+	isAdmin,
+	userIdsArray,
+}: CardFormUpdateProps) => {
 	const { push } = useRouter();
+	const [assigneeId, setAssigneeId] = useState<string>(userId);
+	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
 	const [title, setTitle] = useState<string>(initTitle);
 	const [description, setDescription] = useState<string>(initDescription);
 	const [status, setStatus] = useState<Status>(initStatus);
@@ -24,13 +37,21 @@ export const CardFormUpdate = ({ taskId, initTitle, initStatus, initDescription 
 	const cancelHandler = () => push(`/dashboard/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
-		await updateSingleTask(taskId, { title, description, status });
+		await updateSingleTask(assigneeId, taskId, { title, description, status });
 		cancelHandler();
 	};
 
 	return (
 		<form action={confirmHandler}>
-			<Box>Title</Box>
+			{isAdmin && (
+				<CardAssigneeSelect
+					username={username}
+					setUsername={setUsername}
+					setAssigneeId={setAssigneeId}
+					userIdsArray={userIdsArray}
+				/>
+			)}
+			<Box mt={2}>Title</Box>
 			<TextField onChange={titleHandler} value={title} name="title" margin="dense" fullWidth />
 			<Box mt={2}>
 				<FormControl fullWidth>
@@ -56,14 +77,14 @@ export const CardFormUpdate = ({ taskId, initTitle, initStatus, initDescription 
 				rows={4}
 			/>
 			<Grid container flexDirection="row-reverse">
-				<Grid item>
-					<StyledModalButton variant="text" onClick={cancelHandler}>
+				<ButtonContainer item>
+					<StyledButton size="small" variant="outlined" onClick={cancelHandler}>
 						Cancel
-					</StyledModalButton>
-					<StyledModalButton type="submit" variant="text">
+					</StyledButton>
+					<StyledButton type="submit" size="small" variant="outlined">
 						Confirm
-					</StyledModalButton>
-				</Grid>
+					</StyledButton>
+				</ButtonContainer>
 			</Grid>
 		</form>
 	);

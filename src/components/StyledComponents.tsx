@@ -22,14 +22,24 @@ export const StyledDialogContent = styled(DialogContent)(() => ({
 	paddingTop: '5px !important',
 }));
 
-export const StyledModalButton = styled(Button)(() => ({
+export const ButtonContainer = styled(Grid)(() => ({
+	width: '40%',
+	display: 'flex',
+	justifyContent: 'space-between',
+	marginTop: '1rem',
+}));
+
+export const StyledButton = styled(Button)(() => ({
 	'textTransform': 'none',
-	'color': 'rgba(0, 0, 0, 0.87)',
+	'color': '#000000DD',
+	'border': 'none',
 	'&:focus': {
 		outline: 'none',
 	},
 	'&:hover': {
-		color: '#000',
+		border: 'none',
+		color: '#fff',
+		background: '#00000080',
 	},
 }));
 

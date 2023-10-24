@@ -6,9 +6,14 @@ import { CardFormUpdate } from '@/components/CardFormUpdate';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TableIcon from '@mui/icons-material/ViewWeekOutlined';
+import { getUser } from '@/actions/getUser';
+import { getMappedUserIds } from '@/actions/getMappedUserIds';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
+	const { isAdmin } = await getUser();
 	const task = await getTaskById(taskId);
+	const userIdsArray = await getMappedUserIds();
+
 	return (
 		<Wrapper>
 			<StyledTaskDetails>
@@ -23,12 +28,7 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 							</Link>
 						</IconContainer>
 					</Grid>
-					<CardFormUpdate
-						initTitle={task?.title}
-						initDescription={task?.description}
-						taskId={+taskId}
-						initStatus={task?.status}
-					/>
+					<CardFormUpdate task={task} isAdmin={isAdmin} userIdsArray={userIdsArray} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>

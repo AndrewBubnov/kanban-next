@@ -80,10 +80,9 @@ export interface CardFormCreateProps {
 }
 
 export interface CardFormUpdateProps {
-	initTitle: string;
-	initDescription: string;
-	initStatus: Status;
-	taskId: string;
+	task: TaskItem;
+	isAdmin: boolean;
+	userIdsArray: UserIdsArrayItem[];
 }
 
 export interface TaskIdParam {
@@ -128,4 +127,11 @@ export interface DashboardContextProps {
 	tasks: TaskItem[];
 	filteredTasks: TaskItem[];
 	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
+}
+
+export interface CardAssigneeSelectProps {
+	userIdsArray: UserIdsArrayItem[];
+	username: string;
+	setUsername: Dispatch<SetStateAction<string>>;
+	setAssigneeId: Dispatch<SetStateAction<string>>;
 }

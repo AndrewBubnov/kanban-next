@@ -27,7 +27,7 @@ export const DashboardAssigneeSelect = () => {
 
 	return (
 		<StyledFormControl>
-			<LightInputLabel id="assignee">Assignee</LightInputLabel>
+			<LightInputLabel>Assignee</LightInputLabel>
 			<LightSelect value={username} label="Assignee" onChange={changeHandler}>
 				{extendedUserIdsArray.map(el => (
 					<MenuItem key={el.userId} value={el.username}>

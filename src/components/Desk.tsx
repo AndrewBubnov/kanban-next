@@ -1,13 +1,13 @@
 'use client';
+import { useContext } from 'react';
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
-import { ColumnNameDTO, columns } from '@/constants';
-import { Status } from '@/types';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
-import { useContext } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
+import { ColumnNameDTO, columns } from '@/constants';
+import { Status } from '@/types';
 
 export function Desk() {
 	const { filteredTasks: tasks } = useContext(DashboardContext);
