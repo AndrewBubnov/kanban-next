@@ -4,6 +4,7 @@ import { getUser } from '@/actions/getUser';
 import { prisma } from '@/db';
 import { TaskItem } from '@/types';
 import { revalidatePath } from 'next/cache';
+import { DASHBOARD } from '@/constants';
 
 export const updateAllTasks = async (updatedTaskData: TaskItem[]) => {
 	const user = await getUser();
@@ -17,5 +18,5 @@ export const updateAllTasks = async (updatedTaskData: TaskItem[]) => {
 			});
 		}
 	}
-	revalidatePath('/dashboard');
+	revalidatePath(DASHBOARD);
 };

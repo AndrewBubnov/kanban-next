@@ -1,7 +1,7 @@
 'use client';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { ButtonContainer, StyledButton } from '@/components/StyledComponents';
+import { ButtonContainer, DeleteButton, FlexContainer, StyledButton } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
 import { CardFormUpdateProps, Status } from '@/types';
 import { updateSingleTask } from '@/actions/updateSingleTask';
@@ -10,8 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ColumnNameDTO, columns } from '@/constants';
+import { ColumnNameDTO, columns, DASHBOARD } from '@/constants';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
+import { deleteTask } from '@/actions/deleteTask';
 
 export const CardFormUpdate = ({
 	task: {
@@ -34,11 +35,15 @@ export const CardFormUpdate = ({
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value as Status);
-	const cancelHandler = () => push(`/dashboard/${taskId}`);
+	const cancelHandler = () => push(`${DASHBOARD}/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
 		await updateSingleTask(assigneeId, taskId, { title, description, status });
 		cancelHandler();
+	};
+	const deleteHandler = async () => {
+		await deleteTask(taskId);
+		push(DASHBOARD);
 	};
 
 	return (
@@ -76,8 +81,9 @@ export const CardFormUpdate = ({
 				multiline
 				rows={4}
 			/>
-			<Grid container flexDirection="row-reverse">
-				<ButtonContainer item>
+			<FlexContainer isReverse={!isAdmin} marginTop>
+				{isAdmin && <DeleteButton onClick={deleteHandler}>Delete</DeleteButton>}
+				<ButtonContainer>
 					<StyledButton size="small" variant="outlined" onClick={cancelHandler}>
 						Cancel
 					</StyledButton>
@@ -85,7 +91,7 @@ export const CardFormUpdate = ({
 						Confirm
 					</StyledButton>
 				</ButtonContainer>
-			</Grid>
+			</FlexContainer>
 		</form>
 	);
 };

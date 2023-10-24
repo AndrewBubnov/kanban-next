@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid } from '@mui/material';
 import Link from 'next/link';
-import { DraggableBoxProps } from '@/types';
+import { DraggableBoxProps, FlexContainerProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -26,7 +26,6 @@ export const ButtonContainer = styled(Grid)(() => ({
 	width: '40%',
 	display: 'flex',
 	justifyContent: 'space-between',
-	marginTop: '1rem',
 }));
 
 export const StyledButton = styled(Button)(() => ({
@@ -40,6 +39,20 @@ export const StyledButton = styled(Button)(() => ({
 		border: 'none',
 		color: '#fff',
 		background: '#00000080',
+	},
+}));
+
+export const DeleteButton = styled(Button)(() => ({
+	'textTransform': 'none',
+	'color': 'tomato',
+	'border': 'none',
+	'&:focus': {
+		outline: 'none',
+	},
+	'&:hover': {
+		border: 'none',
+		color: '#fff',
+		background: 'tomato',
 	},
 }));
 
@@ -85,12 +98,16 @@ export const MainContainer = styled(Box)(() => ({
 	padding: '1rem',
 }));
 
-export const FlexContainer = styled(Box)(() => ({
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
-	marginBottom: '0.5rem',
-}));
+export const FlexContainer = styled(({ isReverse = true, marginTop = false, ...props }: FlexContainerProps) => (
+	<Box {...props} />
+))<FlexContainerProps>`
+	display: flex;
+	flex-direction: ${({ isReverse }) => (isReverse ? 'row-reverse' : 'row')};
+	margin-top: ${({ marginTop }) => (marginTop ? '1rem' : 'unset')};
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+`;
 
 export const DeskContainer = styled(Box)(() => ({
 	gap: '1rem',

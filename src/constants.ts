@@ -18,3 +18,4 @@ export const COMMON_TRANSLATE = 'translateY(var(--delta-y))';
 export const ADMINS_LIST = [{ email: 'andrew.bubnov75@gmail.com' }];
 export const ALL_USERNAMES = 'All';
 export const SELECT_ALL_USERS = { userId: '', username: ALL_USERNAMES };
+export const DASHBOARD = '/dashboard';

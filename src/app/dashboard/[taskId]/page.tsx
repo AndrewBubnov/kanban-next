@@ -14,7 +14,7 @@ import Link from 'next/link';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Status, TaskIdParam } from '@/types';
-import { ColumnNameDTO } from '@/constants';
+import { ColumnNameDTO, DASHBOARD } from '@/constants';
 
 const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
@@ -29,7 +29,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 							<Link href={`/dashboard/${taskId}/edit`}>
 								<EditIcon />
 							</Link>
-							<Link href={'/dashboard'}>
+							<Link href={DASHBOARD}>
 								<ArrowBackIcon />
 							</Link>
 						</IconContainer>

@@ -2,6 +2,7 @@
 import { prisma } from '@/db';
 import { EditedTaskContent } from '@/types';
 import { revalidatePath } from 'next/cache';
+import { DASHBOARD } from '@/constants';
 
 export const updateSingleTask = async (userId: string, taskId: string, updatedTaskData: EditedTaskContent) => {
 	const existingTask = await prisma.task.findFirst({
@@ -26,5 +27,5 @@ export const updateSingleTask = async (userId: string, taskId: string, updatedTa
 			},
 		});
 	}
-	revalidatePath('/dashboard');
+	revalidatePath(DASHBOARD);
 };

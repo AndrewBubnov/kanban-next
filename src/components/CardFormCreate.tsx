@@ -1,6 +1,6 @@
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { ButtonContainer, StyledButton } from '@/components/StyledComponents';
+import { ButtonContainer, FlexContainer, StyledButton } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
 import { CardFormCreateProps } from '@/types';
 import { addTask } from '@/actions/addTask';
@@ -48,8 +48,8 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 				multiline
 				rows={4}
 			/>
-			<Grid container flexDirection="row-reverse">
-				<ButtonContainer item>
+			<FlexContainer isReverse marginTop>
+				<ButtonContainer>
 					<StyledButton size="small" variant="outlined" onClick={onCancel}>
 						Cancel
 					</StyledButton>
@@ -57,7 +57,7 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 						Confirm
 					</StyledButton>
 				</ButtonContainer>
-			</Grid>
+			</FlexContainer>
 		</form>
 	);
 };

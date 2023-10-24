@@ -8,6 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TableIcon from '@mui/icons-material/ViewWeekOutlined';
 import { getUser } from '@/actions/getUser';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
+import { DASHBOARD } from '@/constants';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 	const { isAdmin } = await getUser();
@@ -20,7 +21,7 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 				<CardContent>
 					<Grid container flexDirection="row-reverse">
 						<IconContainer>
-							<Link href={'/dashboard'}>
+							<Link href={DASHBOARD}>
 								<TableIcon />
 							</Link>
 							<Link href={`/dashboard/${taskId}`}>

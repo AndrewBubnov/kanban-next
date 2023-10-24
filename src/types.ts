@@ -95,6 +95,11 @@ export interface DraggableBoxProps extends HTMLAttributes<HTMLDivElement> {
 	children: ReactNode;
 }
 
+export interface FlexContainerProps extends HTMLAttributes<HTMLDivElement> {
+	isReverse?: boolean;
+	marginTop?: boolean;
+}
+
 export interface DraggableImageProps {
 	imageParameters: {
 		width: number;
