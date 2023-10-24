@@ -1,4 +1,5 @@
 import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
+import { SelectProps } from '@mui/material';
 
 export enum Status {
 	NEW = 'new',
@@ -132,6 +133,8 @@ export interface DashboardContextProps {
 	tasks: TaskItem[];
 	filteredTasks: TaskItem[];
 	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
+	columnConfig: Status[];
+	setColumnConfig: Dispatch<SetStateAction<Status[]>>;
 }
 
 export interface CardAssigneeSelectProps {
@@ -147,4 +150,8 @@ export interface ConfirmDialogProps {
 	open: boolean;
 	onCancel(): void;
 	onConfirm(): void;
+}
+
+export interface CombinedSelectProps extends SelectProps {
+	labelText: string;
 }

@@ -191,6 +191,7 @@ export const HeaderLink = styled(Link)(() => ({
 
 export const StyledFormControl = styled(FormControl)(() => ({
 	minWidth: 200,
+	marginLeft: '1rem',
 }));
 
 export const CenteredLink = styled(Link)(() => ({

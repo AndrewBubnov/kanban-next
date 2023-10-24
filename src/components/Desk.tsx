@@ -6,11 +6,11 @@ import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { DashboardContext } from '@/components/DashboardProvider';
-import { ColumnNameDTO, columns } from '@/constants';
+import { ColumnNameDTO } from '@/constants';
 import { Status } from '@/types';
 
 export function Desk() {
-	const { filteredTasks: tasks } = useContext(DashboardContext);
+	const { filteredTasks: tasks, columnConfig } = useContext(DashboardContext);
 	const {
 		parameters,
 		config,
@@ -62,5 +62,5 @@ export function Desk() {
 		</Column>
 	);
 
-	return <DeskContainer ref={ref}>{columns.map(renderMapper)}</DeskContainer>;
+	return <DeskContainer ref={ref}>{columnConfig.map(renderMapper)}</DeskContainer>;
 }

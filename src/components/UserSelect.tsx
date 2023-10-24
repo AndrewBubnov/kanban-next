@@ -2,11 +2,12 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
 import MenuItem from '@mui/material/MenuItem';
-import { LightInputLabel, LightSelect, StyledFormControl } from '@/components/StyledComponents';
+import { StyledFormControl } from '@/components/StyledComponents';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { Select } from '@/components/Select';
 import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
 
-export const DashboardAssigneeSelect = () => {
+export const UserSelect = () => {
 	const { tasks, userIdsArray, setFilteredTasks } = useContext(DashboardContext);
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
@@ -27,14 +28,13 @@ export const DashboardAssigneeSelect = () => {
 
 	return (
 		<StyledFormControl>
-			<LightInputLabel>Assignee</LightInputLabel>
-			<LightSelect value={username} label="Assignee" onChange={changeHandler}>
+			<Select value={username} labelText="Assignee" label="Assignee" onChange={changeHandler}>
 				{extendedUserIdsArray.map(el => (
 					<MenuItem key={el.userId} value={el.username}>
 						{el.username}
 					</MenuItem>
 				))}
-			</LightSelect>
+			</Select>
 		</StyledFormControl>
 	);
 };
