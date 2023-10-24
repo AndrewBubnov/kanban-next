@@ -140,3 +140,11 @@ export interface CardAssigneeSelectProps {
 	setUsername: Dispatch<SetStateAction<string>>;
 	setAssigneeId: Dispatch<SetStateAction<string>>;
 }
+
+export interface ConfirmDialogProps {
+	title: ReactNode;
+	text: ReactNode;
+	open: boolean;
+	onCancel(): void;
+	onConfirm(): void;
+}
