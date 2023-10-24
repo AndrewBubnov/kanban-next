@@ -9,12 +9,13 @@ import { useUser } from '@clerk/nextjs';
 
 export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
 	const { user } = useUser();
-	const userId = user?.id || '';
-	const [assigneeId, setAssigneeId] = useState<string>('');
-	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
 
+	const userId = user?.id || '';
+	const [assigneeId, setAssigneeId] = useState<string>(userId);
+	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
 	const [title, setTitle] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
+
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const confirmHandler = async (data: FormData) => {
