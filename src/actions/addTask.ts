@@ -2,7 +2,7 @@
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { getUser } from '@/actions/getUser';
-import { AddTaskAction, Status } from '@/types';
+import { AddTaskAction, Status, TaskItem } from '@/types';
 
 export const addTask = async ({ userId, title, description }: AddTaskAction) => {
 	const user = await getUser();
@@ -18,7 +18,21 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 			index: 0,
 		},
 	});
-	user.tasks.push(newTask);
+	const taskItem: TaskItem = {
+		title: newTask.title,
+		description: newTask.description,
+		id: newTask.id,
+		status: newTask.status as Status,
+		index: newTask.index,
+		assignee: {
+			id: user.id,
+			userId: user.userId,
+			email: user.email,
+			username: user.username,
+			isAdmin: user.isAdmin,
+		},
+	};
+	user.tasks.push(taskItem);
 
 	await prisma.user.update({
 		where: { userId },

@@ -7,12 +7,7 @@ export enum Status {
 	DONE = 'done',
 }
 
-export interface DeskProps {
-	tasks: TaskItem[];
-	columns: Status[];
-}
-
-type Assignee = {
+export type Assignee = {
 	id: number;
 	userId: string;
 	email: string;
@@ -107,11 +102,6 @@ export interface DraggableImageProps {
 		height: number;
 		imgSrc: string;
 	};
-}
-
-export interface UseTasks {
-	filteredTasks: TaskItem[];
-	setFilteredTasks(arg: TaskItem[]): void;
 }
 
 interface UserIdsArrayItem {
