@@ -1,15 +1,17 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { DashboardContext } from '@/components/DashboardProvider';
 import MenuItem from '@mui/material/MenuItem';
 import { LightInputLabel, LightSelect, StyledFormControl } from '@/components/StyledComponents';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { ALL_USERNAMES } from '@/constants';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
 
-export const AssigneeSelect = () => {
-	const { tasks, extendedUserIdsArray, setFilteredTasks } = useContext(DashboardContext);
+export const DashboardAssigneeSelect = () => {
+	const { tasks, userIdsArray, setFilteredTasks } = useContext(DashboardContext);
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
+
+	const extendedUserIdsArray = useMemo(() => [SELECT_ALL_USERS, ...userIdsArray], [userIdsArray]);
 
 	useEffect(() => {
 		const filtered = tasks.filter(el => el.assignee.userId.includes(userId));

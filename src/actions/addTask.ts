@@ -9,6 +9,8 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 
 	if (!user) return;
 
+	const { id, isAdmin, username, email } = user;
+
 	const newTask = await prisma.task.create({
 		data: {
 			userId,
@@ -25,11 +27,11 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 		status: newTask.status as Status,
 		index: newTask.index,
 		assignee: {
-			id: user.id,
+			id,
 			userId: user.userId,
-			email: user.email,
-			username: user.username,
-			isAdmin: user.isAdmin,
+			email,
+			username,
+			isAdmin,
 		},
 	};
 	user.tasks.push(taskItem);

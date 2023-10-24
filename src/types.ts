@@ -118,14 +118,12 @@ export type AddTaskAction = {
 export interface DashboardProviderProps {
 	children: ReactNode;
 	userIdsArray: UserIdsArrayItem[];
-	extendedUserIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	tasks: TaskItem[];
 }
 
 export interface DashboardContextProps {
 	userIdsArray: UserIdsArrayItem[];
-	extendedUserIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	tasks: TaskItem[];
 	filteredTasks: TaskItem[];

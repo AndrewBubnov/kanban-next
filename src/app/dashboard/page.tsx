@@ -3,7 +3,7 @@ import { Header } from '@/components/Header';
 import { AddTask } from '@/components/AddTask';
 import { getTasks } from '@/actions/getTasks';
 import { ControlsContainer, MainContainer } from '@/components/StyledComponents';
-import { AssigneeSelect } from '@/components/AssigneeSelect';
+import { DashboardAssigneeSelect } from '@/components/DashboardAssigneeSelect';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 import { SELECT_ALL_USERS } from '@/constants';
 import { getUser } from '@/actions/getUser';
@@ -17,15 +17,10 @@ export default async function Dashboard() {
 	return (
 		<MainContainer>
 			<Header userId={userId} />
-			<DashboardProvider
-				userIdsArray={userIdsArray}
-				extendedUserIdsArray={[SELECT_ALL_USERS, ...userIdsArray]}
-				isAdmin={isAdmin}
-				tasks={tasks}
-			>
+			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} tasks={tasks}>
 				<ControlsContainer>
 					<AddTask />
-					<AssigneeSelect />
+					<DashboardAssigneeSelect />
 				</ControlsContainer>
 				<Desk />
 			</DashboardProvider>
