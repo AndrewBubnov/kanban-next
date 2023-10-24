@@ -2,7 +2,6 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
 import MenuItem from '@mui/material/MenuItem';
-import { StyledFormControl } from '@/components/StyledComponents';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { Select } from '@/components/Select';
 import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
@@ -27,14 +26,12 @@ export const UserSelect = () => {
 	};
 
 	return (
-		<StyledFormControl>
-			<Select value={username} labelText="Assignee" label="Assignee" onChange={changeHandler}>
-				{extendedUserIdsArray.map(el => (
-					<MenuItem key={el.userId} value={el.username}>
-						{el.username}
-					</MenuItem>
-				))}
-			</Select>
-		</StyledFormControl>
+		<Select value={username} labelText="Assignee" label="Assignee" onChange={changeHandler}>
+			{extendedUserIdsArray.map(el => (
+				<MenuItem key={el.userId} value={el.username}>
+					{el.username}
+				</MenuItem>
+			))}
+		</Select>
 	);
 };

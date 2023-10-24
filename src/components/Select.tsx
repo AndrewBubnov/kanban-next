@@ -1,4 +1,4 @@
-import { LightInputLabel, LightSelect } from '@/components/StyledComponents';
+import { LightInputLabel, LightSelect, StyledFormControl } from '@/components/StyledComponents';
 import { CombinedSelectProps } from '@/types';
 
 const MenuProps = {
@@ -10,10 +10,10 @@ const MenuProps = {
 };
 
 export const Select = ({ children, labelText, ...props }: CombinedSelectProps) => (
-	<>
+	<StyledFormControl>
 		<LightInputLabel shrink>{labelText}</LightInputLabel>
 		<LightSelect {...props} MenuProps={MenuProps} notched>
 			{children}
 		</LightSelect>
-	</>
+	</StyledFormControl>
 );
