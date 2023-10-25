@@ -26,7 +26,6 @@ export const TaskMini = ({ id, title, description, username, email }: TaskMiniPr
 				<DarkGreyText>{id.slice(0, 4)}&nbsp;</DarkGreyText>
 				<ShortTitleText>{title}</ShortTitleText>
 			</FlexContainer>
-
 			<Typography mt={1}>{description}</Typography>
 		</StyledCardContent>
 	</StyledTaskMini>

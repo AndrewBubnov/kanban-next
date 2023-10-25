@@ -18,3 +18,6 @@ export const ADMINS_LIST = [{ email: 'andrew.bubnov75@gmail.com' }];
 export const ALL_USERNAMES = 'All';
 export const SELECT_ALL_USERS = { userId: '', username: ALL_USERNAMES };
 export const DASHBOARD = '/dashboard';
+export const TASK_MINI_HEIGHT = 150;
+export const GAP = 16;
+export const SINGLE_VERTICAL_MOVE = TASK_MINI_HEIGHT + GAP;

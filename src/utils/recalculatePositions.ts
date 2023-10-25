@@ -1,4 +1,5 @@
 import { Parameters, RecalculateProps } from '@/types';
+import { SINGLE_VERTICAL_MOVE } from '@/constants';
 
 export const recalculatePositions =
 	({ draggedId, hoveredId }: RecalculateProps) =>
@@ -20,15 +21,14 @@ export const recalculatePositions =
 		}
 
 		return Object.keys(prevState).reduce((acc, el) => {
-			const id = +el;
-			if (prevState[id].status === hoveredColumn && prevState[id].top >= hoveredTop) {
-				acc[id] = {
-					...prevState[id],
-					dY: prevState[id].dY + 166,
+			if (prevState[el].status === hoveredColumn && prevState[el].top >= hoveredTop) {
+				acc[el] = {
+					...prevState[el],
+					dY: prevState[el].dY + SINGLE_VERTICAL_MOVE,
 				};
 				return acc;
 			}
-			acc[id] = prevState[id];
+			acc[el] = prevState[el];
 			return acc;
 		}, {} as Parameters);
 	};

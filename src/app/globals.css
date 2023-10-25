@@ -5,11 +5,8 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --card-width: 350px;
   --delta-x: '';
   --delta-y: '';
-  --card-height: 150px;
-
 }
 
 * {
