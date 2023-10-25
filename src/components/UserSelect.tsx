@@ -26,7 +26,7 @@ export const UserSelect = () => {
 	};
 
 	return (
-		<Select value={username} labelText="Assignee" label="Assignee" onChange={changeHandler}>
+		<Select value={username} label="Assignee" onChange={changeHandler}>
 			{extendedUserIdsArray.map(el => (
 				<MenuItem key={el.userId} value={el.username}>
 					{el.username}

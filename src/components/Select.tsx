@@ -1,5 +1,5 @@
 import { LightInputLabel, LightSelect, StyledFormControl } from '@/components/StyledComponents';
-import { CombinedSelectProps } from '@/types';
+import { SelectProps } from '@mui/material';
 
 const MenuProps = {
 	PaperProps: {
@@ -9,9 +9,9 @@ const MenuProps = {
 	},
 };
 
-export const Select = ({ children, labelText, ...props }: CombinedSelectProps) => (
+export const Select = ({ children, ...props }: SelectProps) => (
 	<StyledFormControl>
-		<LightInputLabel shrink>{labelText}</LightInputLabel>
+		<LightInputLabel shrink>{props.label}</LightInputLabel>
 		<LightSelect {...props} MenuProps={MenuProps} notched>
 			{children}
 		</LightSelect>

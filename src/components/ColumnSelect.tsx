@@ -1,6 +1,5 @@
 'use client';
 import { useContext } from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
@@ -18,17 +17,16 @@ export const ColumnSelect = () => {
 
 	return (
 		<Select
-			labelText="Columns"
+			label="Columns"
 			multiple
 			value={columnConfig}
 			onChange={handleChange}
-			input={<OutlinedInput label="Columns" />}
-			renderValue={sel => `${(sel as Status[]).length} items`}
+			renderValue={() => `${columnConfig.length} items`}
 		>
-			{columns.map(name => (
-				<MenuItem key={name} value={name}>
-					<Checkbox checked={columnConfig.indexOf(name) > -1} />
-					<ListItemText primary={ColumnNameDTO[name]} />
+			{columns.map(status => (
+				<MenuItem key={status} value={status}>
+					<Checkbox checked={columnConfig.indexOf(status) > -1} />
+					<ListItemText primary={ColumnNameDTO[status]} />
 				</MenuItem>
 			))}
 		</Select>

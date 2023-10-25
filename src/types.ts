@@ -151,7 +151,3 @@ export interface ConfirmDialogProps {
 	onCancel(): void;
 	onConfirm(): void;
 }
-
-export interface CombinedSelectProps extends SelectProps {
-	labelText: string;
-}
