@@ -1,30 +1,27 @@
-import { prisma } from '@/db';
 import { ADMINS_LIST } from '@/constants';
+import { prisma } from '@/db';
+import { AdminList } from '@/types';
 
-export const getAdminList = async (userId: string): Promise<string[]> => {
-	const adminListContent = await prisma.adminList.findFirst({
+export const getAdminList = async (): Promise<string[]> => {
+	let adminListContent: AdminList | null = await prisma.adminList.findFirst({
+		where: { listId: 1 },
 		include: {
 			admins: true,
 		},
 	});
+
 	if (!adminListContent) {
-		await prisma.adminList.create({
+		adminListContent = await prisma.adminList.create({
 			data: {
 				listId: 1,
-				admins: {
-					create: [],
-				},
-			},
-		});
-		await prisma.adminList.update({
-			where: { id: 1 },
-			data: {
 				admins: {
 					create: ADMINS_LIST,
 				},
 			},
+			include: {
+				admins: true,
+			},
 		});
-		await getAdminList(userId);
 	}
-	return adminListContent?.admins.map(el => el.email) || [];
+	return adminListContent.admins.map(el => el.email);
 };

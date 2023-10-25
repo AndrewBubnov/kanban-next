@@ -151,3 +151,5 @@ export interface ConfirmDialogProps {
 	onCancel(): void;
 	onConfirm(): void;
 }
+
+export type AdminList = { admins: { id: number; email: string; listId: number }[] };

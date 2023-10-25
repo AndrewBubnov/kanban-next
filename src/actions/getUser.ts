@@ -1,24 +1,42 @@
 'use server';
 import { prisma } from '@/db';
-import { auth } from '@clerk/nextjs';
-import { TaskItem } from '@/types';
+import { auth, currentUser } from '@clerk/nextjs';
+import { getAdminList } from '@/actions/getAdminList';
 
 export const getUser = async () => {
 	const userId = auth().userId as string;
+	const user = await currentUser();
+	const adminList = await getAdminList();
+	const username = user?.username || '';
+	const email = user?.emailAddresses[0].emailAddress || '';
 
-	return prisma.user.findUnique({
-		where: {
-			userId,
-		},
+	let existingUser = await prisma.user.findUnique({
+		where: { userId },
 		include: {
 			tasks: true,
 		},
-	}) as unknown as Promise<{
-		id: number;
-		userId: string;
-		email: string;
-		username: string;
-		isAdmin: boolean;
-		tasks: TaskItem[];
-	}>;
+	});
+
+	if (!existingUser) {
+		const createUser = await prisma.user.create({
+			data: {
+				userId,
+				email,
+				username,
+				isAdmin: adminList.includes(email),
+				tasks: {
+					create: [],
+				},
+			},
+		});
+		existingUser = {
+			id: createUser.id,
+			userId: createUser.userId,
+			email: createUser.email,
+			username: createUser.username,
+			isAdmin: createUser.isAdmin,
+			tasks: [],
+		};
+	}
+	return existingUser;
 };
