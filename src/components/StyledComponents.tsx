@@ -201,12 +201,13 @@ export const CenteredLink = styled(Link)(() => ({
 
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
-	alignItems: 'center',
+	alignItems: 'flex-start',
 }));
 
 export const TitleText = styled(Box)(() => ({
 	fontSize: '1.1rem',
 	fontWeight: 600,
+	maxWidth: 'calc(100% - 115px)',
 }));
 
 export const ShortTitleText = styled(Box)(() => ({
