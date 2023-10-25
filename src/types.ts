@@ -1,5 +1,4 @@
 import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
-import { SelectProps } from '@mui/material';
 
 export enum Status {
 	NEW = 'new',
@@ -21,6 +20,7 @@ export type TaskItem = {
 	description: string;
 	id: string;
 	status: Status;
+	createdAt: string;
 	index: number;
 	assignee: Assignee;
 };

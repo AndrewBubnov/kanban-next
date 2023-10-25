@@ -1,7 +1,5 @@
 {
   "extends": [
     "next"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["react-refresh"]
+  ]
 }

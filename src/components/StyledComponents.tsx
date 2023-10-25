@@ -201,13 +201,27 @@ export const CenteredLink = styled(Link)(() => ({
 
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center',
+}));
+
+export const TitleInnerContainer = styled(Box)(() => ({
+	display: 'flex',
 	alignItems: 'flex-start',
+	width: '100%',
+}));
+
+export const DateContainer = styled(Box)(() => ({
+	minWidth: 70,
+	fontSize: '0.68rem',
+	color: 'darkgray',
+	fontWeight: 600,
 }));
 
 export const TitleText = styled(Box)(() => ({
-	fontSize: '1.1rem',
+	fontSize: '1rem',
 	fontWeight: 600,
-	maxWidth: 'calc(100% - 115px)',
+	maxWidth: 'calc(100% - 120px)',
 }));
 
 export const ShortTitleText = styled(Box)(() => ({
@@ -231,6 +245,7 @@ export const Module = styled(Box)(() => ({
 
 export const DarkGreyText = styled(Box)(() => ({
 	color: 'darkgrey',
+	fontSize: '1rem',
 	fontWeight: 600,
 }));
 
