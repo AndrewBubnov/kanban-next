@@ -17,6 +17,9 @@
 - **Material-UI Integration**: The project leverages Material-UI for a sleek and modern user interface design. Material-UI provides a wide range of components to create a consistent and responsive user experience.
 
 - **User Authentication**: Users can register and log in using various methods, including Google, Facebook, or email and password registration.
+  
+- **Comment Functionality**: Users can add comments to tasks. Comments are displayed and added in the task details view, allowing for collaboration and communication within tasks.
+
 
 ## Usage
 
