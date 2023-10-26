@@ -18,7 +18,7 @@
 
 - **User Authentication**: Users can register and log in using various methods, including Google, Facebook, or email and password registration.
   
-- **Comment Functionality**: Users can add comments to tasks. Comments are displayed and added in the task details view, allowing for collaboration and communication within tasks.
+- **Comment Functionality**: Users can add comments to tasks. Comments are displayed and added in the task details view, allowing for collaboration and communication within tasks. Each individual user has the ability to edit their own comments, ensuring personal control over their contributions.
 
 
 ## Usage
