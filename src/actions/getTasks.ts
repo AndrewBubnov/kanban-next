@@ -5,7 +5,7 @@ import { sortByIndices } from '@/utils/sortByIndices';
 
 export const getTasks = async (): Promise<TaskItem[]> => {
 	const tasks = await prisma.task.findMany({
-		include: { assignee: true },
+		include: { assignee: true, comments: true },
 	});
 
 	return tasks

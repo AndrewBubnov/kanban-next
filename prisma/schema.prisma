@@ -16,6 +16,17 @@ model Task {
   status       String
   createdAt    DateTime    @default(now())
   assignee     User        @relation(fields: [userId], references: [userId])
+  comments     Comment[]
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  taskId      String
+  username    String
+  email       String
+  createdAt   DateTime  @default(now())
+  text        String
+  task        Task     @relation(fields: [taskId], references: [id])
 }
 
 model User {

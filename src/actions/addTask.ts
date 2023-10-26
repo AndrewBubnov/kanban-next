@@ -2,7 +2,7 @@
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { getUser } from '@/actions/getUser';
-import { AddTaskAction, Status, TaskItem } from '@/types';
+import { AddTaskAction, Status } from '@/types';
 import { DASHBOARD } from '@/constants';
 
 export const addTask = async ({ userId, title, description }: AddTaskAction) => {
@@ -19,14 +19,13 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 			description,
 			status: Status.NEW,
 			index: 0,
+			comments: { create: [] },
 		},
 	});
-	const taskItem: TaskItem = {
-		title: newTask.title,
-		description: newTask.description,
-		id: newTask.id,
+
+	const taskItem = {
+		...newTask,
 		status: newTask.status as Status,
-		index: newTask.index,
 		assignee: {
 			id,
 			userId: user.userId,
@@ -41,5 +40,6 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 		where: { userId },
 		data: { tasks: { connect: { id: newTask.id } } },
 	});
+
 	revalidatePath(DASHBOARD);
 };

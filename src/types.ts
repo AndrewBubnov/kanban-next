@@ -15,14 +15,24 @@ export type Assignee = {
 	isAdmin: boolean;
 };
 
+export type Comment = {
+	id: number;
+	taskId: string;
+	username: string;
+	email: string;
+	createdAt: Date;
+	text: string;
+};
+
 export type TaskItem = {
 	title: string;
 	description: string;
 	id: string;
 	status: Status;
-	createdAt: string;
+	createdAt: Date;
 	index: number;
 	assignee: Assignee;
+	comments: Comment[];
 };
 
 export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee'>;
@@ -153,3 +163,10 @@ export interface ConfirmDialogProps {
 }
 
 export type AdminList = { admins: { id: number; email: string; listId: number }[] };
+
+export type AddCommentToTask = { taskId: string; username: string; email: string; text: string };
+export interface AddCommentProps {
+	taskId: string;
+	username: string;
+	email: string;
+}

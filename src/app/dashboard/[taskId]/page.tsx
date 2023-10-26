@@ -18,9 +18,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Status, TaskIdParam } from '@/types';
 import { ColumnNameDTO, DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
+import { AddComment } from '@/components/AddComment';
+import { getUser } from '@/actions/getUser';
+import { Comments } from '@/components/Comments';
 
 const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
+	const user = await getUser();
 
 	return (
 		<Wrapper>
@@ -54,8 +58,11 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>Description</DarkGreyText>
 						<Typography mt={1}>{task?.description}</Typography>
 					</Module>
+					<Module>{task.comments.length ? <Comments comments={task.comments} /> : null}</Module>
+					<Module>
+						<AddComment taskId={task.id} email={user?.email} username={user?.username} />
+					</Module>
 				</CardContent>
-				<CardActions></CardActions>
 			</StyledTaskDetails>
 		</Wrapper>
 	);

@@ -7,6 +7,7 @@ export const getTaskById = async (taskId: string): Promise<TaskItem> => {
 		where: { id: taskId },
 		include: {
 			assignee: true,
+			comments: true,
 		},
 	}) as unknown as TaskItem;
 };

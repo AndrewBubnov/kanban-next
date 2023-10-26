@@ -11,6 +11,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+import IdentityIcon from '@mui/icons-material/PermIdentity';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -31,6 +33,7 @@ export const ButtonContainer = styled(Grid)(() => ({
 export const StyledButton = styled(Button)(() => ({
 	'textTransform': 'none',
 	'color': '#000000DD',
+	'padding': 0,
 	'border': 'none',
 	'&:focus': {
 		outline: 'none',
@@ -122,6 +125,43 @@ export const Column = styled(Box)(() => ({
 	flex: 1,
 	gap: '1rem',
 	padding: '2vw',
+}));
+
+export const FlexWrapper = styled(Box)(() => ({
+	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center',
+}));
+
+export const CommentsContainer = styled(Box)(() => ({
+	'maxHeight': 120,
+	'borderRadius': 4,
+	'padding': 5,
+	'background': '#d3d3d345',
+	'overflowY': 'auto',
+	'&::-webkit-scrollbar': {
+		width: 6,
+	},
+
+	'&::-webkit-scrollbar-track': {
+		width: 6,
+		backgroundColor: 'transparent',
+		border: 'solid 1px transparent',
+	},
+
+	'&::-webkit-scrollbar-thumb': {
+		backgroundColor: 'darkgray',
+		border: 'solid 1px transparent',
+		borderRadius: 6,
+		backgroundClip: 'padding-box',
+	},
+}));
+export const CommentWrapper = styled(Box)(() => ({
+	marginBottom: '0.7rem',
+}));
+
+export const GrayIcon = styled(IdentityIcon)(() => ({
+	fill: 'darkgray',
 }));
 
 export const DraggableBox = styled(({ isDragged, isConfigUpdated, ...props }: DraggableBoxProps) => (
@@ -231,6 +271,10 @@ export const ShortTitleText = styled(Box)(() => ({
 	whiteSpace: 'nowrap',
 	fontSize: '1.1rem',
 	fontWeight: 600,
+}));
+
+export const AddCommentTextField = styled(TextField)(() => ({
+	paddingBottom: '0.5rem',
 }));
 
 export const ShowFullViewIcon = styled(OpenInFullIcon)(() => ({

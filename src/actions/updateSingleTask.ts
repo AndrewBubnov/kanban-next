@@ -11,6 +11,7 @@ export const updateSingleTask = async (userId: string, taskId: string, updatedTa
 		},
 		include: {
 			assignee: true,
+			comments: true,
 		},
 	});
 
@@ -23,6 +24,11 @@ export const updateSingleTask = async (userId: string, taskId: string, updatedTa
 					connect: {
 						userId,
 					},
+				},
+				comments: {
+					connect: existingTask.comments.map(comment => ({
+						id: comment.id,
+					})),
 				},
 			},
 		});

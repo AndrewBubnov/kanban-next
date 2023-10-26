@@ -10,6 +10,12 @@ export const deleteTask = async (taskId: string) => {
 
 	if (!user) return;
 
+	await prisma.comment.deleteMany({
+		where: {
+			taskId: taskId,
+		},
+	});
+
 	await prisma.task.delete({
 		where: {
 			id: taskId,
