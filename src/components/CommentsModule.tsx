@@ -24,36 +24,38 @@ import { addComment } from '@/actions/addComment';
 import { updateComment } from '@/actions/updateComment';
 
 export const CommentsModule = ({ task }: { task: TaskItem }) => {
+	const { id, comments } = task;
 	const { user } = useUser();
 	const username = user?.username!;
 	const userId = user?.id!;
 	const [text, setText] = useState<string>('');
-	const [id, setId] = useState<number>(0);
+	const [commentId, setCommentId] = useState<number>(0);
 
 	useEffect(() => {
-		if (!text) setId(0);
+		if (!text) setCommentId(0);
 	}, [text]);
 
 	const editHandler =
-		({ commentId, content }: EditHandlerArgs) =>
+		({ id, text }: EditHandlerArgs) =>
 		() => {
-			setId(commentId);
-			setText(content);
+			setCommentId(id);
+			setText(text);
 		};
 	const changeHandler = (evt: ChangeEvent<HTMLInputElement>) => setText(evt.target.value);
 
 	const submitHandler = async () => {
 		if (!text) return;
-		if (id) {
-			await updateComment(task.id, id, { text });
+		if (commentId) {
+			await updateComment(task.id, commentId, { text });
 		} else {
-			await addComment({ taskId: task.id, username, userId, text });
+			await addComment({ taskId: id, username, userId, text });
 		}
 		setText('');
 	};
+
 	return (
 		<>
-			{task.comments.length ? (
+			{comments.length ? (
 				<Module>
 					<Box>
 						<DarkGreyText>Comments</DarkGreyText>
@@ -71,12 +73,7 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 									</FlexWrapper>
 									<FlexWrapper noJustify>
 										{userId === userId ? (
-											<SmallIconButton
-												onClick={editHandler({
-													content: text,
-													commentId: id,
-												})}
-											>
+											<SmallIconButton onClick={editHandler({ text, id })}>
 												<SmallEditIcon />
 											</SmallIconButton>
 										) : null}
@@ -93,7 +90,7 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 					<AddCommentTextField
 						fullWidth
 						autoComplete="off"
-						label={id ? 'Edit comment' : 'Add comment'}
+						label={commentId ? 'Edit comment' : 'Add comment'}
 						value={text}
 						onChange={changeHandler}
 					/>
