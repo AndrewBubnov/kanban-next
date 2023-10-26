@@ -19,7 +19,7 @@ export type Comment = {
 	id: number;
 	taskId: string;
 	username: string;
-	email: string;
+	userId: string;
 	createdAt: Date;
 	text: string;
 };
@@ -164,9 +164,10 @@ export interface ConfirmDialogProps {
 
 export type AdminList = { admins: { id: number; email: string; listId: number }[] };
 
-export type AddCommentToTask = { taskId: string; username: string; email: string; text: string };
-export interface AddCommentProps {
-	taskId: string;
-	username: string;
-	email: string;
+export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
+
+export type EditHandlerArgs = { commentId: number; content: string };
+
+export interface FlexWrapperProps extends HTMLAttributes<HTMLDivElement> {
+	noJustify?: boolean;
 }

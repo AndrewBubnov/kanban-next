@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { DASHBOARD } from '@/constants';
 import { AddCommentToTask } from '@/types';
 
-export async function addCommentToTask({ taskId, username, email, text }: AddCommentToTask) {
+export async function addComment({ taskId, username, userId, text }: AddCommentToTask) {
 	const task = await prisma.task.findUnique({
 		where: { id: taskId },
 		include: {
@@ -16,10 +16,10 @@ export async function addCommentToTask({ taskId, username, email, text }: AddCom
 
 	const comment = await prisma.comment.create({
 		data: {
-			taskId: taskId,
-			username: username,
-			email: email,
-			text: text,
+			taskId,
+			username,
+			userId,
+			text,
 		},
 	});
 	task.comments.push(comment);

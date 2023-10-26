@@ -2,9 +2,9 @@
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { Box, Card, CardContent, Grid } from '@mui/material';
+import { Box, Card, CardContent, Grid, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { DraggableBoxProps, FlexContainerProps } from '@/types';
+import { DraggableBoxProps, FlexContainerProps, FlexWrapperProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import IdentityIcon from '@mui/icons-material/PermIdentity';
+import EditIcon from '@mui/icons-material/EditOutlined';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -127,14 +128,22 @@ export const Column = styled(Box)(() => ({
 	padding: '2vw',
 }));
 
-export const FlexWrapper = styled(Box)(() => ({
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
+export const SmallIconButton = styled(IconButton)(() => ({
+	padding: 0,
 }));
 
+export const CommentText = styled(Box)(() => ({
+	paddingLeft: '0.5rem',
+}));
+
+export const FlexWrapper = styled(({ noJustify, ...props }: FlexWrapperProps) => <Box {...props} />)<FlexWrapperProps>`
+	display: flex;
+	align-items: center;
+	justify-content: ${({ noJustify }) => (noJustify ? 'unset' : 'space-between')};
+`;
+
 export const CommentsContainer = styled(Box)(() => ({
-	'maxHeight': 120,
+	'maxHeight': 130,
 	'borderRadius': 4,
 	'padding': 5,
 	'background': '#d3d3d345',
@@ -157,11 +166,17 @@ export const CommentsContainer = styled(Box)(() => ({
 	},
 }));
 export const CommentWrapper = styled(Box)(() => ({
-	marginBottom: '0.7rem',
+	marginBottom: '1.5rem',
+	fontSize: '0.8rem',
 }));
 
 export const GrayIcon = styled(IdentityIcon)(() => ({
 	fill: 'darkgray',
+}));
+
+export const SmallEditIcon = styled(EditIcon)(() => ({
+	width: '1rem',
+	height: '1rem',
 }));
 
 export const DraggableBox = styled(({ isDragged, isConfigUpdated, ...props }: DraggableBoxProps) => (
@@ -291,6 +306,10 @@ export const DarkGreyText = styled(Box)(() => ({
 	color: 'darkgrey',
 	fontSize: '1rem',
 	fontWeight: 600,
+}));
+
+export const DarkGreyUsername = styled(Box)(() => ({
+	color: 'darkgrey',
 }));
 
 export const Assignee = styled(Box)(() => ({

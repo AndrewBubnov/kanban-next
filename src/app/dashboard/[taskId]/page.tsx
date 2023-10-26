@@ -11,20 +11,17 @@ import {
 	TitleInnerContainer,
 	DateContainer,
 } from '@/components/StyledComponents';
-import { CardActions, CardContent, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Status, TaskIdParam } from '@/types';
 import { ColumnNameDTO, DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
-import { AddComment } from '@/components/AddComment';
-import { getUser } from '@/actions/getUser';
-import { Comments } from '@/components/Comments';
+import { CommentsModule } from '@/components/CommentsModule';
 
 const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
-	const user = await getUser();
 
 	return (
 		<Wrapper>
@@ -58,10 +55,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>Description</DarkGreyText>
 						<Typography mt={1}>{task?.description}</Typography>
 					</Module>
-					<Module>{task.comments.length ? <Comments comments={task.comments} /> : null}</Module>
-					<Module>
-						<AddComment taskId={task.id} email={user?.email} username={user?.username} />
-					</Module>
+					<CommentsModule task={task} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>
