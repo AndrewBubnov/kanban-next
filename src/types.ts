@@ -35,7 +35,7 @@ export type TaskItem = {
 	comments: Comment[];
 };
 
-export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee'>;
+export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee' | 'createdAt' | 'comments'>;
 
 export type TaskMiniProps = {
 	title: string;

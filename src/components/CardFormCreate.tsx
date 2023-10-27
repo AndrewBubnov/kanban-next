@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { ButtonContainer, FlexContainer, StyledButton } from '@/components/StyledComponents';
-import { ChangeEvent, useState } from 'react';
 import { CardFormCreateProps } from '@/types';
 import { addTask } from '@/actions/addTask';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
@@ -13,11 +13,7 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 	const userId = user?.id || '';
 	const [assigneeId, setAssigneeId] = useState<string>(userId);
 	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
-	const [title, setTitle] = useState<string>('');
-	const [description, setDescription] = useState<string>('');
 
-	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
-	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const confirmHandler = async (data: FormData) => {
 		const title = data.get('title') as string;
 		const description = data.get('description') as string;
@@ -37,18 +33,9 @@ export const CardFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 				/>
 			)}
 			<Box mt={2}>Title</Box>
-			<TextField onChange={titleHandler} value={title} name="title" margin="dense" fullWidth />
+			<TextField name="title" margin="dense" fullWidth />
 			<Box mt={2}>Description</Box>
-			<TextField
-				onChange={descriptionHandler}
-				value={description}
-				margin="dense"
-				variant="outlined"
-				name="description"
-				fullWidth
-				multiline
-				rows={4}
-			/>
+			<TextField margin="dense" variant="outlined" name="description" fullWidth multiline rows={4} />
 			<FlexContainer isReverse marginTop>
 				<ButtonContainer>
 					<StyledButton size="small" variant="outlined" onClick={onCancel}>
