@@ -254,6 +254,14 @@ export const CenteredLink = styled(Link)(() => ({
 	alignItems: 'center',
 }));
 
+export const CreateColumnInput = styled(TextField)(() => ({
+	'& .MuiOutlinedInput-root': {
+		'& input': {
+			padding: 5,
+		},
+	},
+}));
+
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
