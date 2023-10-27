@@ -6,6 +6,7 @@ import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { DashboardContext } from '@/components/DashboardProvider';
+import { ColumnType } from '@/types';
 
 export function Desk() {
 	const { filteredTasks: tasks, columnConfig } = useContext(DashboardContext);
@@ -22,13 +23,13 @@ export function Desk() {
 		isConfigUpdated,
 	} = useDrag(tasks);
 
-	const renderMapper = (status: string) => (
-		<Column key={status} id={status}>
-			<ColumnName component="span">{status}</ColumnName>
+	const renderMapper = (column: ColumnType) => (
+		<Column key={column.name} id={column.name}>
+			<ColumnName component="span">{column.name}</ColumnName>
 			{config
-				.filter(card => card.status === status)
+				.filter(card => card.status === column.name)
 				.map(({ title, description, id, assignee: { email, username } }) => {
-					const cardId = `${status}:${id}`;
+					const cardId = `${column.name}:${id}`;
 					const isDragged = id === draggedId;
 					const imageParameters = parameters[draggedId];
 					return (
@@ -60,5 +61,5 @@ export function Desk() {
 		</Column>
 	);
 
-	return <DeskContainer ref={ref}>{columnConfig.map(renderMapper)}</DeskContainer>;
+	return <DeskContainer ref={ref}>{columnConfig.filter(el => el.shown).map(renderMapper)}</DeskContainer>;
 }

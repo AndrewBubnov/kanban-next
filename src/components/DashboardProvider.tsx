@@ -1,13 +1,12 @@
 'use client';
 import { createContext, useState } from 'react';
-import { DashboardContextProps, DashboardProviderProps, TaskItem } from '@/types';
+import { ColumnType, DashboardContextProps, DashboardProviderProps, TaskItem } from '@/types';
 import { columns } from '@/constants';
 
 export const DashboardContext = createContext<DashboardContextProps>({} as DashboardContextProps);
 
-export const DashboardProvider = ({ children, userIdsArray, isAdmin, tasks }: DashboardProviderProps) => {
+export const DashboardProvider = ({ children, userIdsArray, isAdmin, tasks, columnConfig }: DashboardProviderProps) => {
 	const [filteredTasks, setFilteredTasks] = useState<TaskItem[]>([]);
-	const [columnConfig, setColumnConfig] = useState<string[]>(columns);
 
 	return (
 		<DashboardContext.Provider
@@ -18,7 +17,6 @@ export const DashboardProvider = ({ children, userIdsArray, isAdmin, tasks }: Da
 				filteredTasks,
 				setFilteredTasks,
 				columnConfig,
-				setColumnConfig,
 			}}
 		>
 			{children}

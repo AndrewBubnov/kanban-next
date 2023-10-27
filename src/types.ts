@@ -116,11 +116,14 @@ export type AddTaskAction = {
 	description: string;
 };
 
+export type ColumnType = { name: string; shown: boolean; id?: number };
+
 export interface DashboardProviderProps {
 	children: ReactNode;
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	tasks: TaskItem[];
+	columnConfig: ColumnType[];
 }
 
 export interface DashboardContextProps {
@@ -129,8 +132,7 @@ export interface DashboardContextProps {
 	tasks: TaskItem[];
 	filteredTasks: TaskItem[];
 	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
-	columnConfig: string[];
-	setColumnConfig: Dispatch<SetStateAction<string[]>>;
+	columnConfig: ColumnType[];
 }
 
 export interface CardAssigneeSelectProps {

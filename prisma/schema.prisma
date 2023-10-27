@@ -50,3 +50,16 @@ model AdminList {
   admins    Admin[]
   listId    Int
 }
+
+model Column {
+  id          Int      @id @default(autoincrement())
+  name        String
+  shown       Boolean
+  tableData   ColumnList @relation(fields: [tableDataId], references: [id])
+  tableDataId Int
+}
+
+model ColumnList {
+  id      Int @id @default(autoincrement())
+  columns Column[]
+}

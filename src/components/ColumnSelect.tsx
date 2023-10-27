@@ -3,22 +3,21 @@ import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { columns } from '@/constants';
 import { DashboardContext } from '@/components/DashboardProvider';
 import { Select } from '@/components/Select';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { sortColumns } from '@/utils/sortColumns';
 import FormControl from '@mui/material/FormControl';
 import { Box } from '@mui/material';
 import { CreateColumnInput } from '@/components/StyledComponents';
+import { updateColumnList } from '@/actions/updateColumnList';
 
 export const ColumnSelect = () => {
-	const { columnConfig, setColumnConfig } = useContext(DashboardContext);
+	const { columnConfig } = useContext(DashboardContext);
+
 	const [newColumnName, setNewColumnName] = useState<string>('');
-	const changeHandler = (event: SelectChangeEvent<unknown>) => {
-		const value = event.target.value as string[];
-		if (!value.at(-1)) return;
-		setColumnConfig(value.sort(sortColumns));
+	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
+		const value = (event.target.value as string[]).at(-1);
+		await updateColumnList(value);
 	};
 
 	const newColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -26,15 +25,14 @@ export const ColumnSelect = () => {
 	};
 
 	const createColumn = useCallback(async () => {
-		setColumnConfig(prevState => [...prevState, newColumnName]);
 		setNewColumnName('');
-	}, [newColumnName, setColumnConfig]);
+	}, []);
 
 	const menuItemArray = useMemo(() => {
-		const main = columns.map(status => (
-			<MenuItem key={status} value={status}>
-				<Checkbox checked={columnConfig.indexOf(status) > -1} />
-				<ListItemText primary={status} />
+		const main = columnConfig.map(column => (
+			<MenuItem key={column.name} value={column.name}>
+				<Checkbox checked={column.shown} />
+				<ListItemText primary={column.name} />
 			</MenuItem>
 		));
 		return main.concat(
@@ -61,7 +59,7 @@ export const ColumnSelect = () => {
 			multiple
 			value={columnConfig}
 			onChange={changeHandler}
-			renderValue={() => `${columnConfig.length} shown`}
+			renderValue={() => `${columnConfig.filter(el => el.shown).length} shown`}
 		>
 			{menuItemArray}
 		</Select>
