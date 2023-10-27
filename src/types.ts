@@ -1,12 +1,5 @@
 import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
 
-export enum Status {
-	NEW = 'new',
-	PROGRESS = 'progress',
-	PENDING = 'pending',
-	DONE = 'done',
-}
-
 export type Assignee = {
 	id: number;
 	userId: string;
@@ -28,7 +21,7 @@ export type TaskItem = {
 	title: string;
 	description: string;
 	id: string;
-	status: Status;
+	status: string;
 	createdAt: Date;
 	index: number;
 	assignee: Assignee;
@@ -64,7 +57,7 @@ interface ParameterItem {
 	height: number;
 	dX: number;
 	dY: number;
-	status: Status;
+	status: string;
 	imgSrc: string;
 }
 
@@ -75,14 +68,7 @@ export type RecalculateProps = {
 	hoveredId: string;
 };
 
-export enum ColumnName {
-	NEW = 'New',
-	PROGRESS = 'In progress',
-	PENDING = 'Pending',
-	DONE = 'Done',
-}
-
-export type ColCoords = Record<Status, DOMRect>;
+export type ColCoords = Record<string, DOMRect>;
 
 export interface CardFormCreateProps {
 	userIdsArray: UserIdsArrayItem[];
@@ -143,8 +129,8 @@ export interface DashboardContextProps {
 	tasks: TaskItem[];
 	filteredTasks: TaskItem[];
 	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
-	columnConfig: Status[];
-	setColumnConfig: Dispatch<SetStateAction<Status[]>>;
+	columnConfig: string[];
+	setColumnConfig: Dispatch<SetStateAction<string[]>>;
 }
 
 export interface CardAssigneeSelectProps {

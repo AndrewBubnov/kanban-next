@@ -1,7 +1,7 @@
-import { Parameters, Status } from '@/types';
+import { Parameters } from '@/types';
 import { SINGLE_VERTICAL_MOVE } from '@/constants';
 
-export const ascent = (leftSiteStatus: Status | null, leftSiteTop: number) => (positions: Parameters) => {
+export const ascent = (leftSiteStatus: string | null, leftSiteTop: number) => (positions: Parameters) => {
 	if (!leftSiteStatus) return positions;
 	return Object.keys(positions).reduce((acc, el) => {
 		if (positions[el].status === leftSiteStatus && positions[el].top + positions[el].dY > leftSiteTop) {

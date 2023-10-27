@@ -9,14 +9,14 @@ import {
 	StyledButton,
 } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
-import { CardFormUpdateProps, Status } from '@/types';
+import { CardFormUpdateProps } from '@/types';
 import { updateSingleTask } from '@/actions/updateSingleTask';
 import { useRouter } from 'next/navigation';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ColumnNameDTO, columns, DASHBOARD } from '@/constants';
+import { columns, DASHBOARD } from '@/constants';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { deleteTask } from '@/actions/deleteTask';
 import * as React from 'react';
@@ -38,7 +38,7 @@ export const CardFormUpdate = ({
 	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
 	const [title, setTitle] = useState<string>(initTitle);
 	const [description, setDescription] = useState<string>(initDescription);
-	const [status, setStatus] = useState<Status>(initStatus);
+	const [status, setStatus] = useState<string>(initStatus);
 	const [open, setOpen] = useState(false);
 
 	const deleteCancelHandler = () => setOpen(false);
@@ -50,7 +50,7 @@ export const CardFormUpdate = ({
 
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
-	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value as Status);
+	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value);
 	const cancelHandler = () => push(`${DASHBOARD}/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
@@ -77,7 +77,7 @@ export const CardFormUpdate = ({
 						<Select value={status} label="Status" onChange={statusHandler}>
 							{columns.map(el => (
 								<MenuItem key={el} value={el}>
-									{ColumnNameDTO[el]}
+									{el}
 								</MenuItem>
 							))}
 						</Select>

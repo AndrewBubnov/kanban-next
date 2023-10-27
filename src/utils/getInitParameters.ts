@@ -1,4 +1,4 @@
-import { ColCoords, Parameters, Status } from '@/types';
+import { ColCoords, Parameters } from '@/types';
 import { toJpeg } from 'html-to-image';
 
 export const getInitParameters = async (ref: HTMLDivElement) => {
@@ -7,7 +7,7 @@ export const getInitParameters = async (ref: HTMLDivElement) => {
 
 	const cardPositions = Array.from(ref.children)
 		.map(columnElement => {
-			columnDOMRects[columnElement.id as Status] = columnElement.getBoundingClientRect();
+			columnDOMRects[columnElement.id] = columnElement.getBoundingClientRect();
 			return Array.from(columnElement.children).filter(el => !!el.id);
 		})
 		.map(el =>
@@ -23,7 +23,7 @@ export const getInitParameters = async (ref: HTMLDivElement) => {
 					dX: 0,
 					dY: 0,
 					imgSrc: '',
-					status: status as Status,
+					status,
 				};
 				return acc;
 			}, {} as Parameters)

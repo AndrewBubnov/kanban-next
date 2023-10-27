@@ -1,5 +1,5 @@
 import { DragEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ColCoords, Parameters, Status, TaskItem } from '@/types';
+import { ColCoords, Parameters, TaskItem } from '@/types';
 import { INTERSECTION_RATIO } from '@/constants';
 import { ascent } from '@/utils/ascent';
 import { recalculatePositions } from '@/utils/recalculatePositions';
@@ -9,12 +9,13 @@ import { updateConfigAdd } from '@/utils/updateConfigAdd';
 import { updateAllTasks } from '@/actions/updateAllTasks';
 import { updateIndices } from '@/utils/updateIndices';
 import { applyHoveredColumn } from '@/utils/applyHoveredColumn';
+import { colors } from '@mui/material';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
-	const [leftSiteStatus, setLeftSiteStatus] = useState<Status | null>(null);
+	const [leftSiteStatus, setLeftSiteStatus] = useState<string | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
-	const [hoveredColumn, setHoveredColumn] = useState<Status | undefined>();
+	const [hoveredColumn, setHoveredColumn] = useState<string | undefined>();
 	const [hoveredId, setHoveredId] = useState<string>('');
 	const [parameters, setParameters] = useState<Parameters>({});
 	const [draggedDX, setDraggedDX] = useState<number>(0);
@@ -31,7 +32,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 		if (!positionKeys.length) return;
 		if (!draggedDX || !draggedDY || !draggedId) return;
 
-		const hoveredCol = (Object.keys(colCoords) as Status[]).find(name => {
+		const hoveredCol = Object.keys(colCoords).find(name => {
 			const distanceX = colCoords[name]?.left - draggedDX - parameters[draggedId].left;
 			return Math.abs(distanceX) < colCoords[name]?.width * INTERSECTION_RATIO;
 		});

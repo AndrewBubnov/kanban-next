@@ -1,16 +1,7 @@
-import { ColumnName, Status } from '@/types';
-
 export const DELTA_X = '--delta-x';
 export const DELTA_Y = '--delta-y';
-export const ColumnNameDTO: Record<Status, ColumnName> = {
-	[Status.NEW]: ColumnName.NEW,
-	[Status.PROGRESS]: ColumnName.PROGRESS,
-	[Status.PENDING]: ColumnName.PENDING,
-	[Status.DONE]: ColumnName.DONE,
-};
 export const INTERSECTION_RATIO = 1 / 2;
-
-export const columns: Status[] = [Status.NEW, Status.PROGRESS, Status.PENDING, Status.DONE];
+export const columns = ['New', 'In progress', 'Pending', 'Done'];
 export const DRAGGED_TRANSLATE = 'translate(var(--delta-x), var(--delta-y))';
 export const COMMON_TRANSITION = 'transform 0.3s';
 export const COMMON_TRANSLATE = 'translateY(var(--delta-y))';

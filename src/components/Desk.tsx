@@ -6,8 +6,6 @@ import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { DashboardContext } from '@/components/DashboardProvider';
-import { ColumnNameDTO } from '@/constants';
-import { Status } from '@/types';
 
 export function Desk() {
 	const { filteredTasks: tasks, columnConfig } = useContext(DashboardContext);
@@ -24,9 +22,9 @@ export function Desk() {
 		isConfigUpdated,
 	} = useDrag(tasks);
 
-	const renderMapper = (status: Status) => (
+	const renderMapper = (status: string) => (
 		<Column key={status} id={status}>
-			<ColumnName component="span">{ColumnNameDTO[status]}</ColumnName>
+			<ColumnName component="span">{status}</ColumnName>
 			{config
 				.filter(card => card.status === status)
 				.map(({ title, description, id, assignee: { email, username } }) => {

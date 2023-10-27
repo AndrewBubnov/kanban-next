@@ -15,8 +15,8 @@ import { CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Status, TaskIdParam } from '@/types';
-import { ColumnNameDTO, DASHBOARD } from '@/constants';
+import { TaskIdParam } from '@/types';
+import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
 import { CommentsModule } from '@/components/CommentsModule';
 
@@ -49,7 +49,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 					</Module>
 					<Module>
 						<DarkGreyText>Status</DarkGreyText>
-						<Typography mt={1}>{ColumnNameDTO[task?.status as Status]}</Typography>
+						<Typography mt={1}>{task?.status}</Typography>
 					</Module>
 					<Module>
 						<DarkGreyText>Description</DarkGreyText>

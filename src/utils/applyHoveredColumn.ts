@@ -1,6 +1,6 @@
-import { Parameters, Status } from '@/types';
+import { Parameters } from '@/types';
 
-export const applyHoveredColumn = (draggedId: string, status: Status) => (positions: Parameters) => ({
+export const applyHoveredColumn = (draggedId: string, status: string) => (positions: Parameters) => ({
 	...positions,
 	[draggedId]: { ...positions[draggedId], status },
 });
