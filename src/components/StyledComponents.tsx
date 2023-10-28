@@ -14,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import IdentityIcon from '@mui/icons-material/PermIdentity';
 import EditIcon from '@mui/icons-material/EditOutlined';
+import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -170,11 +171,28 @@ export const CommentWrapper = styled(Box)(() => ({
 	fontSize: '0.8rem',
 }));
 
+export const NewColumnInputWrapper = styled(Box)(() => ({
+	padding: '6px 16px',
+}));
+
+export const NewColumnLabel = styled(Box)(() => ({
+	fontSize: '0.8rem',
+}));
+
+export const NewColumnFormControl = styled(FormControl)(() => ({
+	maxWidth: 170,
+}));
+
 export const GrayIcon = styled(IdentityIcon)(() => ({
 	fill: 'darkgray',
 }));
 
 export const SmallEditIcon = styled(EditIcon)(() => ({
+	width: '1rem',
+	height: '1rem',
+}));
+
+export const SmallDeleteIcon = styled(DeleteIcon)(() => ({
 	width: '1rem',
 	height: '1rem',
 }));

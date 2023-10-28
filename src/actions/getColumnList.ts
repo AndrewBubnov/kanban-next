@@ -25,5 +25,5 @@ export const getColumnList = async () => {
 	}
 	revalidatePath(DASHBOARD);
 
-	return columnList.columns.map(({ tableDataId, ...rest }) => rest);
+	return columnList.columns;
 };

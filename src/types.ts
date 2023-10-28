@@ -116,7 +116,7 @@ export type AddTaskAction = {
 	description: string;
 };
 
-export type ColumnType = { name: string; shown: boolean; id?: number };
+export type ColumnType = { name: string; shown: boolean; id?: number; tableId?: number };
 
 export interface DashboardProviderProps {
 	children: ReactNode;

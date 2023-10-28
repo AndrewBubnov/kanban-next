@@ -3,8 +3,8 @@ import { prisma } from '@/db';
 import { DASHBOARD } from '@/constants';
 import { revalidatePath } from 'next/cache';
 
-export const updateColumnList = async (value?: string) => {
-	if (!value) return;
+export const toggleColumnShown = async (id?: number) => {
+	if (!id) return;
 
 	const existed = await prisma.columnList.findFirst({
 		where: { id: 1 },
@@ -16,7 +16,7 @@ export const updateColumnList = async (value?: string) => {
 	if (!existed) return;
 
 	const updated = existed.columns.map(el => {
-		if (el.name === value) return { ...el, shown: !el.shown };
+		if (el.id === id) return { ...el, shown: !el.shown };
 		return el;
 	});
 
@@ -29,6 +29,7 @@ export const updateColumnList = async (value?: string) => {
 	for (const col of updated) {
 		await prisma.column.create({
 			data: {
+				id: col.id,
 				name: col.name,
 				shown: col.shown,
 				tableDataId: 1,
