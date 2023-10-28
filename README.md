@@ -12,9 +12,9 @@
 
 - **User Roles**: The system distinguishes between administrators and regular users. Administrators have elevated privileges, including the ability to reassign tasks and delete them, while regular users can edit tasks but not reassign them to others.
   
-- **Comment Functionality**: Users can add comments to tasks. Comments are displayed and added in the task details view, allowing for collaboration and communication within tasks. Each individual user has the ability to edit their own comments, ensuring personal control over their contributions.
+- **Comment Functionality**: Users can add comments to tasks. Comments are displayed and can be edited individually (the edit icon appears on hover over the comment's text), allowing for personal control over contributions and fostering collaboration and communication within tasks.
 
-- **Column Customization**: Users have the flexibility to choose which columns to display and which to hide, as well as the ability to add and delete custom columns (available to administrators). This feature allows for a personalized Kanban board layout, tailored to individual preferences. The column configuration, including the available columns and their visibility status, is centrally stored on the server and remains consistent for all users.
+- **Column Customization**: Users have the flexibility to choose which columns to display and hide. Additionally, administrators have the ability to add and delete custom columns (the relevant icon is shown on hover over the menu items). This feature enables a personalized Kanban board layout, tailored to individual preferences. The column configuration, including the available columns and their visibility status, is centrally stored on the server and remains consistent for all users.
 
 - **Filtering Tasks**: Users can filter tasks by user, allowing them to focus on their specific tasks or see all tasks at once, offering a customizable view of their workflow.
 
