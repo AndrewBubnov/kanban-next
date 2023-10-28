@@ -14,7 +14,7 @@
   
 - **Comment Functionality**: Users can add comments to tasks. Comments are displayed and added in the task details view, allowing for collaboration and communication within tasks. Each individual user has the ability to edit their own comments, ensuring personal control over their contributions.
 
-- **Column Customization**: Users have the flexibility to choose which columns to display and which to hide. This feature allows for a personalized Kanban board layout, tailored to individual preferences.
+- **Column Customization**: Users have the flexibility to choose which columns to display and which to hide, as well as the ability to add and delete custom columns (available to administrators). This feature allows for a personalized Kanban board layout, tailored to individual preferences. The column configuration, including the available columns and their visibility status, is centrally stored on the server and remains consistent for all users.
 
 - **Filtering Tasks**: Users can filter tasks by user, allowing them to focus on their specific tasks or see all tasks at once, offering a customizable view of their workflow.
 
