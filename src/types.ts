@@ -155,7 +155,3 @@ export type AdminList = { admins: { id: number; email: string; listId: number }[
 export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
 
 export type EditHandlerArgs = { id: number; text: string };
-
-export interface FlexWrapperProps extends HTMLAttributes<HTMLDivElement> {
-	noJustify?: boolean;
-}

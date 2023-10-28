@@ -1,6 +1,5 @@
 'use client';
 import { ChangeEvent, useCallback, useContext, useMemo, useState, MouseEvent } from 'react';
-import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { DashboardContext } from '@/components/DashboardProvider';
@@ -8,7 +7,8 @@ import { Select } from '@/components/Select';
 import { SelectChangeEvent } from '@mui/material/Select';
 import {
 	CreateColumnInput,
-	NewColumnFormControl,
+	HoverSensitiveMenuItem,
+	CustomColumnFormControl,
 	NewColumnInputWrapper,
 	NewColumnLabel,
 	SmallDeleteIcon,
@@ -21,7 +21,7 @@ import { deleteColumn } from '@/actions/deleteColumn';
 export const ColumnSelect = () => {
 	const { columnConfig, isAdmin } = useContext(DashboardContext);
 
-	const [newColumnName, setNewColumnName] = useState<string>('');
+	const [customColumnName, setCustomColumnName] = useState<string>('');
 
 	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
 		const value = (event.target.value as string[]).at(-1);
@@ -29,14 +29,14 @@ export const ColumnSelect = () => {
 	};
 
 	const newColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => {
-		setNewColumnName(evt.target.value);
+		setCustomColumnName(evt.target.value);
 	};
 
 	const createColumn = useCallback(async () => {
-		if (newColumnName.length < 2) return;
-		await addColumn(newColumnName);
-		setNewColumnName('');
-	}, [newColumnName]);
+		if (customColumnName.length < 2) return;
+		await addColumn(customColumnName);
+		setCustomColumnName('');
+	}, [customColumnName]);
 
 	const columnShown = useMemo(
 		() => `${columnConfig.filter(el => el.shown).length} / ${columnConfig.length} shown`,
@@ -51,7 +51,7 @@ export const ColumnSelect = () => {
 
 	const menuItemArray = useMemo(() => {
 		const main = columnConfig.map(column => (
-			<MenuItem key={column.name} value={column.name}>
+			<HoverSensitiveMenuItem key={column.name} value={column.name}>
 				<Checkbox checked={column.shown} />
 				<ListItemText primary={column.name} />
 				{isAdmin ? (
@@ -59,25 +59,25 @@ export const ColumnSelect = () => {
 						<SmallDeleteIcon />
 					</SmallIconButton>
 				) : null}
-			</MenuItem>
+			</HoverSensitiveMenuItem>
 		));
 		return main.concat(
 			<NewColumnInputWrapper key="input">
 				<NewColumnLabel>Type new column name:</NewColumnLabel>
 				<form action={createColumn}>
-					<NewColumnFormControl>
+					<CustomColumnFormControl>
 						<CreateColumnInput
 							autoFocus
 							name="column"
 							autoComplete="off"
-							value={newColumnName}
+							value={customColumnName}
 							onChange={newColumnHandler}
 						/>
-					</NewColumnFormControl>
+					</CustomColumnFormControl>
 				</form>
 			</NewColumnInputWrapper>
 		);
-	}, [columnConfig, createColumn, newColumnName, isAdmin]);
+	}, [columnConfig, createColumn, customColumnName, isAdmin]);
 
 	return (
 		<Select label="Columns" multiple value={columnConfig} onChange={changeHandler} renderValue={() => columnShown}>

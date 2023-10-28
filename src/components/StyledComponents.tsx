@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { DraggableBoxProps, FlexContainerProps, FlexWrapperProps } from '@/types';
+import { DraggableBoxProps, FlexContainerProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import IdentityIcon from '@mui/icons-material/PermIdentity';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import MenuItem from '@mui/material/MenuItem';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -131,16 +132,33 @@ export const Column = styled(Box)(() => ({
 
 export const SmallIconButton = styled(IconButton)(() => ({
 	padding: 0,
+	opacity: 0,
+	paddingLeft: '0.25rem',
+	transition: 'opacity 0.3s ease',
 }));
 
 export const CommentText = styled(Box)(() => ({
-	paddingLeft: '0.5rem',
+	paddingLeft: '0.25rem',
 }));
 
-export const FlexWrapper = styled(({ noJustify, ...props }: FlexWrapperProps) => <Box {...props} />)<FlexWrapperProps>`
+export const FlexWrapper = styled(Box)(() => ({
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
+}));
+
+export const HoverSensitiveWrapper = styled(Box)`
 	display: flex;
 	align-items: center;
-	justify-content: ${({ noJustify }) => (noJustify ? 'unset' : 'space-between')};
+	&:hover > button {
+		opacity: 1;
+	}
+`;
+
+export const HoverSensitiveMenuItem = styled(MenuItem)`
+	&:hover > button {
+		opacity: 1;
+	}
 `;
 
 export const CommentsContainer = styled(Box)(() => ({
@@ -179,7 +197,7 @@ export const NewColumnLabel = styled(Box)(() => ({
 	fontSize: '0.8rem',
 }));
 
-export const NewColumnFormControl = styled(FormControl)(() => ({
+export const CustomColumnFormControl = styled(FormControl)(() => ({
 	maxWidth: 170,
 }));
 

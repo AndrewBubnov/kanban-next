@@ -10,6 +10,7 @@ import {
 	DateContainer,
 	FlexWrapper,
 	GrayIcon,
+	HoverSensitiveWrapper,
 	Module,
 	SmallEditIcon,
 	SmallIconButton,
@@ -71,14 +72,14 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 											<DateContainer component="span">{getElapsedTime(createdAt)}</DateContainer>
 										</FlexWrapper>
 									</FlexWrapper>
-									<FlexWrapper noJustify>
+									<HoverSensitiveWrapper>
 										{userId === userId ? (
 											<SmallIconButton onClick={editHandler({ text, id })}>
 												<SmallEditIcon />
 											</SmallIconButton>
 										) : null}
 										<CommentText>{text}</CommentText>
-									</FlexWrapper>
+									</HoverSensitiveWrapper>
 								</CommentWrapper>
 							))}
 						</CommentsContainer>
