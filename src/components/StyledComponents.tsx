@@ -162,7 +162,7 @@ export const HoverSensitiveMenuItem = styled(MenuItem)`
 `;
 
 export const CommentsContainer = styled(Box)(() => ({
-	'maxHeight': 130,
+	'height': 130,
 	'borderRadius': 4,
 	'padding': 5,
 	'background': '#d3d3d345',

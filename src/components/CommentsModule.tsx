@@ -95,7 +95,6 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 						value={text}
 						onChange={changeHandler}
 					/>
-					<StyledButton type="submit">Submit</StyledButton>
 				</form>
 			</Module>
 		</>
