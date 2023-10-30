@@ -13,6 +13,7 @@ model Task {
   title        String
   description  String
   index        Int
+  estimateDays Float
   status       String
   createdAt    DateTime    @default(now())
   assignee     User        @relation(fields: [userId], references: [userId])

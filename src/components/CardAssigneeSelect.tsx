@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { CardAssigneeSelectProps } from '@/types';
 
-export const CardAssigneeSelect = ({ userIdsArray, username, setUsername, setAssigneeId }: CardAssigneeSelectProps) => {
+export const CardAssigneeSelect = ({ userIdsArray, userId, setAssigneeId }: CardAssigneeSelectProps) => {
+	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
+
 	const changeHandler = (event: SelectChangeEvent<unknown>) => {
 		const value = event.target.value as string;
 		const currentUserId = userIdsArray.find(item => value === item.username)?.userId || '';
@@ -12,7 +15,7 @@ export const CardAssigneeSelect = ({ userIdsArray, username, setUsername, setAss
 		setAssigneeId(currentUserId);
 	};
 	return (
-		<FormControl fullWidth>
+		<FormControl sx={{ width: '48%' }}>
 			<InputLabel>Assignee</InputLabel>
 			<Select value={username} label="Assignee" onChange={changeHandler}>
 				{userIdsArray.map(el => (

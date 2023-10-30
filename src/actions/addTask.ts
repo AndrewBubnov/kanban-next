@@ -5,7 +5,7 @@ import { getUser } from '@/actions/getUser';
 import { AddTaskAction } from '@/types';
 import { DASHBOARD } from '@/constants';
 
-export const addTask = async ({ userId, title, description }: AddTaskAction) => {
+export const addTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
 	const user = await getUser();
 
 	if (!user) return;
@@ -17,6 +17,7 @@ export const addTask = async ({ userId, title, description }: AddTaskAction) => 
 			userId,
 			title,
 			description,
+			estimateDays: parseFloat(estimateDays) || 0,
 			status: 'New',
 			index: 0,
 			comments: { create: [] },

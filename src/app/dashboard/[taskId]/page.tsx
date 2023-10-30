@@ -10,8 +10,10 @@ import {
 	FlexContainer,
 	TitleInnerContainer,
 	DateContainer,
+	RemainingTimeWrapper,
+	FlexStartWrapper,
 } from '@/components/StyledComponents';
-import { CardContent, Typography } from '@mui/material';
+import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -19,6 +21,7 @@ import { TaskIdParam } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
 import { CommentsModule } from '@/components/CommentsModule';
+import { getRemainingTime } from '@/utils/getRemainingTime';
 
 const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
@@ -48,8 +51,16 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 						</TitleContainer>
 					</Module>
 					<Module>
-						<DarkGreyText>Status</DarkGreyText>
-						<Typography mt={1}>{task?.status}</Typography>
+						<FlexStartWrapper>
+							<Box>
+								<DarkGreyText>Status</DarkGreyText>
+								<Typography mt={1}>{task?.status}</Typography>
+							</Box>
+							<RemainingTimeWrapper>
+								<DarkGreyText>Time remaining</DarkGreyText>
+								<Typography mt={1}>{getRemainingTime(task?.createdAt, task?.estimateDays)}</Typography>
+							</RemainingTimeWrapper>
+						</FlexStartWrapper>
 					</Module>
 					<Module>
 						<DarkGreyText>Description</DarkGreyText>

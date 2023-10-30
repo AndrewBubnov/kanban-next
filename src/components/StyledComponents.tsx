@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { DraggableBoxProps, FlexContainerProps } from '@/types';
+import { ConditionalFullWidthProps, DraggableBoxProps, FlexContainerProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -115,6 +115,12 @@ export const FlexContainer = styled(({ isReverse = true, marginTop = false, ...p
 	margin-bottom: 0.5rem;
 `;
 
+export const ConditionalFullWidth = styled(({ fullWidth, ...props }: ConditionalFullWidthProps) => (
+	<FormControl {...props} />
+))<ConditionalFullWidthProps>`
+	width: ${({ fullWidth }) => (fullWidth ? '100%' : '48%')};
+`;
+
 export const DeskContainer = styled(Box)(() => ({
 	gap: '1rem',
 	maxWidth: 'calc(100vw - 4rem)',
@@ -144,6 +150,12 @@ export const CommentText = styled(Box)(() => ({
 export const FlexWrapper = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
+	justifyContent: 'space-between',
+}));
+
+export const FlexStartWrapper = styled(Box)(() => ({
+	display: 'flex',
+	alignItems: 'flex-start',
 	justifyContent: 'space-between',
 }));
 
@@ -187,6 +199,13 @@ export const CommentsContainer = styled(Box)(() => ({
 export const CommentWrapper = styled(Box)(() => ({
 	marginBottom: '1.5rem',
 	fontSize: '0.8rem',
+}));
+
+export const RemainingTimeWrapper = styled(Box)(() => ({
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'flex-end',
+	fontSize: '0.9rem',
 }));
 
 export const NewColumnInputWrapper = styled(Box)(() => ({

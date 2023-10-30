@@ -6,6 +6,7 @@ import {
 	DarkGreyText,
 	DeleteButton,
 	FlexContainer,
+	FlexWrapper,
 	StyledButton,
 } from '@/components/StyledComponents';
 import { ChangeEvent, useState } from 'react';
@@ -16,11 +17,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { columns, DASHBOARD } from '@/constants';
+import { columns, DASHBOARD, estimation } from '@/constants';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { deleteTask } from '@/actions/deleteTask';
 import * as React from 'react';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
+import { CardEstimateSelect } from '@/components/CardEstimateSelect';
 
 export const CardFormUpdate = ({
 	task: {
@@ -29,17 +31,21 @@ export const CardFormUpdate = ({
 		description: initDescription,
 		status: initStatus,
 		assignee: { userId },
+		estimateDays,
+		createdAt,
 	},
 	isAdmin,
 	userIdsArray,
 }: CardFormUpdateProps) => {
 	const { push } = useRouter();
 	const [assigneeId, setAssigneeId] = useState<string>(userId);
-	const [username, setUsername] = useState<string>(userIdsArray.find(el => el.userId === userId)?.username || '');
 	const [title, setTitle] = useState<string>(initTitle);
 	const [description, setDescription] = useState<string>(initDescription);
 	const [status, setStatus] = useState<string>(initStatus);
 	const [open, setOpen] = useState(false);
+	const [estimateDaysState, setEstimateDaysState] = useState<string>(
+		estimation ? estimation.find(el => el.startsWith(String(estimateDays))) || '' : ''
+	);
 
 	const deleteCancelHandler = () => setOpen(false);
 	const deleteConfirmHandler = async () => {
@@ -54,7 +60,8 @@ export const CardFormUpdate = ({
 	const cancelHandler = () => push(`${DASHBOARD}/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
-		await updateSingleTask(assigneeId, taskId, { title, description, status });
+		const updatedTaskData = { title, description, status, estimateDays: parseFloat(estimateDaysState) };
+		await updateSingleTask(assigneeId, taskId, updatedTaskData);
 		cancelHandler();
 	};
 
@@ -62,12 +69,15 @@ export const CardFormUpdate = ({
 		<>
 			<form action={confirmHandler}>
 				{isAdmin && (
-					<CardAssigneeSelect
-						username={username}
-						setUsername={setUsername}
-						setAssigneeId={setAssigneeId}
-						userIdsArray={userIdsArray}
-					/>
+					<FlexWrapper>
+						<CardAssigneeSelect userId={userId} setAssigneeId={setAssigneeId} userIdsArray={userIdsArray} />
+						<CardEstimateSelect
+							createdAt={createdAt}
+							estimateDays={estimateDaysState}
+							setEstimateDays={setEstimateDaysState}
+							fullWidth={!isAdmin}
+						/>
+					</FlexWrapper>
 				)}
 				<Box mt={2}>Title</Box>
 				<TextField onChange={titleHandler} value={title} name="title" margin="dense" fullWidth />

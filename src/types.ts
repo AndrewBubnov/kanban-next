@@ -1,4 +1,5 @@
 import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
+import { FormControlProps } from '@mui/material/FormControl/FormControl';
 
 export type Assignee = {
 	id: number;
@@ -26,6 +27,7 @@ export type TaskItem = {
 	index: number;
 	assignee: Assignee;
 	comments: Comment[];
+	estimateDays: number;
 };
 
 export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee' | 'createdAt' | 'comments'>;
@@ -97,6 +99,10 @@ export interface FlexContainerProps extends HTMLAttributes<HTMLDivElement> {
 	marginTop?: boolean;
 }
 
+export interface ConditionalFullWidthProps extends FormControlProps {
+	fullWidth: boolean;
+}
+
 export interface DraggableImageProps {
 	imageParameters: {
 		width: number;
@@ -114,6 +120,7 @@ export type AddTaskAction = {
 	userId: string;
 	title: string;
 	description: string;
+	estimateDays: string;
 };
 
 export type ColumnType = { name: string; shown: boolean; id?: number; tableId?: number };
@@ -135,10 +142,16 @@ export interface DashboardContextProps {
 	columnConfig: ColumnType[];
 }
 
+export interface CardEstimateSelectProps {
+	createdAt: Date;
+	estimateDays: string;
+	setEstimateDays: Dispatch<SetStateAction<string>>;
+	fullWidth: boolean;
+}
+
 export interface CardAssigneeSelectProps {
 	userIdsArray: UserIdsArrayItem[];
-	username: string;
-	setUsername: Dispatch<SetStateAction<string>>;
+	userId: string;
 	setAssigneeId: Dispatch<SetStateAction<string>>;
 }
 
