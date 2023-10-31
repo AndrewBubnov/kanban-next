@@ -10,7 +10,6 @@ import {
 	FlexContainer,
 	TitleInnerContainer,
 	DateContainer,
-	RemainingTimeWrapper,
 	FlexStartWrapper,
 } from '@/components/StyledComponents';
 import { Box, CardContent, Typography } from '@mui/material';
@@ -21,10 +20,11 @@ import { TaskIdParam } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
 import { CommentsModule } from '@/components/CommentsModule';
-import { getRemainingTime } from '@/utils/getRemainingTime';
+import { EstimatedTime } from '@/components/EstimatedTime';
 
-const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
+const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
+	const editPage = `${DASHBOARD}/${taskId}/edit`;
 
 	return (
 		<Wrapper>
@@ -33,7 +33,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 					<FlexContainer>
 						<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
 						<IconContainer>
-							<Link href={`/dashboard/${taskId}/edit`}>
+							<Link href={editPage}>
 								<EditIcon />
 							</Link>
 							<Link href={DASHBOARD}>
@@ -56,10 +56,7 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 								<DarkGreyText>Status</DarkGreyText>
 								<Typography mt={1}>{task?.status}</Typography>
 							</Box>
-							<RemainingTimeWrapper>
-								<DarkGreyText>Time remaining</DarkGreyText>
-								<Typography mt={1}>{getRemainingTime(task?.createdAt, task?.estimateDays)}</Typography>
-							</RemainingTimeWrapper>
+							<EstimatedTime task={task} editPage={editPage} />
 						</FlexStartWrapper>
 					</Module>
 					<Module>
@@ -72,4 +69,4 @@ const Dashboard = async ({ params: { taskId } }: TaskIdParam) => {
 		</Wrapper>
 	);
 };
-export default Dashboard;
+export default Details;

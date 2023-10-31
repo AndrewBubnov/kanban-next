@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { ConditionalFullWidthProps, DraggableBoxProps, FlexContainerProps } from '@/types';
+import { ConditionalFullWidthProps, DraggableBoxProps, EditPageLinkProps, FlexContainerProps } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -152,7 +152,6 @@ export const FlexWrapper = styled(Box)(() => ({
 	alignItems: 'center',
 	justifyContent: 'space-between',
 }));
-
 export const FlexStartWrapper = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'flex-start',
@@ -368,8 +367,16 @@ export const Module = styled(Box)(() => ({
 export const DarkGreyText = styled(Box)(() => ({
 	color: 'darkgrey',
 	fontSize: '1rem',
-	fontWeight: 600,
 }));
+
+export const EditTaskLink = styled(({ color, paddingTop, ...props }: EditPageLinkProps) => (
+	<Link {...props} />
+))<EditPageLinkProps>`
+	font-size: 0.9rem;
+	line-height: 1rem;
+	color: ${({ color }) => (color ? color : 'currentColor')};
+	padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}px` : 'unset')};
+`;
 
 export const DarkGreyUsername = styled(Box)(() => ({
 	color: 'darkgrey',

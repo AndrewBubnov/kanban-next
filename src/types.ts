@@ -1,5 +1,6 @@
-import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, SetStateAction } from 'react';
+import { Dispatch, DragEvent, HTMLAttributes, ReactElement, ReactNode, RefAttributes, SetStateAction } from 'react';
 import { FormControlProps } from '@mui/material/FormControl/FormControl';
+import { LinkProps } from 'next/link';
 
 export type Assignee = {
 	id: number;
@@ -168,3 +169,14 @@ export type AdminList = { admins: { id: number; email: string; listId: number }[
 export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
 
 export type EditHandlerArgs = { id: number; text: string };
+
+export interface EditPageLinkProps extends LinkProps {
+	children: ReactNode;
+	color?: string;
+	paddingTop?: number;
+}
+
+export interface EstimatedTimeProps {
+	task: TaskItem;
+	editPage: string;
+}

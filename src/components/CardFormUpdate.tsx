@@ -44,7 +44,7 @@ export const CardFormUpdate = ({
 	const [status, setStatus] = useState<string>(initStatus);
 	const [open, setOpen] = useState(false);
 	const [estimateDaysState, setEstimateDaysState] = useState<string>(
-		estimation ? estimation.find(el => el.startsWith(String(estimateDays))) || '' : ''
+		estimateDays ? estimation.find(el => el.startsWith(String(estimateDays))) || '' : ''
 	);
 
 	const deleteCancelHandler = () => setOpen(false);
@@ -53,7 +53,6 @@ export const CardFormUpdate = ({
 		push(DASHBOARD);
 	};
 	const deleteClickHandler = async () => setOpen(true);
-
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value);
