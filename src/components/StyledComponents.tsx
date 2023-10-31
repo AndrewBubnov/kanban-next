@@ -16,6 +16,8 @@ import IdentityIcon from '@mui/icons-material/PermIdentity';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import MenuItem from '@mui/material/MenuItem';
+import BackIcon from '@mui/icons-material/ArrowBack';
+import TableIcon from '@mui/icons-material/ViewWeekOutlined';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -221,6 +223,18 @@ export const CustomColumnFormControl = styled(FormControl)(() => ({
 
 export const GrayIcon = styled(IdentityIcon)(() => ({
 	fill: 'darkgray',
+}));
+
+export const StyledEditIcon = styled(EditIcon)(() => ({
+	fill: '#000000b5',
+}));
+
+export const StyledBackIcon = styled(BackIcon)(() => ({
+	fill: '#000000b5',
+}));
+
+export const StyledTableIcon = styled(TableIcon)(() => ({
+	fill: '#000000b5',
 }));
 
 export const SmallEditIcon = styled(EditIcon)(() => ({

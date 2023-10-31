@@ -1,11 +1,15 @@
-import { IconContainer, StyledTaskDetails, Wrapper } from '@/components/StyledComponents';
+import {
+	IconContainer,
+	StyledBackIcon,
+	StyledTableIcon,
+	StyledTaskDetails,
+	Wrapper,
+} from '@/components/StyledComponents';
+import Link from 'next/link';
 import { CardContent, Grid } from '@mui/material';
 import { TaskIdParam } from '@/types';
 import { getTaskById } from '@/actions/getTaskById';
 import { CardFormUpdate } from '@/components/CardFormUpdate';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import TableIcon from '@mui/icons-material/ViewWeekOutlined';
 import { getUser } from '@/actions/getUser';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 import { DASHBOARD } from '@/constants';
@@ -22,10 +26,10 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 					<Grid container flexDirection="row-reverse">
 						<IconContainer>
 							<Link href={DASHBOARD}>
-								<TableIcon />
+								<StyledTableIcon />
 							</Link>
-							<Link href={`/dashboard/${taskId}`}>
-								<ArrowBackIcon />
+							<Link href={`${DASHBOARD}/${taskId}`}>
+								<StyledBackIcon />
 							</Link>
 						</IconContainer>
 					</Grid>

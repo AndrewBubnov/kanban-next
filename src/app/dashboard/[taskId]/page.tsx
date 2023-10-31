@@ -11,11 +11,11 @@ import {
 	TitleInnerContainer,
 	DateContainer,
 	FlexStartWrapper,
+	StyledBackIcon,
+	StyledEditIcon,
 } from '@/components/StyledComponents';
 import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
-import EditIcon from '@mui/icons-material/EditOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TaskIdParam } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
@@ -34,10 +34,10 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
 						<IconContainer>
 							<Link href={editPage}>
-								<EditIcon />
+								<StyledEditIcon />
 							</Link>
 							<Link href={DASHBOARD}>
-								<ArrowBackIcon />
+								<StyledBackIcon />
 							</Link>
 						</IconContainer>
 					</FlexContainer>
