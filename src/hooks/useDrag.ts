@@ -9,7 +9,6 @@ import { updateConfigAdd } from '@/utils/updateConfigAdd';
 import { updateAllTasks } from '@/actions/updateAllTasks';
 import { updateIndices } from '@/utils/updateIndices';
 import { applyHoveredColumn } from '@/utils/applyHoveredColumn';
-import { colors } from '@mui/material';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
