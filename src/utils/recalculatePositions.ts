@@ -21,6 +21,13 @@ export const recalculatePositions =
 		}
 
 		return Object.keys(prevState).reduce((acc, el) => {
+			if (el === draggedId) {
+				acc[el] = {
+					...prevState[el],
+					dY: hoveredTop - draggedTop + hoveredDY,
+				};
+				return acc;
+			}
 			if (prevState[el].status === hoveredColumn && prevState[el].top >= hoveredTop) {
 				acc[el] = {
 					...prevState[el],
