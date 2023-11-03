@@ -64,7 +64,7 @@ export const DeleteButton = styled(Button)(() => ({
 	},
 }));
 
-export const StyledAddButton = styled(Button)(() => ({
+export const StyledActionButton = styled(Button)(() => ({
 	'textTransform': 'none',
 	'fontSize': '1rem',
 	'color': 'lightgray',
@@ -407,7 +407,10 @@ export const Assignee = styled(Box)(() => ({
 
 export const HeroContainer = styled(Grid)(() => ({
 	display: 'flex',
+	flexDirection: 'column',
 	justifyContent: 'center',
+	alignItems: 'center',
+	gap: '3rem',
 	width: '100%',
 	color: '#fff',
 	fontSize: '1.5rem',

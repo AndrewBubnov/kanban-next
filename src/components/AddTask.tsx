@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
-import { StyledDialog, StyledAddButton, StyledDialogContent } from '@/components/StyledComponents';
+import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/components/StyledComponents';
 import { CardFormCreate } from '@/components/CardFormCreate';
 import { DashboardContext } from '@/components/DashboardProvider';
 
@@ -13,9 +13,9 @@ export const AddTask = () => {
 	return (
 		<>
 			<Grid container>
-				<StyledAddButton variant="text" onClick={toggleOpenHandler}>
+				<StyledActionButton variant="text" onClick={toggleOpenHandler}>
 					Add new
-				</StyledAddButton>
+				</StyledActionButton>
 			</Grid>
 			<StyledDialog open={openModal} onClose={toggleOpenHandler}>
 				<DialogTitle>Create new task</DialogTitle>
