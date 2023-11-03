@@ -1,10 +1,18 @@
 import { Parameters, TaskItem } from '@/types';
 
-export const updateConfig = (config: TaskItem[], pos: Parameters) => {
-	const updatedConfig = config.map(el => ({
-		...el,
-		status: pos[el.id].status,
-	}));
+export const updateConfig = (config: TaskItem[], pos: Parameters, draggedId: string, updatedStatus?: string) => {
+	const updatedConfig = config.map(el => {
+		if (el.id === draggedId) {
+			return {
+				...el,
+				status: updatedStatus ? updatedStatus : pos[el.id].status,
+			};
+		}
+		return {
+			...el,
+			status: pos[el.id].status,
+		};
+	});
 	const mappedUpdatedConfig = updatedConfig.reduce(
 		(acc, cur) => {
 			if (!acc[cur.status]) {

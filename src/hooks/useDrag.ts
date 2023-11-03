@@ -6,19 +6,18 @@ import { recalculatePositions } from '@/utils/recalculatePositions';
 import { getInitParameters } from '@/utils/getInitParameters';
 import { updateConfig } from '@/utils/updateConfig';
 import { updateAllTasks } from '@/actions/updateAllTasks';
-import { applyHoveredColumn } from '@/utils/applyHoveredColumn';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<string | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
-	const [hoveredColumn, setHoveredColumn] = useState<string | undefined>();
 	const [hoveredId, setHoveredId] = useState<string>('');
 	const [parameters, setParameters] = useState<Parameters>({});
 	const [draggedDX, setDraggedDX] = useState<number>(0);
 	const [draggedDY, setDraggedDY] = useState<number>(0);
 	const [draggedId, setDraggedId] = useState<string>('');
 
+	const updatedStatus = useRef<string | undefined>();
 	const isConfigUpdated = useRef<boolean>(false);
 	const offsetX = useRef(0);
 	const offsetY = useRef(0);
@@ -46,7 +45,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 			setLeftSiteStatus(parameters[draggedId].status);
 			setLeftSiteTop(parameters[draggedId].top + parameters[draggedId].dY);
 		}
-		if (hoveredCol) setHoveredColumn(hoveredCol);
+		if (hoveredCol) updatedStatus.current = hoveredCol;
 	}, [colCoords, draggedDX, draggedDY, draggedId, parameters]);
 
 	useEffect(() => setParameters(ascent(leftSiteStatus, leftSiteTop)), [leftSiteTop, leftSiteStatus]);
@@ -55,10 +54,6 @@ export const useDrag = (tasks: TaskItem[]) => {
 		if (!draggedId || !hoveredId) return;
 		setParameters(recalculatePositions({ draggedId, hoveredId }));
 	}, [draggedId, hoveredId]);
-
-	useEffect(() => {
-		if (hoveredColumn) setParameters(applyHoveredColumn(draggedId, hoveredColumn));
-	}, [draggedId, hoveredColumn]);
 
 	const resetState = useCallback(() => {
 		isConfigUpdated.current = true;
@@ -69,7 +64,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 		setDraggedDY(0);
 		setLeftSiteStatus(null);
 		setLeftSiteTop(0);
-		setHoveredColumn(undefined);
+		updatedStatus.current = undefined;
 		offsetX.current = 0;
 		offsetY.current = 0;
 	}, []);
@@ -103,8 +98,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 	);
 
 	const dropHandler = useCallback(async () => {
-		await updateAllTasks(updateConfig(tasks, parameters));
-	}, [tasks, parameters]);
+		await updateAllTasks(updateConfig(tasks, parameters, draggedId, updatedStatus.current));
+	}, [tasks, parameters, draggedId, updatedStatus]);
 
 	return {
 		parameters: parameters,
