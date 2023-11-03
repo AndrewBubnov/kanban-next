@@ -4,9 +4,9 @@ import { SINGLE_VERTICAL_MOVE } from '@/constants';
 export const recalculatePositions =
 	({ draggedId, hoveredId }: RecalculateProps) =>
 	(prevState: Parameters) => {
-		const { status: draggedColumn, top: draggedTop, dY: draggedDY } = prevState[draggedId];
-		const { status: hoveredColumn, top: hoveredTop, dY: hoveredDY } = prevState[hoveredId];
-		if (draggedColumn === hoveredColumn) {
+		const { status: draggedStatus, top: draggedTop, dY: draggedDY } = prevState[draggedId];
+		const { status: hoveredStatus, top: hoveredTop, dY: hoveredDY } = prevState[hoveredId];
+		if (draggedStatus === hoveredStatus) {
 			return {
 				...prevState,
 				[hoveredId]: {
@@ -24,11 +24,12 @@ export const recalculatePositions =
 			if (el === draggedId) {
 				acc[el] = {
 					...prevState[el],
+					status: hoveredStatus,
 					dY: hoveredTop - draggedTop + hoveredDY,
 				};
 				return acc;
 			}
-			if (prevState[el].status === hoveredColumn && prevState[el].top >= hoveredTop) {
+			if (prevState[el].status === hoveredStatus && prevState[el].top >= hoveredTop) {
 				acc[el] = {
 					...prevState[el],
 					dY: prevState[el].dY + SINGLE_VERTICAL_MOVE,

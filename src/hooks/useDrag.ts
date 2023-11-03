@@ -4,10 +4,8 @@ import { INTERSECTION_RATIO } from '@/constants';
 import { ascent } from '@/utils/ascent';
 import { recalculatePositions } from '@/utils/recalculatePositions';
 import { getInitParameters } from '@/utils/getInitParameters';
-import { updateConfigInsert } from '@/utils/updateConfigInsert';
-import { updateConfigAdd } from '@/utils/updateConfigAdd';
+import { updateConfig } from '@/utils/updateConfig';
 import { updateAllTasks } from '@/actions/updateAllTasks';
-import { updateIndices } from '@/utils/updateIndices';
 import { applyHoveredColumn } from '@/utils/applyHoveredColumn';
 
 export const useDrag = (tasks: TaskItem[]) => {
@@ -105,12 +103,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 	);
 
 	const dropHandler = useCallback(async () => {
-		const isInserted = Object.values(parameters).filter(el => el.status === hoveredColumn).length > 1;
-		const newConfig = isInserted
-			? updateConfigInsert(tasks, parameters)
-			: updateConfigAdd(tasks, draggedId, hoveredColumn);
-		await updateAllTasks(updateIndices(newConfig, parameters));
-	}, [tasks, draggedId, hoveredColumn, parameters]);
+		await updateAllTasks(updateConfig(tasks, parameters));
+	}, [tasks, parameters]);
 
 	return {
 		parameters: parameters,
