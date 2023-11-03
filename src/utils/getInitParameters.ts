@@ -1,7 +1,7 @@
 import { ColCoords, Parameters } from '@/types';
 import { toJpeg } from 'html-to-image';
 
-export const getInitParameters = async (ref: HTMLDivElement) => {
+export const getInitParameters = async (ref: HTMLDivElement, parameters: Parameters) => {
 	const columnDOMRects = {} as ColCoords;
 	const elementList: { id: string; element: HTMLDivElement }[] = [];
 
@@ -14,7 +14,7 @@ export const getInitParameters = async (ref: HTMLDivElement) => {
 			el.reduce((acc, card) => {
 				const [status, cardId] = card.id.split(':');
 				const cardElement = card as HTMLDivElement;
-				elementList.push({ id: cardId, element: cardElement });
+				if (!parameters[cardId]) elementList.push({ id: cardId, element: cardElement });
 				acc[cardId] = {
 					top: cardElement.offsetTop,
 					left: cardElement.offsetLeft,
@@ -22,7 +22,7 @@ export const getInitParameters = async (ref: HTMLDivElement) => {
 					height: cardElement.clientHeight,
 					dX: 0,
 					dY: 0,
-					imgSrc: '',
+					imgSrc: parameters[cardId]?.imgSrc || '',
 					status,
 				};
 				return acc;

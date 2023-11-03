@@ -19,7 +19,7 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 			description,
 			estimateDays: parseFloat(estimateDays) || 0,
 			status: 'New',
-			index: 0,
+			index: -1,
 			comments: { create: [] },
 		},
 	});

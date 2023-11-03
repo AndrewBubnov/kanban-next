@@ -6,16 +6,18 @@ import { recalculatePositions } from '@/utils/recalculatePositions';
 import { getInitParameters } from '@/utils/getInitParameters';
 import { updateConfig } from '@/utils/updateConfig';
 import { updateAllTasks } from '@/actions/updateAllTasks';
+import { useLatest } from '@/hooks/useLatest';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<string | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
-	const [hoveredId, setHoveredId] = useState<string>('');
 	const [parameters, setParameters] = useState<Parameters>({});
 	const [draggedDX, setDraggedDX] = useState<number>(0);
 	const [draggedDY, setDraggedDY] = useState<number>(0);
 	const [draggedId, setDraggedId] = useState<string>('');
+
+	const parametersRef = useLatest(parameters);
 
 	const updatedStatus = useRef<string | undefined>();
 	const isConfigUpdated = useRef<boolean>(false);
@@ -24,42 +26,38 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const positionKeys = Object.keys(parameters);
+		const currentParameters = parametersRef.current;
+		const positionKeys = Object.keys(currentParameters);
 		if (!positionKeys.length) return;
 		if (!draggedDX || !draggedDY || !draggedId) return;
 
+		const draggedParameters = currentParameters[draggedId];
 		const hoveredCol = Object.keys(colCoords).find(name => {
-			const distanceX = colCoords[name]?.left - draggedDX - parameters[draggedId].left;
+			const distanceX = colCoords[name]?.left - draggedDX - draggedParameters.left;
 			return Math.abs(distanceX) < colCoords[name]?.width * INTERSECTION_RATIO;
 		});
 
-		const foundHoveredTask = positionKeys
-			.filter(el => parameters[el].status === hoveredCol && el !== draggedId)
+		const hoveredId = positionKeys
+			.filter(el => currentParameters[el].status === hoveredCol && el !== draggedId)
 			.find(el => {
-				const draggedPosition = parameters[draggedId].top + draggedDY;
-				const keyPosition = parameters[el].top + parameters[el].dY;
-				return Math.abs(draggedPosition - keyPosition) < parameters[el].height * INTERSECTION_RATIO;
+				const draggedPosition = draggedParameters.top + draggedDY;
+				const keyPosition = currentParameters[el].top + currentParameters[el].dY;
+				return Math.abs(draggedPosition - keyPosition) < currentParameters[el].height * INTERSECTION_RATIO;
 			});
-		setHoveredId(foundHoveredTask ? foundHoveredTask : '');
-		if (hoveredCol && hoveredCol !== parameters[draggedId].status) {
-			setLeftSiteStatus(parameters[draggedId].status);
-			setLeftSiteTop(parameters[draggedId].top + parameters[draggedId].dY);
+		if (hoveredId) setParameters(recalculatePositions({ draggedId, hoveredId }));
+		if (hoveredCol && hoveredCol !== draggedParameters.status) {
+			setLeftSiteStatus(draggedParameters.status);
+			setLeftSiteTop(draggedParameters.top + draggedParameters.dY);
 		}
 		if (hoveredCol) updatedStatus.current = hoveredCol;
-	}, [colCoords, draggedDX, draggedDY, draggedId, parameters]);
+	}, [colCoords, draggedDX, draggedDY, draggedId, parametersRef]);
 
 	useEffect(() => setParameters(ascent(leftSiteStatus, leftSiteTop)), [leftSiteTop, leftSiteStatus]);
-
-	useEffect(() => {
-		if (!draggedId || !hoveredId) return;
-		setParameters(recalculatePositions({ draggedId, hoveredId }));
-	}, [draggedId, hoveredId]);
 
 	const resetState = useCallback(() => {
 		isConfigUpdated.current = true;
 		setParameters({});
 		setDraggedId('');
-		setHoveredId('');
 		setDraggedDX(0);
 		setDraggedDY(0);
 		setLeftSiteStatus(null);
@@ -72,12 +70,12 @@ export const useDrag = (tasks: TaskItem[]) => {
 	useLayoutEffect(() => {
 		(async () => {
 			if (!ref.current || !tasks.length) return;
-			const { cardPositions, columnDOMRects } = await getInitParameters(ref.current);
+			const { cardPositions, columnDOMRects } = await getInitParameters(ref.current, parametersRef.current);
 			setParameters(cardPositions);
 			setColCoords(columnDOMRects);
 		})();
 		return resetState;
-	}, [resetState, tasks]);
+	}, [parametersRef, resetState, tasks]);
 
 	const dragStartHandler = (id: string) => async (event: DragEvent<HTMLDivElement>) => {
 		if (!parameters[id]) return;
