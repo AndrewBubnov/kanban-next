@@ -106,13 +106,13 @@ export const MainContainer = styled(Box)(() => ({
 	padding: '1rem',
 }));
 
-export const FlexContainer = styled(({ isReverse = true, marginTop = false, ...props }: FlexContainerProps) => (
-	<Box {...props} />
-))<FlexContainerProps>`
+export const FlexContainer = styled(
+	({ isReverse = true, marginTop = false, justify = true, ...props }: FlexContainerProps) => <Box {...props} />
+)<FlexContainerProps>`
 	display: flex;
 	flex-direction: ${({ isReverse }) => (isReverse ? 'row-reverse' : 'row')};
 	margin-top: ${({ marginTop }) => (marginTop ? '1rem' : 'unset')};
-	justify-content: space-between;
+	justify-content: ${({ justify }) => (justify ? 'space-between' : 'flex-start')};
 	align-items: center;
 	margin-bottom: 0.5rem;
 `;

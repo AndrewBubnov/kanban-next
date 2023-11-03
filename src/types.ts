@@ -98,6 +98,7 @@ export interface DraggableBoxProps extends HTMLAttributes<HTMLDivElement> {
 export interface FlexContainerProps extends HTMLAttributes<HTMLDivElement> {
 	isReverse?: boolean;
 	marginTop?: boolean;
+	justify?: boolean;
 }
 
 export interface ConditionalFullWidthProps extends FormControlProps {

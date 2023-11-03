@@ -9,6 +9,7 @@ import {
 	Assignee,
 	CenteredLink,
 } from '@/components/StyledComponents';
+import { DASHBOARD } from '@/constants';
 import { TaskMiniProps } from '@/types';
 
 export const TaskMini = ({ id, title, description, username, email }: TaskMiniProps) => (
@@ -18,11 +19,11 @@ export const TaskMini = ({ id, title, description, username, email }: TaskMiniPr
 				<Assignee>
 					{username} {email}
 				</Assignee>
-				<CenteredLink href={`/dashboard/${id}`}>
+				<CenteredLink href={`${DASHBOARD}/${id}`}>
 					<ShowFullViewIcon />
 				</CenteredLink>
 			</FlexContainer>
-			<FlexContainer>
+			<FlexContainer justify={false}>
 				<DarkGreyText>{id.slice(0, 4)}&nbsp;</DarkGreyText>
 				<ShortTitleText>{title}</ShortTitleText>
 			</FlexContainer>
