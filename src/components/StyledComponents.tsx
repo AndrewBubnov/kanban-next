@@ -408,10 +408,28 @@ export const Assignee = styled(Box)(() => ({
 export const HeroContainer = styled(Grid)(() => ({
 	display: 'flex',
 	justifyContent: 'center',
+	width: '100%',
 	color: '#fff',
 	fontSize: '1.5rem',
 	marginTop: '10rem',
 }));
+
+export const Loader = styled(Box)`
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 3px solid #fff;
+	border-right: 3px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+
+	@keyframes rotation {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+`;
 
 export const StyledCardContent = styled(CardContent)(() => ({
 	'& .MuiTypography-root': {

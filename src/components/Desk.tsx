@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
-import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
+import { Column, ColumnName, DeskContainer, HeroContainer, Loader } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { DashboardContext } from '@/components/DashboardProvider';
 import { ColumnType } from '@/types';
@@ -61,5 +61,15 @@ export function Desk() {
 		</Column>
 	);
 
-	return <DeskContainer ref={ref}>{columnConfig.filter(el => el.shown).map(renderMapper)}</DeskContainer>;
+	return (
+		<DeskContainer ref={ref}>
+			{tasks.length ? (
+				columnConfig.filter(el => el.shown).map(renderMapper)
+			) : (
+				<HeroContainer>
+					<Loader />
+				</HeroContainer>
+			)}
+		</DeskContainer>
+	);
 }

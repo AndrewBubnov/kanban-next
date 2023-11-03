@@ -78,7 +78,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 
 	useLayoutEffect(() => {
 		(async () => {
-			if (!ref.current) return;
+			if (!ref.current || !tasks.length) return;
 			const { cardPositions, columnDOMRects } = await getInitParameters(ref.current);
 			setParameters(cardPositions);
 			setColCoords(columnDOMRects);
