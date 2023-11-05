@@ -1,4 +1,6 @@
 'use client';
 import { SignUp } from '@clerk/clerk-react';
 
-export default SignUp;
+export default function SignUpPage() {
+    return SignUp;
+}
