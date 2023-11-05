@@ -1,8 +1,11 @@
 'use client';
 
+import { useEffect } from 'react';
 import { HeroContainer, StyledActionButton } from '@/components/StyledComponents';
 
-export default function Error({ reset }: { reset(): void }) {
+
+export default function Error({ reset, error }: { reset(): void; error: Error & { digest?: string } }) {
+	useEffect(() => console.error(error), [error]);
 	return (
 		<div>
 			<HeroContainer>

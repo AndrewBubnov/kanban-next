@@ -5,6 +5,10 @@ import { getAdminList } from '@/actions/getAdminList';
 
 export const getUser = async () => {
 	const userId = auth().userId as string;
+	if (!userId) {
+		console.log('userId is not defined');
+		return;
+	}
 	const user = await currentUser();
 	const adminList = await getAdminList();
 	const username = user?.username || '';
