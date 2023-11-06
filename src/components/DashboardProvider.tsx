@@ -1,7 +1,6 @@
 'use client';
 import { createContext, useState } from 'react';
-import { ColumnType, DashboardContextProps, DashboardProviderProps, TaskItem } from '@/types';
-import { columns } from '@/constants';
+import { DashboardContextProps, DashboardProviderProps, TaskItem } from '@/types';
 
 export const DashboardContext = createContext<DashboardContextProps>({} as DashboardContextProps);
 
