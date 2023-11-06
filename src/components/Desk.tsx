@@ -66,9 +66,7 @@ export function Desk() {
 			{tasks.length ? (
 				columnConfig.filter(el => el.shown).map(renderMapper)
 			) : (
-				<HeroContainer>
-					<Loader />
-				</HeroContainer>
+				<HeroContainer>No tasks</HeroContainer>
 			)}
 		</DeskContainer>
 	);
