@@ -4,7 +4,7 @@ import { AdminList } from '@/types';
 
 export const getAdminList = async (): Promise<string[]> => {
 	let adminListContent: AdminList | null = await prisma.adminList.findFirst({
-		where: { listId: 1 },
+		where: { listId: '1' },
 		include: {
 			admins: true,
 		},
@@ -13,7 +13,7 @@ export const getAdminList = async (): Promise<string[]> => {
 	if (!adminListContent) {
 		adminListContent = await prisma.adminList.create({
 			data: {
-				listId: 1,
+				listId: '1',
 				admins: {
 					create: ADMINS_LIST,
 				},
@@ -23,5 +23,5 @@ export const getAdminList = async (): Promise<string[]> => {
 			},
 		});
 	}
-	return adminListContent.admins.map(el => el.email);
+	return adminListContent?.admins.map(el => el.email);
 };

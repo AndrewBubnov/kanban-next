@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 
 export const getColumnList = async () => {
 	let columnList = await prisma.columnList.findFirst({
-		where: { id: 1 },
+		where: { id: '1' },
 		include: {
 			columns: true,
 		},
@@ -13,7 +13,7 @@ export const getColumnList = async () => {
 	if (!columnList) {
 		columnList = await prisma.columnList.create({
 			data: {
-				id: 1,
+				id: '1',
 				columns: {
 					create: COLUMN_LIST,
 				},

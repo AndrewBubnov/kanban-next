@@ -30,7 +30,7 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 		<Wrapper>
 			<StyledTaskDetails>
 				<CardContent>
-					<FlexContainer>
+					<FlexContainer justify>
 						<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
 						<IconContainer>
 							<Link href={editPage}>

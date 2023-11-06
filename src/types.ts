@@ -165,7 +165,7 @@ export interface ConfirmDialogProps {
 	onConfirm(): void;
 }
 
-export type AdminList = { admins: { id: number; email: string; listId: number }[] };
+export type AdminList = { admins: { id: string; email: string; listId: number }[] };
 
 export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
 
