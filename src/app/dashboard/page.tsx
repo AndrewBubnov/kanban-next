@@ -1,7 +1,6 @@
 import { Desk } from '@/components/Desk';
 import { Header } from '@/components/Header';
 import { AddTask } from '@/components/AddTask';
-import { getTasks } from '@/actions/getTasks';
 import { ControlsContainer, MainContainer } from '@/components/StyledComponents';
 import { UserSelect } from '@/components/UserSelect';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
@@ -12,14 +11,13 @@ import { getColumnList } from '@/actions/getColumnList';
 
 export default async function Dashboard() {
 	const { isAdmin, userId } = await getUser();
-	const tasks = await getTasks();
 	const userIdsArray = await getMappedUserIds();
 	const columnConfig = await getColumnList();
 
 	return (
 		<MainContainer>
 			<Header userId={userId} />
-			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} tasks={tasks} columnConfig={columnConfig}>
+			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} columnConfig={columnConfig}>
 				<ControlsContainer>
 					<AddTask />
 					<ColumnSelect />
