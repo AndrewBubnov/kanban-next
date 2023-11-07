@@ -1,15 +1,12 @@
 'use client';
-import { useContext } from 'react';
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
-import { DashboardContext } from '@/components/DashboardProvider';
-import { ColumnType } from '@/types';
+import { ColumnType, DeskClientProps, TaskItem } from '@/types';
 
-export function Desk() {
-	const { tasks, columnConfig } = useContext(DashboardContext);
+export function DeskClient({ tasks, columnConfig }: DeskClientProps) {
 	const {
 		parameters,
 		config,

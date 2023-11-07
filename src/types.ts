@@ -127,19 +127,23 @@ export type AddTaskAction = {
 
 export type ColumnType = { name: string; shown: boolean; id?: number; tableId?: number };
 
-export interface DashboardProviderProps {
-	children: ReactNode;
+export interface DeskServerProps {
+	columnConfig: ColumnType[];
+}
+
+export interface DeskClientProps {
+	tasks: TaskItem[];
+	columnConfig: ColumnType[];
+}
+
+export interface ControlsContextProps {
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	columnConfig: ColumnType[];
 }
 
-export interface DashboardContextProps {
-	userIdsArray: UserIdsArrayItem[];
-	isAdmin: boolean;
-	tasks: TaskItem[];
-	setTasks: Dispatch<SetStateAction<TaskItem[]>>;
-	columnConfig: ColumnType[];
+export interface ControlsProviderProps extends ControlsContextProps {
+	children: ReactNode;
 }
 
 export interface CardEstimateSelectProps {

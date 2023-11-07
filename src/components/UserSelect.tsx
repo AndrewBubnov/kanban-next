@@ -1,31 +1,25 @@
 'use client';
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { useContext, useMemo, useState } from 'react';
+import { ControlsContext } from '@/components/ControlsProvider';
 import { Select } from '@/components/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { setUserIdShown } from '@/actions/setUserIdShown';
 import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
-import { getTasksByUserId } from '@/actions/getTasksByUserId';
 
 export const UserSelect = () => {
-	const { userIdsArray, setTasks } = useContext(DashboardContext);
+	const { userIdsArray } = useContext(ControlsContext);
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
 
 	const extendedUserIdsArray = useMemo(() => [SELECT_ALL_USERS, ...userIdsArray], [userIdsArray]);
 
-	useEffect(() => {
-		(async function () {
-			const tasks = await getTasksByUserId(userId);
-			setTasks(tasks);
-		})();
-	}, [setTasks, userId]);
-
-	const changeHandler = (event: SelectChangeEvent<unknown>) => {
+	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
 		const value = event.target.value as string;
 		const currentUserId = extendedUserIdsArray.find(item => value === item.username)?.userId || '';
 		setUsername(value);
 		setUserId(currentUserId);
+		await setUserIdShown(currentUserId);
 	};
 
 	return (
