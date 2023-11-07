@@ -131,7 +131,6 @@ export interface DashboardProviderProps {
 	children: ReactNode;
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
-	tasks: TaskItem[];
 	columnConfig: ColumnType[];
 }
 
@@ -139,8 +138,7 @@ export interface DashboardContextProps {
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	tasks: TaskItem[];
-	filteredTasks: TaskItem[];
-	setFilteredTasks: Dispatch<SetStateAction<TaskItem[]>>;
+	setTasks: Dispatch<SetStateAction<TaskItem[]>>;
 	columnConfig: ColumnType[];
 }
 

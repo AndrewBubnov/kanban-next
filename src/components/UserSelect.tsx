@@ -5,18 +5,21 @@ import { Select } from '@/components/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
+import { getTasksByUserId } from '@/actions/getTasksByUserId';
 
 export const UserSelect = () => {
-	const { tasks, userIdsArray, setFilteredTasks } = useContext(DashboardContext);
+	const { userIdsArray, setTasks } = useContext(DashboardContext);
 	const [userId, setUserId] = useState<string>('');
 	const [username, setUsername] = useState<string>(ALL_USERNAMES);
 
 	const extendedUserIdsArray = useMemo(() => [SELECT_ALL_USERS, ...userIdsArray], [userIdsArray]);
 
 	useEffect(() => {
-		const filtered = tasks.filter(el => el.assignee.userId.includes(userId));
-		setFilteredTasks(filtered);
-	}, [setFilteredTasks, tasks, userId]);
+		(async function () {
+			const tasks = await getTasksByUserId(userId);
+			setTasks(tasks);
+		})();
+	}, [setTasks, userId]);
 
 	const changeHandler = (event: SelectChangeEvent<unknown>) => {
 		const value = event.target.value as string;

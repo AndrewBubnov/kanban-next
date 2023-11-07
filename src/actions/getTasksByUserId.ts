@@ -3,8 +3,10 @@ import { prisma } from '@/db';
 import { TaskItem } from '@/types';
 import { sortByIndices } from '@/utils/sortByIndices';
 
-export const getTasks = async (): Promise<TaskItem[]> => {
+export const getTasksByUserId = async (userId: string): Promise<TaskItem[]> => {
+	const parameter = userId ? { userId } : {};
 	const tasks = await prisma.task.findMany({
+		where: parameter,
 		include: { assignee: true, comments: true },
 	});
 
