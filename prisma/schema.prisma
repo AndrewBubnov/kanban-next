@@ -25,7 +25,7 @@ model Comment {
   taskId      String
   username    String
   userId      String
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime @default(now())
   text        String
   task        Task     @relation(fields: [taskId], references: [id])
 }
@@ -40,20 +40,20 @@ model User {
 }
 
 model Admin {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   email     String
   adminList AdminList @relation(fields: [listId], references: [id])
   listId    Int
 }
 
 model AdminList {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   admins    Admin[]
   listId    Int
 }
 
 model Column {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   shown       Boolean
   tableData   ColumnList @relation(fields: [tableDataId], references: [id])
@@ -61,6 +61,11 @@ model Column {
 }
 
 model ColumnList {
-  id      Int @id @default(autoincrement())
+  id      Int        @id @default(autoincrement())
   columns Column[]
+}
+
+model UserIdShown {
+  id      Int        @id
+  userId  String     @default("")
 }

@@ -1,8 +1,8 @@
 'use client';
-import { ChangeEvent, useCallback, useContext, useMemo, useState, MouseEvent } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState, MouseEvent, useContext } from 'react';
+import { ControlsContext } from '@/components/ControlsProvider';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { DashboardContext } from '@/components/DashboardProvider';
 import { Select } from '@/components/Select';
 import { SelectChangeEvent } from '@mui/material/Select';
 import {
@@ -19,8 +19,7 @@ import { addColumn } from '@/actions/addColumn';
 import { deleteColumn } from '@/actions/deleteColumn';
 
 export const ColumnSelect = () => {
-	const { columnConfig, isAdmin } = useContext(DashboardContext);
-
+	const { columnConfig, isAdmin } = useContext(ControlsContext);
 	const [customColumnName, setCustomColumnName] = useState<string>('');
 
 	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
