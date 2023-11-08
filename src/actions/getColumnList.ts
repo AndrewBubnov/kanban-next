@@ -23,6 +23,7 @@ export const getColumnList = async () => {
 			},
 		});
 	}
+
 	revalidatePath(DASHBOARD);
 
 	return columnList.columns;

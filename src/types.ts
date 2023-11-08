@@ -125,7 +125,7 @@ export type AddTaskAction = {
 	estimateDays: string;
 };
 
-export type ColumnType = { name: string; shown: boolean; id?: number; tableId?: number };
+export type ColumnType = { name: string; shown: boolean; columnListId?: string | null; tableId?: number };
 
 export interface DeskServerProps {
 	columnConfig: ColumnType[];
@@ -167,7 +167,7 @@ export interface ConfirmDialogProps {
 	onConfirm(): void;
 }
 
-export type AdminList = { admins: { id: string; email: string; listId: number }[] };
+export type AdminList = { admins: { email: string; adminListId: number | null }[] };
 
 export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
 

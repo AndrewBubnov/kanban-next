@@ -24,7 +24,7 @@ export const ColumnSelect = () => {
 
 	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
 		const value = (event.target.value as string[]).at(-1);
-		await toggleColumnShown(columnConfig.find(el => el.name === value)?.id);
+		await toggleColumnShown(value);
 	};
 
 	const newColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -42,10 +42,10 @@ export const ColumnSelect = () => {
 		[columnConfig]
 	);
 
-	const deleteHandler = (id?: number) => async (evt: MouseEvent) => {
+	const deleteHandler = (name?: string) => async (evt: MouseEvent) => {
 		evt.preventDefault();
 		evt.stopPropagation();
-		await deleteColumn(id);
+		await deleteColumn(name);
 	};
 
 	const menuItemArray = useMemo(() => {
@@ -54,7 +54,7 @@ export const ColumnSelect = () => {
 				<Checkbox checked={column.shown} />
 				<ListItemText primary={column.name} />
 				{isAdmin ? (
-					<SmallIconButton onClick={deleteHandler(column.id)}>
+					<SmallIconButton onClick={deleteHandler(column.name)}>
 						<SmallDeleteIcon />
 					</SmallIconButton>
 				) : null}

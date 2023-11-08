@@ -8,8 +8,8 @@ import { ColumnSelect } from '@/components/ColumnSelect';
 import { getColumnList } from '@/actions/getColumnList';
 import { DeskServer } from '@/components/DeskServer';
 import { Suspense } from 'react';
-import LoadingDashboard from '@/app/dashboard/loading';
 import { ControlsProvider } from '@/components/ControlsProvider';
+import { Loader } from '@/components/Loader';
 
 export default async function Dashboard() {
 	const { isAdmin, userId } = await getUser();
@@ -26,7 +26,7 @@ export default async function Dashboard() {
 					<UserSelect />
 				</ControlsProvider>
 			</ControlsContainer>
-			<Suspense fallback={<LoadingDashboard />}>
+			<Suspense fallback={<Loader />}>
 				<DeskServer columnConfig={columnConfig} />
 			</Suspense>
 		</MainContainer>

@@ -8,65 +8,61 @@ datasource db {
 }
 
 model Task {
-  id           String      @id  @map("_id") @default(uuid())
+  id           String    @id @default(uuid()) @map("_id")
   userId       String
   title        String
   description  String
   index        Int
   estimateDays Float
   status       String
-  createdAt    DateTime    @default(now())
-  assignee     User        @relation(fields: [userId], references: [userId])
+  createdAt    DateTime  @default(now())
+  assignee     User      @relation(fields: [userId], references: [userId])
   comments     Comment[]
 }
 
 model Comment {
-  id          String      @id  @map("_id") @default(uuid())
-  taskId      String
-  username    String
-  userId      String
-  createdAt   DateTime    @default(now())
-  text        String
-  task        Task        @relation(fields: [taskId], references: [id])
+  id        String   @id @default(uuid()) @map("_id")
+  taskId    String
+  username  String
+  userId    String
+  createdAt DateTime @default(now())
+  text      String
+  task      Task     @relation(fields: [taskId], references: [id])
 }
 
 model User {
-  id          String @id  @map("_id") @default(uuid())
-  userId    String   @unique
-  email     String   @unique
-  username  String
-  isAdmin   Boolean  @default(false)
-  tasks     Task[]
+  id       String  @id @default(uuid()) @map("_id")
+  userId   String  @unique
+  email    String  @unique
+  username String
+  isAdmin  Boolean @default(false)
+  tasks    Task[]
 }
 
 model Admin {
-  id        String    @id  @map("_id") @default(uuid())
-  email     String
-  adminList AdminList @relation(fields: [listId], references: [id])
-  listId    String
+  email       String     @id @map("_id")
+  AdminList   AdminList? @relation(fields: [adminListId], references: [id])
+  adminListId Int?
 }
 
 model AdminList {
-  id        String      @id  @map("_id")
-  admins    Admin[]
-  listId    String
+  id     Int     @id @map("_id")
+  admins Admin[]
 }
 
-
 model Column {
-  id          String     @id  @map("_id") @default(uuid())
-  name        String
-  shown       Boolean
-  tableData   ColumnList @relation(fields: [tableDataId], references: [id])
-  tableDataId String
+  name          String @id @map("_id")
+  shown         Boolean
+  columnList    ColumnList? @relation(fields: [columnListId], references: [id])
+  columnListId  String?
 }
 
 model ColumnList {
-  id      String      @id  @map("_id")
+  id      String   @id @map("_id")
   columns Column[]
 }
 
 model UserIdShown {
-  id      String        @id  @map("_id")
-  userId  String     @default("")
+  id     Int @id @map("_id")
+  userId String @default("")
 }

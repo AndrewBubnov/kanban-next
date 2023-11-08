@@ -417,7 +417,7 @@ export const HeroContainer = styled(Grid)(() => ({
 	marginTop: '10rem',
 }));
 
-export const Loader = styled(Box)`
+export const LoadingIndicator = styled(Box)`
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;

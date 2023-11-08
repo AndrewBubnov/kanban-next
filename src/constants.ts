@@ -20,6 +20,7 @@ export const DASHBOARD = '/dashboard';
 export const TASK_MINI_HEIGHT = 150;
 export const GAP = 16;
 export const SINGLE_VERTICAL_MOVE = TASK_MINI_HEIGHT + GAP;
+export const SINGLE_ID = '1';
 export const timeUnits = {
 	year: 24 * 60 * 60 * 1000 * 365,
 	month: (24 * 60 * 60 * 1000 * 365) / 12,

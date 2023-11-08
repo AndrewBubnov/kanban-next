@@ -1,41 +1,22 @@
 'use server';
-import { prisma } from '@/db';
 import { DASHBOARD } from '@/constants';
 import { revalidatePath } from 'next/cache';
+import { getExistingColumns } from '@/actions/getExistingColumns';
+import { updateColumns } from '@/actions/updateColumns';
 
-export const toggleColumnShown = async (id?: number) => {
-	if (!id) return;
+export const toggleColumnShown = async (name?: string) => {
+	if (!name) return;
 
-	const existed = await prisma.columnList.findFirst({
-		where: { id: 1 },
-		include: {
-			columns: true,
-		},
-	});
+	const existed = await getExistingColumns();
 
 	if (!existed) return;
 
 	const updated = existed.columns.map(el => {
-		if (el.id === id) return { ...el, shown: !el.shown };
+		if (el.name === name) return { ...el, shown: !el.shown };
 		return el;
 	});
 
-	await prisma.column.deleteMany({
-		where: {
-			tableDataId: 1,
-		},
-	});
-
-	for (const col of updated) {
-		await prisma.column.create({
-			data: {
-				id: col.id,
-				name: col.name,
-				shown: col.shown,
-				tableDataId: 1,
-			},
-		});
-	}
+	await updateColumns(updated);
 
 	revalidatePath(DASHBOARD);
 };

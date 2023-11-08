@@ -4,7 +4,7 @@ import { AdminList } from '@/types';
 
 export const getAdminList = async (): Promise<string[]> => {
 	let adminListContent: AdminList | null = await prisma.adminList.findFirst({
-		where: { listId: '1' },
+		where: { id: 1 },
 		include: {
 			admins: true,
 		},
@@ -13,10 +13,8 @@ export const getAdminList = async (): Promise<string[]> => {
 	if (!adminListContent) {
 		adminListContent = await prisma.adminList.create({
 			data: {
-				listId: '1',
-				admins: {
-					create: ADMINS_LIST,
-				},
+				id: 1,
+				admins: { create: ADMINS_LIST },
 			},
 			include: {
 				admins: true,
