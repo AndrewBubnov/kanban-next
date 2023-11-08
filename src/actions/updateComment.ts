@@ -6,7 +6,7 @@ import { DASHBOARD } from '@/constants';
 
 export const updateComment = async (
 	taskId: string,
-	commentId: number,
+	commentId: string,
 	updatedCommentData: Partial<Prisma.CommentUpdateInput>
 ) => {
 	await prisma.comment.update({
