@@ -2,8 +2,6 @@ import { DragEvent, CSSProperties } from 'react';
 import { CenterLoader, DraggableBox, LoadingIndicator } from '@/components/StyledComponents';
 import { DELTA_X, DELTA_Y } from '@/constants';
 import { DraggableProps } from '@/types';
-import { Loader } from '@/components/Loader';
-import { Box } from '@mui/material';
 
 export const Draggable = ({
 	children,
