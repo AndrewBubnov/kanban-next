@@ -12,6 +12,7 @@ import {
 	GrayIcon,
 	HoverSensitiveWrapper,
 	Module,
+	SmallDeleteIcon,
 	SmallEditIcon,
 	SmallIconButton,
 } from '@/components/StyledComponents';
@@ -22,6 +23,7 @@ import { Box } from '@mui/material';
 import { getElapsedTime } from '@/utils/getElapsedTime';
 import { addComment } from '@/actions/addComment';
 import { updateComment } from '@/actions/updateComment';
+import { deleteComment } from '@/actions/deleteComment';
 
 export const CommentsModule = ({ task }: { task: TaskItem }) => {
 	const { id, comments } = task;
@@ -41,6 +43,7 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 			setCommentId(id);
 			setText(text);
 		};
+	const deleteHandler = (commentId: string) => async () => await deleteComment(task.id, commentId);
 	const changeHandler = (evt: ChangeEvent<HTMLInputElement>) => setText(evt.target.value);
 
 	const submitHandler = async () => {
@@ -70,17 +73,24 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 												<DarkGreyUsername component="span">{username}</DarkGreyUsername>
 											</FlexWrapper>
 											<FlexWrapper>
-												<DateContainer component="span">
-													{getElapsedTime(createdAt)}
-												</DateContainer>
+												<HoverSensitiveWrapper>
+													{userId === authorId && (
+														<SmallIconButton onClick={deleteHandler(id)}>
+															<SmallDeleteIcon />
+														</SmallIconButton>
+													)}
+													<DateContainer component="span">
+														{getElapsedTime(createdAt)}
+													</DateContainer>
+												</HoverSensitiveWrapper>
 											</FlexWrapper>
 										</FlexWrapper>
 										<HoverSensitiveWrapper>
-											{userId === authorId ? (
+											{userId === authorId && (
 												<SmallIconButton onClick={editHandler({ text, id })}>
 													<SmallEditIcon />
 												</SmallIconButton>
-											) : null}
+											)}
 											<CommentText>{text}</CommentText>
 										</HoverSensitiveWrapper>
 									</CommentWrapper>

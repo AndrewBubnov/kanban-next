@@ -366,6 +366,7 @@ export const DateContainer = styled(Box)(() => ({
 	fontSize: '0.68rem',
 	color: 'darkgray',
 	fontWeight: 600,
+	marginLeft: '1rem',
 }));
 
 export const TitleText = styled(Box)(() => ({
