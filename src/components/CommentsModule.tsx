@@ -60,27 +60,31 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 					<Box>
 						<DarkGreyText>Comments</DarkGreyText>
 						<CommentsContainer>
-							{task.comments.sort(sortComments).map(({ id, username, text, userId, createdAt }) => (
-								<CommentWrapper key={id}>
-									<FlexWrapper>
+							{task.comments
+								.sort(sortComments)
+								.map(({ id, username, text, userId: authorId, createdAt }) => (
+									<CommentWrapper key={id}>
 										<FlexWrapper>
-											<GrayIcon />
-											<DarkGreyUsername component="span">{username}</DarkGreyUsername>
+											<FlexWrapper>
+												<GrayIcon />
+												<DarkGreyUsername component="span">{username}</DarkGreyUsername>
+											</FlexWrapper>
+											<FlexWrapper>
+												<DateContainer component="span">
+													{getElapsedTime(createdAt)}
+												</DateContainer>
+											</FlexWrapper>
 										</FlexWrapper>
-										<FlexWrapper>
-											<DateContainer component="span">{getElapsedTime(createdAt)}</DateContainer>
-										</FlexWrapper>
-									</FlexWrapper>
-									<HoverSensitiveWrapper>
-										{userId === userId ? (
-											<SmallIconButton onClick={editHandler({ text, id })}>
-												<SmallEditIcon />
-											</SmallIconButton>
-										) : null}
-										<CommentText>{text}</CommentText>
-									</HoverSensitiveWrapper>
-								</CommentWrapper>
-							))}
+										<HoverSensitiveWrapper>
+											{userId === authorId ? (
+												<SmallIconButton onClick={editHandler({ text, id })}>
+													<SmallEditIcon />
+												</SmallIconButton>
+											) : null}
+											<CommentText>{text}</CommentText>
+										</HoverSensitiveWrapper>
+									</CommentWrapper>
+								))}
 						</CommentsContainer>
 					</Box>
 				</Module>
