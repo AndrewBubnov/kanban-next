@@ -11,7 +11,7 @@ export type Assignee = {
 };
 
 export type Comment = {
-	id: number;
+	id: string;
 	taskId: string;
 	username: string;
 	userId: string;
@@ -173,7 +173,7 @@ export type AdminList = { admins: { email: string; adminListId: number | null }[
 
 export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
 
-export type EditHandlerArgs = { id: number; text: string };
+export type EditHandlerArgs = { id: string; text: string };
 
 export interface EditPageLinkProps extends LinkProps {
 	children: ReactNode;

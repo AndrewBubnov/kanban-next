@@ -14,7 +14,6 @@ import {
 	Module,
 	SmallEditIcon,
 	SmallIconButton,
-	StyledButton,
 } from '@/components/StyledComponents';
 import { EditHandlerArgs, TaskItem } from '@/types';
 import { useUser } from '@clerk/nextjs';
@@ -30,10 +29,10 @@ export const CommentsModule = ({ task }: { task: TaskItem }) => {
 	const username = user?.username!;
 	const userId = user?.id!;
 	const [text, setText] = useState<string>('');
-	const [commentId, setCommentId] = useState<number>(0);
+	const [commentId, setCommentId] = useState<string>('');
 
 	useEffect(() => {
-		if (!text) setCommentId(0);
+		if (!text) setCommentId('');
 	}, [text]);
 
 	const editHandler =
