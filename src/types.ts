@@ -43,6 +43,7 @@ export type TaskMiniProps = {
 
 export interface DraggableProps {
 	children: ReactElement;
+	isLoading: boolean;
 	onDragStart(event: DragEvent<HTMLDivElement>): void;
 	onDrag(evt: DragEvent): void;
 	onDrop(): void;
@@ -92,6 +93,7 @@ export interface TaskIdParam {
 export interface DraggableBoxProps extends HTMLAttributes<HTMLDivElement> {
 	isDragged: boolean;
 	isConfigUpdated: boolean;
+	isLoading: boolean;
 	children: ReactNode;
 }
 

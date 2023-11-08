@@ -4,7 +4,7 @@ import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer, HeroContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
-import { ColumnType, DeskClientProps, TaskItem } from '@/types';
+import { ColumnType, DeskClientProps } from '@/types';
 
 export function DeskClient({ tasks, columnConfig }: DeskClientProps) {
 	const {
@@ -17,6 +17,7 @@ export function DeskClient({ tasks, columnConfig }: DeskClientProps) {
 		dragStartHandler,
 		dragHandler,
 		dropHandler,
+		isLoading,
 		isConfigUpdated,
 	} = useDrag(tasks);
 
@@ -32,6 +33,7 @@ export function DeskClient({ tasks, columnConfig }: DeskClientProps) {
 					return (
 						<Draggable
 							key={cardId}
+							isLoading={isLoading}
 							onDragStart={dragStartHandler(id)}
 							onDrag={dragHandler}
 							onDrop={dropHandler}

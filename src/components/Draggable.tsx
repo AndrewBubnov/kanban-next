@@ -1,7 +1,9 @@
 import { DragEvent, CSSProperties } from 'react';
-import { DraggableBox } from '@/components/StyledComponents';
+import { CenterLoader, DraggableBox, LoadingIndicator } from '@/components/StyledComponents';
 import { DELTA_X, DELTA_Y } from '@/constants';
 import { DraggableProps } from '@/types';
+import { Loader } from '@/components/Loader';
+import { Box } from '@mui/material';
 
 export const Draggable = ({
 	children,
@@ -13,6 +15,7 @@ export const Draggable = ({
 	isDragged,
 	onDrop,
 	isConfigUpdated,
+	isLoading,
 }: DraggableProps) => {
 	const dragOverHandler = (evt: DragEvent) => {
 		evt.stopPropagation();
@@ -21,8 +24,9 @@ export const Draggable = ({
 
 	return (
 		<DraggableBox
-			draggable
 			id={id}
+			isLoading={isLoading}
+			draggable={!isLoading}
 			isDragged={isDragged}
 			isConfigUpdated={isConfigUpdated}
 			onDragStart={onDragStart}
@@ -31,6 +35,11 @@ export const Draggable = ({
 			onDragOver={dragOverHandler}
 			style={{ [DELTA_X]: `${dX}px`, [DELTA_Y]: `${dY}px` } as CSSProperties}
 		>
+			{isLoading && (dX || dY) ? (
+				<CenterLoader>
+					<LoadingIndicator />
+				</CenterLoader>
+			) : null}
 			{children}
 		</DraggableBox>
 	);

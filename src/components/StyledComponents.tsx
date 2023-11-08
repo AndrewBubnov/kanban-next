@@ -247,20 +247,39 @@ export const SmallDeleteIcon = styled(DeleteIcon)(() => ({
 	height: '1rem',
 }));
 
-export const DraggableBox = styled(({ isDragged, isConfigUpdated, ...props }: DraggableBoxProps) => (
+export const DraggableBox = styled(({ isDragged, isConfigUpdated, isLoading, ...props }: DraggableBoxProps) => (
 	<Box {...props} />
 ))<DraggableBoxProps>`
+	position: relative;
+	user-select: none;
 	transform: ${({ isDragged, isConfigUpdated }) => {
 		const commonTranslate = isConfigUpdated ? '' : COMMON_TRANSLATE;
 		return isDragged ? DRAGGED_TRANSLATE : commonTranslate;
 	}};
 	transition: ${({ isDragged, isConfigUpdated }) => (isDragged || isConfigUpdated ? '' : COMMON_TRANSITION)};
+	&::after {
+		content: '';
+		position: absolute;
+		display: ${({ isLoading }) => (isLoading ? 'block' : 'none')};
+		top: 0;
+		background: rgba(0, 0, 0, 0.25);
+		width: 100%;
+		height: 100%;
+	}
 `;
 
 export const ColumnName = styled(Box)(() => ({
 	color: 'lightgray',
 	fontSize: '1.25rem',
 	textAlign: 'center',
+}));
+
+export const CenterLoader = styled(Box)(() => ({
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	zIndex: 10,
 }));
 
 export const LightInputLabel = styled(InputLabel)(() => ({
