@@ -12,7 +12,7 @@ import {
 	NewColumnInputWrapper,
 	NewColumnLabel,
 	SmallDeleteIcon,
-	SmallIconButton,
+	SmallIconTransparentButton,
 } from '@/components/StyledComponents';
 
 export const ColumnSelect = () => {
@@ -52,9 +52,9 @@ export const ColumnSelect = () => {
 				<Checkbox checked={column.shown} />
 				<ListItemText primary={column.name} />
 				{isAdmin ? (
-					<SmallIconButton onClick={deleteHandler(column.name)}>
+					<SmallIconTransparentButton onClick={deleteHandler(column.name)}>
 						<SmallDeleteIcon />
-					</SmallIconButton>
+					</SmallIconTransparentButton>
 				) : null}
 			</HoverSensitiveMenuItem>
 		));

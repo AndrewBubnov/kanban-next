@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import IdentityIcon from '@mui/icons-material/PermIdentity';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import MoreIcon from '@mui/icons-material/MoreVert';
 import MenuItem from '@mui/material/MenuItem';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import TableIcon from '@mui/icons-material/ViewWeekOutlined';
@@ -48,6 +49,28 @@ export const StyledButton = styled(Button)(() => ({
 		color: '#fff',
 		background: '#00000080',
 	},
+}));
+export const FunctionalButton = styled(Button)(() => ({
+	'textTransform': 'none',
+	'background': 'rgba(211,211,211,0.4)',
+	'color': '#00000080',
+	'padding': '3px 7px',
+	'border': 'none',
+	'&:focus': {
+		outline: 'none',
+	},
+	'&:hover': {
+		border: 'none',
+		color: '#fff',
+		background: '#00000080',
+	},
+}));
+
+export const FunctionalButtonWrapper = styled(Box)(() => ({
+	display: 'flex',
+	width: 180,
+	justifyContent: 'space-between',
+	padding: '0.5rem',
 }));
 
 export const DeleteButton = styled(Button)(() => ({
@@ -138,15 +161,26 @@ export const Column = styled(Box)(() => ({
 	padding: '2vw',
 }));
 
-export const SmallIconButton = styled(IconButton)(() => ({
+export const SmallIconTransparentButton = styled(IconButton)(() => ({
 	padding: 0,
 	opacity: 0,
 	paddingLeft: '0.25rem',
 	transition: 'opacity 0.3s ease',
 }));
 
+export const SmallIconButton = styled(IconButton)(() => ({
+	'padding': 0,
+	'marginLeft': '0.25rem',
+	'&:hover': {
+		background: 'darkgray',
+	},
+	'&:hover > svg': {
+		fill: '#fff',
+	},
+}));
+
 export const CommentText = styled(Box)(() => ({
-	paddingLeft: '0.25rem',
+	paddingLeft: '0.3rem',
 }));
 
 export const FlexWrapper = styled(Box)(() => ({
@@ -159,14 +193,6 @@ export const FlexStartWrapper = styled(Box)(() => ({
 	alignItems: 'flex-start',
 	justifyContent: 'space-between',
 }));
-
-export const HoverSensitiveWrapper = styled(Box)`
-	display: flex;
-	align-items: center;
-	&:hover > button {
-		opacity: 1;
-	}
-`;
 
 export const HoverSensitiveMenuItem = styled(MenuItem)`
 	&:hover > button {
@@ -238,6 +264,11 @@ export const StyledTableIcon = styled(TableIcon)(() => ({
 }));
 
 export const SmallEditIcon = styled(EditIcon)(() => ({
+	width: '1rem',
+	height: '1rem',
+}));
+
+export const SmallMoreIcon = styled(MoreIcon)(() => ({
 	width: '1rem',
 	height: '1rem',
 }));

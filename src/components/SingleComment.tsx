@@ -5,16 +5,19 @@ import {
 	DateContainer,
 	FlexWrapper,
 	GrayIcon,
-	HoverSensitiveWrapper,
-	SmallDeleteIcon,
-	SmallEditIcon,
-	SmallIconButton,
+	FunctionalButton,
+	FunctionalButtonWrapper,
+	FlexContainer,
 } from '@/components/StyledComponents';
+import FunctionalPopover from '@/components/FunctionalPopover';
+import { Divider } from '@mui/material';
+import EditIcon from '@mui/icons-material/EditOutlined';
+import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { getElapsedTime } from '@/utils/getElapsedTime';
 import { SingleCommentProps } from '@/types';
 
 export const SingleComment = ({
-	comment: { id, username, text, userId: authorId, createdAt },
+	comment: { username, text, userId: authorId, createdAt },
 	userId,
 	deleteHandler,
 	editHandler,
@@ -26,23 +29,24 @@ export const SingleComment = ({
 				<DarkGreyUsername component="span">{username}</DarkGreyUsername>
 			</FlexWrapper>
 			<FlexWrapper>
-				<HoverSensitiveWrapper>
-					{userId === authorId && (
-						<SmallIconButton onClick={deleteHandler}>
-							<SmallDeleteIcon />
-						</SmallIconButton>
-					)}
-					<DateContainer component="span">{getElapsedTime(createdAt)}</DateContainer>
-				</HoverSensitiveWrapper>
+				<DateContainer component="span">{getElapsedTime(createdAt)}</DateContainer>
 			</FlexWrapper>
 		</FlexWrapper>
-		<HoverSensitiveWrapper>
+		<FlexContainer>
 			{userId === authorId && (
-				<SmallIconButton onClick={editHandler}>
-					<SmallEditIcon />
-				</SmallIconButton>
+				<FunctionalPopover>
+					<FunctionalButtonWrapper>
+						<FunctionalButton onClick={editHandler} size="small" startIcon={<EditIcon />}>
+							Edit
+						</FunctionalButton>
+						<Divider orientation="vertical" flexItem />
+						<FunctionalButton onClick={deleteHandler} size="small" startIcon={<DeleteIcon />}>
+							Delete
+						</FunctionalButton>
+					</FunctionalButtonWrapper>
+				</FunctionalPopover>
 			)}
 			<CommentText>{text}</CommentText>
-		</HoverSensitiveWrapper>
+		</FlexContainer>
 	</CommentWrapper>
 );
