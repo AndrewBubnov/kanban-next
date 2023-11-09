@@ -5,8 +5,12 @@ import { TaskMini } from '@/components/TaskMini';
 import { Column, ColumnName, DeskContainer, HeroContainer } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { ColumnType, DeskClientProps } from '@/types';
+import { useContext } from 'react';
+import { DashboardContext } from '@/components/DashboardProvider';
 
-export function DeskClient({ tasks, columnConfig }: DeskClientProps) {
+export function DeskClient({ tasks }: DeskClientProps) {
+	const { columnConfigState: columnConfig } = useContext(DashboardContext);
+
 	const {
 		parameters,
 		config,

@@ -1,6 +1,6 @@
 'use client';
 import { ChangeEvent, useCallback, useMemo, useState, MouseEvent, useContext } from 'react';
-import { ControlsContext } from '@/components/ControlsProvider';
+import { DashboardContext } from '@/components/DashboardProvider';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { Select } from '@/components/Select';
@@ -14,42 +14,40 @@ import {
 	SmallDeleteIcon,
 	SmallIconButton,
 } from '@/components/StyledComponents';
-import { toggleColumnShown } from '@/actions/toggleColumnShown';
-import { addColumn } from '@/actions/addColumn';
-import { deleteColumn } from '@/actions/deleteColumn';
 
 export const ColumnSelect = () => {
-	const { columnConfig, isAdmin } = useContext(ControlsContext);
+	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn } =
+		useContext(DashboardContext);
 	const [customColumnName, setCustomColumnName] = useState<string>('');
 
 	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
 		const value = (event.target.value as string[]).at(-1);
-		await toggleColumnShown(value);
+		await toggleColumnState(value);
 	};
-
-	const newColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => {
-		setCustomColumnName(evt.target.value);
-	};
+	const customColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => setCustomColumnName(evt.target.value);
 
 	const createColumn = useCallback(async () => {
 		if (customColumnName.length < 2) return;
-		await addColumn(customColumnName);
 		setCustomColumnName('');
-	}, [customColumnName]);
+		await addCustomColumn(customColumnName);
+	}, [addCustomColumn, customColumnName]);
 
 	const columnShown = useMemo(
-		() => `${columnConfig.filter(el => el.shown).length} / ${columnConfig.length} shown`,
-		[columnConfig]
+		() => `${columnConfigState.filter(el => el.shown).length} / ${columnConfigState.length} shown`,
+		[columnConfigState]
 	);
 
-	const deleteHandler = (name?: string) => async (evt: MouseEvent) => {
-		evt.preventDefault();
-		evt.stopPropagation();
-		await deleteColumn(name);
-	};
+	const deleteHandler = useMemo(
+		() => (name: string) => (evt: MouseEvent) => {
+			evt.preventDefault();
+			evt.stopPropagation();
+			removeColumn(name);
+		},
+		[removeColumn]
+	);
 
 	const menuItemArray = useMemo(() => {
-		const main = columnConfig.map(column => (
+		const main = columnConfigState.map(column => (
 			<HoverSensitiveMenuItem key={column.name} value={column.name}>
 				<Checkbox checked={column.shown} />
 				<ListItemText primary={column.name} />
@@ -61,7 +59,7 @@ export const ColumnSelect = () => {
 			</HoverSensitiveMenuItem>
 		));
 		return main.concat(
-			<NewColumnInputWrapper key="input">
+			<NewColumnInputWrapper key="input" onKeyDown={e => e.stopPropagation()}>
 				<NewColumnLabel>Type new column name:</NewColumnLabel>
 				<form action={createColumn}>
 					<CustomColumnFormControl>
@@ -70,16 +68,22 @@ export const ColumnSelect = () => {
 							name="column"
 							autoComplete="off"
 							value={customColumnName}
-							onChange={newColumnHandler}
+							onChange={customColumnHandler}
 						/>
 					</CustomColumnFormControl>
 				</form>
 			</NewColumnInputWrapper>
 		);
-	}, [columnConfig, createColumn, customColumnName, isAdmin]);
+	}, [columnConfigState, createColumn, customColumnName, deleteHandler, isAdmin]);
 
 	return (
-		<Select label="Columns" multiple value={columnConfig} onChange={changeHandler} renderValue={() => columnShown}>
+		<Select
+			label="Columns"
+			multiple
+			value={columnConfigState}
+			onChange={changeHandler}
+			renderValue={() => columnShown}
+		>
 			{menuItemArray}
 		</Select>
 	);

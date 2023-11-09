@@ -1,8 +1,7 @@
 import { DeskClient } from '@/components/DeskClient';
 import { getTasksShown } from '@/actions/getTasksShown';
-import { DeskServerProps } from '@/types';
 
-export const DeskServer = async ({ columnConfig }: DeskServerProps) => {
+export const DeskServer = async () => {
 	const tasks = await getTasksShown();
-	return <DeskClient tasks={tasks} columnConfig={columnConfig} />;
+	return <DeskClient tasks={tasks} />;
 };
