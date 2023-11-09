@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { TaskIdParam } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
-import { CommentsModule } from '@/components/CommentsModule';
+import { CommentsList } from '@/components/CommentsList';
 import { EstimatedTime } from '@/components/EstimatedTime';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
@@ -63,7 +63,7 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>Description</DarkGreyText>
 						<Typography mt={1}>{task?.description}</Typography>
 					</Module>
-					<CommentsModule task={task} />
+					<CommentsList task={task} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>

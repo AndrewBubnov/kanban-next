@@ -20,11 +20,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { columns, DASHBOARD, estimation } from '@/constants';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { deleteTask } from '@/actions/deleteTask';
-import * as React from 'react';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { CardEstimateSelect } from '@/components/CardEstimateSelect';
 
-export const CardFormUpdate = ({
+export const TaskFormUpdate = ({
 	task: {
 		id: taskId,
 		title: initTitle,
@@ -52,7 +51,7 @@ export const CardFormUpdate = ({
 		await deleteTask(taskId);
 		push(DASHBOARD);
 	};
-	const deleteClickHandler = async () => setOpen(true);
+	const deleteClickHandler = () => setOpen(true);
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
 	const descriptionHandler = (evt: ChangeEvent<HTMLInputElement>) => setDescription(evt.target.value);
 	const statusHandler = (event: SelectChangeEvent) => setStatus(event.target.value);
@@ -103,7 +102,7 @@ export const CardFormUpdate = ({
 					multiline
 					rows={4}
 				/>
-				<FlexContainer isReverse={!isAdmin} marginTop>
+				<FlexContainer isReverse={!isAdmin} marginTop justify>
 					{isAdmin && <DeleteButton onClick={deleteClickHandler}>Delete</DeleteButton>}
 					<ButtonContainer>
 						<StyledButton size="small" variant="outlined" onClick={cancelHandler}>

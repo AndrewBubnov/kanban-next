@@ -186,3 +186,16 @@ export interface EstimatedTimeProps {
 	task: TaskItem;
 	editPage: string;
 }
+
+export interface SingleCommentProps {
+	comment: Comment;
+	userId: string;
+	deleteHandler(): Promise<void>;
+	editHandler(): void;
+}
+
+export interface UseHandleCommentsProps {
+	task: TaskItem;
+	username: string;
+	userId: string;
+}

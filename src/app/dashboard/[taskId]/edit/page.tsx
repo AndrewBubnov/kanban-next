@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { CardContent, Grid } from '@mui/material';
 import { TaskIdParam } from '@/types';
 import { getTaskById } from '@/actions/getTaskById';
-import { CardFormUpdate } from '@/components/CardFormUpdate';
+import { TaskFormUpdate } from '@/components/TaskFormUpdate';
 import { getUser } from '@/actions/getUser';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 import { DASHBOARD } from '@/constants';
@@ -33,7 +33,7 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 							</Link>
 						</IconContainer>
 					</Grid>
-					<CardFormUpdate task={task} isAdmin={isAdmin} userIdsArray={userIdsArray} />
+					<TaskFormUpdate task={task} isAdmin={isAdmin} userIdsArray={userIdsArray} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>
