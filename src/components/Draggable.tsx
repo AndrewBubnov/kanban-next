@@ -13,7 +13,7 @@ export const Draggable = ({
 	isDragged,
 	onDrop,
 	isConfigUpdated,
-	isLoading,
+	isSaved,
 }: DraggableProps) => {
 	const dragOverHandler = (evt: DragEvent) => {
 		evt.stopPropagation();
@@ -23,8 +23,8 @@ export const Draggable = ({
 	return (
 		<DraggableBox
 			id={id}
-			isLoading={isLoading}
-			draggable={!isLoading}
+			isSaved={isSaved}
+			draggable={!isSaved}
 			isDragged={isDragged}
 			isConfigUpdated={isConfigUpdated}
 			onDragStart={onDragStart}
@@ -33,7 +33,7 @@ export const Draggable = ({
 			onDragOver={dragOverHandler}
 			style={{ [DELTA_X]: `${dX}px`, [DELTA_Y]: `${dY}px` } as CSSProperties}
 		>
-			{isLoading && (dX || dY) ? (
+			{isSaved && (dX || dY) ? (
 				<CenterLoader>
 					<LoadingIndicator />
 				</CenterLoader>

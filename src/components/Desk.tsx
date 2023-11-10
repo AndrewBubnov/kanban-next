@@ -21,7 +21,7 @@ export function Desk({ tasks }: DeskClientProps) {
 		dragStartHandler,
 		dragHandler,
 		dropHandler,
-		isLoading,
+		isSaved,
 		isConfigUpdated,
 	} = useDrag(tasks);
 
@@ -37,7 +37,7 @@ export function Desk({ tasks }: DeskClientProps) {
 					return (
 						<Draggable
 							key={cardId}
-							isLoading={isLoading}
+							isSaved={isSaved}
 							onDragStart={dragStartHandler(id)}
 							onDrag={dragHandler}
 							onDrop={dropHandler}

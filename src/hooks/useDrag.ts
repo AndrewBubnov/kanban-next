@@ -9,7 +9,7 @@ import { updateAllTasks } from '@/actions/updateAllTasks';
 import { useLatest } from '@/hooks/useLatest';
 
 export const useDrag = (tasks: TaskItem[]) => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isSaved, setIsSaved] = useState<boolean>(false);
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<string | null>(null);
 	const [leftSiteTop, setLeftSiteTop] = useState<number>(0);
@@ -74,7 +74,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 			const { cardPositions, columnDOMRects } = await getInitParameters(ref.current, parametersRef.current);
 			setParameters(cardPositions);
 			setColCoords(columnDOMRects);
-			setIsLoading(false);
+			setIsSaved(false);
 		})();
 		return resetState;
 	}, [parametersRef, resetState, tasks]);
@@ -98,7 +98,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 	);
 
 	const dropHandler = useCallback(async () => {
-		setIsLoading(true);
+		setIsSaved(true);
 		await updateAllTasks(updateConfig(tasks, parameters, draggedId, updatedStatus.current));
 	}, [tasks, parameters, draggedId, updatedStatus]);
 
@@ -112,7 +112,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 		dragStartHandler,
 		dragHandler,
 		dropHandler,
-		isLoading,
+		isSaved,
 		isConfigUpdated: isConfigUpdated.current,
 	};
 };

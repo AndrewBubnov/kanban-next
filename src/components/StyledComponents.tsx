@@ -277,7 +277,7 @@ export const SmallDeleteIcon = styled(DeleteIcon)(() => ({
 	height: '1rem',
 }));
 
-export const DraggableBox = styled(({ isDragged, isConfigUpdated, isLoading, ...props }: DraggableBoxProps) => (
+export const DraggableBox = styled(({ isDragged, isConfigUpdated, isSaved, ...props }: DraggableBoxProps) => (
 	<Box {...props} />
 ))<DraggableBoxProps>`
 	position: relative;
@@ -290,7 +290,7 @@ export const DraggableBox = styled(({ isDragged, isConfigUpdated, isLoading, ...
 	&::after {
 		content: '';
 		position: absolute;
-		display: ${({ isLoading }) => (isLoading ? 'block' : 'none')};
+		display: ${({ isSaved }) => (isSaved ? 'block' : 'none')};
 		top: 0;
 		background: rgba(0, 0, 0, 0.25);
 		width: 100%;
