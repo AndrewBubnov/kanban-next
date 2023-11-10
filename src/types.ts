@@ -140,6 +140,8 @@ export interface DashboardContextProps {
 	toggleColumnState(name?: string): Promise<void>;
 	addCustomColumn(name: string): void;
 	removeColumn(name: string): void;
+	isLoading: boolean;
+	setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DashboardProviderProps {

@@ -1,4 +1,4 @@
-import { DragEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { DragEvent, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ColCoords, Parameters, TaskItem } from '@/types';
 import { INTERSECTION_RATIO } from '@/constants';
 import { ascent } from '@/utils/ascent';
@@ -7,8 +7,10 @@ import { getInitParameters } from '@/utils/getInitParameters';
 import { updateConfig } from '@/utils/updateConfig';
 import { updateAllTasks } from '@/actions/updateAllTasks';
 import { useLatest } from '@/hooks/useLatest';
+import { DashboardContext } from '@/components/DashboardProvider';
 
 export const useDrag = (tasks: TaskItem[]) => {
+	const { isLoading, setIsLoading } = useContext(DashboardContext);
 	const [isSaved, setIsSaved] = useState<boolean>(false);
 	const [colCoords, setColCoords] = useState<ColCoords>({} as ColCoords);
 	const [leftSiteStatus, setLeftSiteStatus] = useState<string | null>(null);
@@ -25,6 +27,8 @@ export const useDrag = (tasks: TaskItem[]) => {
 	const offsetX = useRef(0);
 	const offsetY = useRef(0);
 	const ref = useRef<HTMLDivElement>(null);
+
+	useEffect(() => setIsLoading(false), [tasks, setIsLoading]);
 
 	useEffect(() => {
 		const currentParameters = parametersRef.current;
@@ -113,6 +117,7 @@ export const useDrag = (tasks: TaskItem[]) => {
 		dragHandler,
 		dropHandler,
 		isSaved,
+		isLoading,
 		isConfigUpdated: isConfigUpdated.current,
 	};
 };

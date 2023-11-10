@@ -1,5 +1,5 @@
 'use client';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { useColumnConfig } from '@/hooks/useColumnConfig';
 import { DashboardContextProps, DashboardProviderProps } from '@/types';
 
@@ -7,6 +7,7 @@ export const DashboardContext = createContext<DashboardContextProps>({} as Dashb
 
 export const DashboardProvider = ({ children, userIdsArray, isAdmin, columnConfig }: DashboardProviderProps) => {
 	const { columnConfigState, toggleColumnState, addCustomColumn, removeColumn } = useColumnConfig(columnConfig);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	return (
 		<DashboardContext.Provider
 			value={{
@@ -16,6 +17,8 @@ export const DashboardProvider = ({ children, userIdsArray, isAdmin, columnConfi
 				toggleColumnState,
 				addCustomColumn,
 				removeColumn,
+				isLoading,
+				setIsLoading,
 			}}
 		>
 			{children}

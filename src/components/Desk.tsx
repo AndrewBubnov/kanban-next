@@ -2,7 +2,7 @@
 import { useDrag } from '@/hooks/useDrag';
 import { Draggable } from '@/components/Draggable';
 import { TaskMini } from '@/components/TaskMini';
-import { Column, ColumnName, DeskContainer, HeroContainer } from '@/components/StyledComponents';
+import { Column, ColumnName, DeskContainer, HeroContainer, LoadingIndicator } from '@/components/StyledComponents';
 import { DraggableImage } from '@/components/DraggableImage';
 import { ColumnType, DeskClientProps } from '@/types';
 import { useContext } from 'react';
@@ -22,8 +22,16 @@ export function Desk({ tasks }: DeskClientProps) {
 		dragHandler,
 		dropHandler,
 		isSaved,
+		isLoading,
 		isConfigUpdated,
 	} = useDrag(tasks);
+
+	if (isLoading)
+		return (
+			<HeroContainer>
+				<LoadingIndicator />
+			</HeroContainer>
+		);
 
 	const renderMapper = (column: ColumnType) => (
 		<Column key={column.name} id={column.name}>

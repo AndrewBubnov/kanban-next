@@ -8,7 +8,7 @@ import { ALL_USERNAMES_SELECTED, ALL_USERS, DASHBOARD, SELECT_ALL_USERS } from '
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export const UserSelect = () => {
-	const { userIdsArray } = useContext(DashboardContext);
+	const { userIdsArray, setIsLoading } = useContext(DashboardContext);
 	const [username, setUsername] = useState<string>(ALL_USERNAMES_SELECTED);
 	const searchParamsUser = useSearchParams().get('user');
 	const router = useRouter();
@@ -17,6 +17,7 @@ export const UserSelect = () => {
 
 	useEffect(() => {
 		if (searchParamsUser) return;
+		setIsLoading(true);
 		router.replace(`${DASHBOARD}?username=${username === ALL_USERNAMES_SELECTED ? ALL_USERS : username}`);
 	}, [router, searchParamsUser, username]);
 
