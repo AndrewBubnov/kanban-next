@@ -16,7 +16,7 @@ import {
 } from '@/components/StyledComponents';
 
 export const ColumnSelect = () => {
-	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn } =
+	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn, isLight } =
 		useContext(DashboardContext);
 	const [customColumnName, setCustomColumnName] = useState<string>('');
 
@@ -65,16 +65,19 @@ export const ColumnSelect = () => {
 					<CustomColumnFormControl>
 						<CreateColumnInput
 							autoFocus
+							isLight={isLight}
+							variant="outlined"
 							name="column"
 							autoComplete="off"
 							value={customColumnName}
 							onChange={customColumnHandler}
+							onBlur={() => setCustomColumnName('')}
 						/>
 					</CustomColumnFormControl>
 				</form>
 			</NewColumnInputWrapper>
 		);
-	}, [columnConfigState, createColumn, customColumnName, deleteHandler, isAdmin]);
+	}, [columnConfigState, createColumn, customColumnName, deleteHandler, isAdmin, isLight]);
 
 	return (
 		<Select

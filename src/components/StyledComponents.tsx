@@ -2,9 +2,20 @@
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { Box, Card, CardContent, Grid, IconButton } from '@mui/material';
+import { Box, Card, CardContent, Grid, IconButton, Switch, SwitchProps } from '@mui/material';
 import Link from 'next/link';
-import { ConditionalFullWidthProps, DraggableBoxProps, EditPageLinkProps, FlexContainerProps } from '@/types';
+import {
+	ConditionalFullWidthProps,
+	DraggableBoxProps,
+	EditPageLinkProps,
+	FlexContainerProps,
+	ThemedActionButtonProps,
+	ThemedColumnNameProps,
+	ThemedIconProps,
+	ThemedInputLabelProps,
+	ThemedSelectProps,
+	ThemedTextFieldProps,
+} from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import InputLabel from '@mui/material/InputLabel';
@@ -19,6 +30,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import MenuItem from '@mui/material/MenuItem';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import TableIcon from '@mui/icons-material/ViewWeekOutlined';
+import DarkModeMuiIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeMuiIcon from '@mui/icons-material/LightModeOutlined';
 
 export const StyledDialog = styled(Dialog)(() => ({
 	'& .MuiPaper-root': {
@@ -87,17 +100,22 @@ export const DeleteButton = styled(Button)(() => ({
 	},
 }));
 
-export const StyledActionButton = styled(Button)(() => ({
-	'textTransform': 'none',
-	'fontSize': '1rem',
-	'color': 'lightgray',
-	'&:hover': {
-		color: '#fff',
-	},
-	'&:focus': {
-		outline: 'none',
-	},
-}));
+export const StyledActionButton = styled(({ isLight = false, ...props }: ThemedActionButtonProps) => (
+	<Button {...props} />
+))`
+	text-transform: none;
+	font-size: 1rem;
+	color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	border-color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	&:hover {
+		background: ${({ isLight }) => (isLight ? '#2f2f2f' : 'lightgray')};
+		color: ${({ isLight }) => (isLight ? 'lightgray' : '#000')};
+		border-color: ${({ isLight }) => (isLight ? '#2f2f2f' : 'lightgray')};
+	}
+	&:focus {
+		outline: none;
+	}
+`;
 
 export const StyledTaskMini = styled(Card)(() => ({
 	height: 150,
@@ -186,6 +204,13 @@ export const FlexWrapper = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
+}));
+
+export const SwitchWrapper = styled(Box)(() => ({
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
+	marginLeft: '1rem',
 }));
 export const FlexStartWrapper = styled(Box)(() => ({
 	display: 'flex',
@@ -298,12 +323,11 @@ export const DraggableBox = styled(({ isDragged, isConfigUpdated, isSaved, ...pr
 	}
 `;
 
-export const ColumnName = styled(Box)(() => ({
-	color: 'lightgray',
-	fontSize: '1.25rem',
-	textAlign: 'center',
-}));
-
+export const ColumnName = styled(({ isLight, ...props }: ThemedColumnNameProps) => <Box {...props} />)`
+	color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	font-size: 1.25rem;
+	text-align: center;
+`;
 export const CenterLoader = styled(Box)(() => ({
 	position: 'absolute',
 	top: '50%',
@@ -312,31 +336,34 @@ export const CenterLoader = styled(Box)(() => ({
 	zIndex: 10,
 }));
 
-export const LightInputLabel = styled(InputLabel)(() => ({
-	'color': 'lightgray',
-	'&.Mui-focused': {
-		color: '#fff',
-	},
-}));
+export const LightInputLabel = styled(({ isLight, ...props }: ThemedInputLabelProps) => <InputLabel {...props} />)`
+	color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	&.Mui-focused {
+		color: ${({ isLight }) => (isLight ? '#000' : '#fff')};
+	}
+`;
 
-export const LightSelect = styled(Select)(() => ({
-	'color': 'lightgray',
-	'&.Mui-focused': {
-		color: '#fff',
-	},
-	'.MuiOutlinedInput-notchedOutline': {
-		borderColor: 'darkgray',
-	},
-	'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-		borderColor: '#fff',
-	},
-	'&:hover .MuiOutlinedInput-notchedOutline': {
-		borderColor: 'darkgray',
-	},
-	'.MuiSvgIcon-root ': {
-		fill: 'lightgray !important',
-	},
-}));
+export const ThemedSelect = styled(({ isLight, ...props }: ThemedSelectProps) => <Select {...props} />)`
+	color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	&.MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+		background: green;
+	}
+	&.Mui-focused {
+		color: ${({ isLight }) => (isLight ? '#000' : '#fff')};
+	}
+	.MuiOutlinedInput-notchedOutline {
+		border-color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	}
+	&.Mui-focused .MuiOutlinedInput-notchedOutline {
+		border-color: ${({ isLight }) => (isLight ? '#000' : '#fff')};
+	}
+	&:hover .MuiOutlinedInput-notchedOutline {
+		border-color: ${({ isLight }) => (isLight ? '#000' : '#fff')};
+	}
+	.MuiSvgIcon-root {
+		fill: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+	}
+`;
 
 export const HeaderContainer = styled(Box)(() => ({
 	display: 'flex',
@@ -371,13 +398,24 @@ export const CenteredLink = styled(Link)(() => ({
 	alignItems: 'center',
 }));
 
-export const CreateColumnInput = styled(TextField)(() => ({
-	'& .MuiOutlinedInput-root': {
-		'& input': {
-			padding: 5,
-		},
-	},
-}));
+export const CreateColumnInput = styled(({ isLight, ...props }: ThemedTextFieldProps) => <TextField {...props} />)`
+	margin-top: 5px;
+	.MuiOutlinedInput-notchedOutline {
+		border-color: ${({ isLight }) => (isLight ? 'lightgray' : '#1a1a1a')};
+	}
+	&:hover .MuiOutlinedInput-notchedOutline {
+		border-color: ${({ isLight }) => (isLight ? '#fff' : '#000')};
+	}
+	&.Mui-focused fieldset {
+		border-color: yellow;
+	}
+	& .MuiOutlinedInput-root {
+		& > input {
+			padding: 5px;
+			color: ${({ isLight }) => (isLight ? '#fff' : '#1a1a1a')};
+		}
+	}
+`;
 
 export const TitleContainer = styled(Box)(() => ({
 	display: 'flex',
@@ -494,3 +532,54 @@ export const StyledCardContent = styled(CardContent)(() => ({
 		overflow: 'hidden',
 	},
 }));
+
+export const StyledSwitch = styled((props: SwitchProps) => (
+	<Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(() => ({
+	'width': 42,
+	'height': 26,
+	'padding': 0,
+	'margin': '0 0.5rem',
+	'& .MuiSwitch-switchBase': {
+		'padding': 0,
+		'margin': 2,
+		'transitionDuration': '300ms',
+		'&.Mui-checked': {
+			'transform': 'translateX(16px)',
+			'color': 'lightgray',
+			'& + .MuiSwitch-track': {
+				backgroundColor: '#2ECA45',
+				opacity: 1,
+				border: 0,
+			},
+			'&.Mui-disabled + .MuiSwitch-track': {
+				opacity: 0.5,
+			},
+		},
+		'&.Mui-focusVisible .MuiSwitch-thumb': {
+			color: '#33cf4d',
+			border: '6px solid #fff',
+		},
+		'&.Mui-disabled + .MuiSwitch-track': {
+			opacity: 0.7,
+		},
+	},
+	'& .MuiSwitch-thumb': {
+		boxSizing: 'border-box',
+		width: 22,
+		height: 22,
+	},
+	'& .MuiSwitch-track': {
+		borderRadius: 26 / 2,
+		backgroundColor: 'lightgray',
+		opacity: 1,
+	},
+}));
+
+export const DarkModeIcon = styled(({ isLight, ...props }: ThemedIconProps) => <DarkModeMuiIcon {...props} />)`
+	fill: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+`;
+
+export const LightModeIcon = styled(({ isLight, ...props }: ThemedIconProps) => <LightModeMuiIcon {...props} />)`
+	fill: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
+`;

@@ -9,6 +9,7 @@ import { getColumnList } from '@/actions/getColumnList';
 import { DashboardProvider } from '@/components/DashboardProvider';
 import { getTasksShown } from '@/actions/getTasksShown';
 import { Desk } from '@/components/Desk';
+import { ThemeSwitch } from '@/components/ThemeSwitch';
 
 interface DashboardPageProps {
 	searchParams: { username: string };
@@ -28,6 +29,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 					<AddTask />
 					{tasksShown.length ? <ColumnSelect /> : null}
 					<UserSelect />
+					<ThemeSwitch />
 				</ControlsContainer>
 				<Desk tasks={tasksShown} />
 			</DashboardProvider>

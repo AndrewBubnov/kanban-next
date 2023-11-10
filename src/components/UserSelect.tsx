@@ -19,7 +19,7 @@ export const UserSelect = () => {
 		if (searchParamsUser) return;
 		setIsLoading(true);
 		router.replace(`${DASHBOARD}?username=${username === ALL_USERNAMES_SELECTED ? ALL_USERS : username}`);
-	}, [router, searchParamsUser, username]);
+	}, [router, searchParamsUser, setIsLoading, username]);
 
 	const changeHandler = async (event: SelectChangeEvent<unknown>) => setUsername(event.target.value as string);
 

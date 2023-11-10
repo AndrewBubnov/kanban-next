@@ -7,13 +7,14 @@ import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/compone
 import { TaskFormCreate } from '@/components/TaskFormCreate';
 
 export const AddTask = () => {
-	const { userIdsArray, isAdmin } = useContext(DashboardContext);
+	const { userIdsArray, isAdmin, isLight } = useContext(DashboardContext);
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
+
 	return (
 		<>
 			<Grid container>
-				<StyledActionButton variant="text" onClick={toggleOpenHandler}>
+				<StyledActionButton variant="outlined" onClick={toggleOpenHandler} isLight={isLight}>
 					Add new
 				</StyledActionButton>
 			</Grid>

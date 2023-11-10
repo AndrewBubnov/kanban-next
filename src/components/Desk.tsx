@@ -7,9 +7,13 @@ import { DraggableImage } from '@/components/DraggableImage';
 import { ColumnType, DeskClientProps } from '@/types';
 import { useContext } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
+import { useTheme } from 'next-themes';
+import { LIGHT } from '@/constants';
 
 export function Desk({ tasks }: DeskClientProps) {
 	const { columnConfigState: columnConfig } = useContext(DashboardContext);
+	const { theme } = useTheme();
+	const isLight = theme === LIGHT;
 
 	const {
 		parameters,
@@ -35,7 +39,9 @@ export function Desk({ tasks }: DeskClientProps) {
 
 	const renderMapper = (column: ColumnType) => (
 		<Column key={column.name} id={column.name}>
-			<ColumnName component="span">{column.name}</ColumnName>
+			<ColumnName component="span" isLight={isLight}>
+				{column.name}
+			</ColumnName>
 			{config
 				.filter(card => card.status === column.name)
 				.map(({ title, description, id, assignee: { email, username } }) => {
