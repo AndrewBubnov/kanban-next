@@ -8,7 +8,7 @@ import { ColumnType, DeskClientProps } from '@/types';
 import { useContext } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
 
-export function DeskClient({ tasks }: DeskClientProps) {
+export function Desk({ tasks }: DeskClientProps) {
 	const { columnConfigState: columnConfig } = useContext(DashboardContext);
 
 	const {

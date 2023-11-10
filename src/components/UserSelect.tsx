@@ -1,24 +1,26 @@
 'use client';
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
 import { Select } from '@/components/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { setUserIdShown } from '@/actions/setUserIdShown';
-import { ALL_USERNAMES, SELECT_ALL_USERS } from '@/constants';
+import { ALL_USERNAMES_SELECTED, ALL_USERS, DASHBOARD, SELECT_ALL_USERS } from '@/constants';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export const UserSelect = () => {
 	const { userIdsArray } = useContext(DashboardContext);
-	const [username, setUsername] = useState<string>(ALL_USERNAMES);
+	const [username, setUsername] = useState<string>(ALL_USERNAMES_SELECTED);
+	const searchParamsUser = useSearchParams().get('user');
+	const router = useRouter();
 
 	const extendedUserIdsArray = useMemo(() => [SELECT_ALL_USERS, ...userIdsArray], [userIdsArray]);
 
-	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
-		const value = event.target.value as string;
-		const currentUserId = extendedUserIdsArray.find(item => value === item.username)?.userId || '';
-		setUsername(value);
-		await setUserIdShown(currentUserId);
-	};
+	useEffect(() => {
+		if (searchParamsUser) return;
+		router.replace(`${DASHBOARD}?username=${username === ALL_USERNAMES_SELECTED ? ALL_USERS : username}`);
+	}, [router, searchParamsUser, username]);
+
+	const changeHandler = async (event: SelectChangeEvent<unknown>) => setUsername(event.target.value as string);
 
 	return (
 		<Select value={username} label="Assignee" onChange={changeHandler}>

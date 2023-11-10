@@ -1,14 +1,14 @@
 'use server';
 import { prisma } from '@/db';
-import { TaskItem } from '@/types';
+import { TaskItem, UserIdsArrayItem } from '@/types';
 import { sortByIndices } from '@/utils/sortByIndices';
-import { getUserIdShown } from '@/actions/getUserIdShown';
 import { revalidatePath } from 'next/cache';
-import { DASHBOARD } from '@/constants';
+import { ALL_USERS, DASHBOARD } from '@/constants';
 
-export const getTasksShown = async (): Promise<TaskItem[]> => {
-	const userId = await getUserIdShown();
-	const parameter = userId ? { userId } : {};
+export const getTasksShown = async (username: string, userIdsArray: UserIdsArrayItem[] = []): Promise<TaskItem[]> => {
+	const userId = userIdsArray.find(item => username === item.username)?.userId || '';
+	const parameter = username === ALL_USERS || !userId ? {} : { userId };
+
 	const tasks = await prisma.task.findMany({
 		where: parameter,
 		include: { assignee: true, comments: true },

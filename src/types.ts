@@ -3,7 +3,7 @@ import { FormControlProps } from '@mui/material/FormControl/FormControl';
 import { LinkProps } from 'next/link';
 
 export type Assignee = {
-	id: number;
+	id: string;
 	userId: string;
 	email: string;
 	username: string;
@@ -115,7 +115,7 @@ export interface DraggableImageProps {
 	};
 }
 
-interface UserIdsArrayItem {
+export interface UserIdsArrayItem {
 	userId: string;
 	username: string;
 }

@@ -61,8 +61,3 @@ model ColumnList {
   id      String   @id @map("_id")
   columns Column[]
 }
-
-model UserIdShown {
-  id     Int @id @map("_id")
-  userId String @default("")
-}
