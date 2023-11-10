@@ -8,8 +8,6 @@ export const useColumnConfig = (columnConfig: ColumnType[]) => {
 
 	const updatedState = useLatest(state);
 
-	useEffect(() => setState(columnConfig), [columnConfig]);
-
 	useEffect(() => {
 		(async function () {
 			await updateColumns(updatedState.current);
