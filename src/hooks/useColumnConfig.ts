@@ -4,15 +4,23 @@ import { updateColumns } from '@/actions/updateColumns';
 import { ColumnType } from '@/types';
 
 export const useColumnConfig = (columnConfig: ColumnType[]) => {
+	const [isStateUpdated, setIsStateUpdated] = useState<boolean>(false);
 	const [state, setState] = useState<ColumnType[]>(columnConfig);
 
-	const updatedState = useLatest(state);
+	const updatedStateRef = useLatest(state);
 
 	useEffect(() => {
+		if (!isStateUpdated) return;
+		setIsStateUpdated(false);
 		(async function () {
-			await updateColumns(updatedState.current);
+			await updateColumns(updatedStateRef.current);
 		})();
-	}, [state.length, updatedState]);
+	}, [isStateUpdated, updatedStateRef]);
+
+	const updateState = useCallback((updatedState: ColumnType[]) => {
+		setState(updatedState);
+		setIsStateUpdated(true);
+	}, []);
 
 	const toggleColumnState = useCallback(
 		async (name?: string) => {
@@ -20,24 +28,20 @@ export const useColumnConfig = (columnConfig: ColumnType[]) => {
 			const updatedState = state.map(el => {
 				return el.name === name ? { ...el, shown: !el.shown } : el;
 			});
-			setState(updatedState);
-			await updateColumns(updatedState);
+			updateState(updatedState);
 		},
-		[state]
+		[state, updateState]
 	);
 
 	const addCustomColumn = useCallback(
-		(name: string) => {
-			const updatedState = [...state, { name, shown: true }];
-			setState(updatedState);
-		},
-		[state]
+		(name: string) => updateState([...state, { name, shown: true }]),
+		[state, updateState]
 	);
 
-	const removeColumn = (name: string) => {
-		const updatedState = state.filter(el => el.name !== name);
-		setState(updatedState);
-	};
+	const removeColumn = useCallback(
+		(name: string) => updateState(state.filter(el => el.name !== name)),
+		[state, updateState]
+	);
 
 	return { columnConfigState: state, toggleColumnState, addCustomColumn, removeColumn };
 };

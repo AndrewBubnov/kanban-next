@@ -162,9 +162,8 @@ export const Column = styled(Box)(() => ({
 }));
 
 export const SmallIconTransparentButton = styled(IconButton)(() => ({
-	padding: 0,
+	padding: 2,
 	opacity: 0,
-	paddingLeft: '0.25rem',
 	transition: 'opacity 0.3s ease',
 }));
 
