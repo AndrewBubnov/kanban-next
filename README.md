@@ -10,7 +10,7 @@ Please explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/
 
 - **Custom Drag-and-Drop:** The application includes a custom drag-and-drop system for moving and organizing task cards. No third-party drag-and-drop libraries are used, giving you full control over the user experience.
 
-- **Server Actions and Prisma**: This application utilizes server actions, a feature provided by Next.js 13, for direct database access, powered by the Prisma ORM. This enables efficient data operations and interactions with the backend.
+- **Server Actions and Prisma**: This application utilizes server actions, a feature provided by Next.js 13, for direct cloud Atlas database access, powered by the Prisma ORM. This enables efficient data operations and interactions with the backend.
 
 - **Task Management**: In addition to drag-and-drop functionality, users can view task details and edit them, providing a comprehensive task management experience. Administrators have the additional ability to reassign tasks to other users or delete them.
 
