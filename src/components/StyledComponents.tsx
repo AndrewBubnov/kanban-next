@@ -406,9 +406,6 @@ export const CreateColumnInput = styled(({ isLight, ...props }: ThemedTextFieldP
 	&:hover .MuiOutlinedInput-notchedOutline {
 		border-color: ${({ isLight }) => (isLight ? '#fff' : '#000')};
 	}
-	&.Mui-focused fieldset {
-		border-color: yellow;
-	}
 	& .MuiOutlinedInput-root {
 		& > input {
 			padding: 5px;
