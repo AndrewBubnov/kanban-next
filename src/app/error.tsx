@@ -10,7 +10,7 @@ export default function Error({ reset, error }: { reset(): void; error: Error & 
 		<div>
 			<HeroContainer>
 				Sorry, something went wrong..
-				<StyledActionButton onClick={reset}>Try again</StyledActionButton>
+				<StyledActionButton onClick={reset} isLight>Try again</StyledActionButton>
 			</HeroContainer>
 		</div>
 	);
