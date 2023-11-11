@@ -1,6 +1,10 @@
-# kanban-next
+## kanban-next
 
-**kanban-next** is a personal project created by Andrew Bubnov using Next.js 13, Prisma ORM, Atlas MongoDB, Material-UI, and custom drag-and-drop functionality to build a Kanban-style task management application. The authentication procedure and direct access to the database provide secure authorized access to individual user's data. Users have roles, such as administrators and regular users, allowing for different levels of control and access to the system.
+**kanban-next** is a robust Kanban-style task management application built with Next.js 13, Prisma ORM, Atlas MongoDB, and Material-UI. The application features a custom drag-and-drop system, user authentication, and direct access to the database for efficient data operations. It supports user roles, task management, comments, column customization, task estimation, filtering, light and dark themes, and more.
+
+### Live Demo
+
+Explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/)
 
 ## Features
 
