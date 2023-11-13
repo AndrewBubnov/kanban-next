@@ -14,6 +14,7 @@ export const getUser = async () => {
 		where: { userId },
 		include: {
 			tasks: true,
+			notifications: true,
 		},
 	});
 
@@ -27,6 +28,13 @@ export const getUser = async () => {
 				tasks: {
 					create: [],
 				},
+				notifications: {
+					create: [],
+				},
+			},
+			include: {
+				tasks: true,
+				notifications: true,
 			},
 		});
 		existingUser = {
@@ -35,7 +43,9 @@ export const getUser = async () => {
 			email: createUser.email,
 			username: createUser.username,
 			isAdmin: createUser.isAdmin,
+			lastVisitedAt: new Date(),
 			tasks: [],
+			notifications: [],
 		};
 	}
 	return existingUser;

@@ -21,10 +21,12 @@ import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
 import { CommentsList } from '@/components/CommentsList';
 import { EstimatedTime } from '@/components/EstimatedTime';
+import { getMappedUserIds } from '@/actions/getMappedUserIds';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
 	const editPage = `${DASHBOARD}/${taskId}/edit`;
+	const userIdsArray = await getMappedUserIds();
 
 	return (
 		<Wrapper>
@@ -63,7 +65,7 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>Description</DarkGreyText>
 						<Typography mt={1}>{task?.description}</Typography>
 					</Module>
-					<CommentsList task={task} />
+					<CommentsList task={task} userIdsArray={userIdsArray} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>

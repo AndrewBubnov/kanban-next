@@ -206,6 +206,7 @@ export interface UseHandleCommentsProps {
 	task: TaskItem;
 	username: string;
 	userId: string;
+	userIdsArray: UserIdsArrayItem[];
 }
 
 export interface ThemedSelectProps extends SelectProps {

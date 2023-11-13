@@ -1,13 +1,13 @@
 'use client';
 import { AddCommentTextField, CommentsContainer, DarkGreyText, Module } from '@/components/StyledComponents';
-import { TaskItem } from '@/types';
+import { TaskItem, UserIdsArrayItem } from '@/types';
 import { useUser } from '@clerk/nextjs';
 import { sortComments } from '@/utils/sortComments';
 import { Box } from '@mui/material';
 import { SingleComment } from '@/components/SingleComment';
 import { useHandleComments } from '@/hooks/useHandleComments';
 
-export const CommentsList = ({ task }: { task: TaskItem }) => {
+export const CommentsList = ({ task, userIdsArray }: { task: TaskItem; userIdsArray: UserIdsArrayItem[] }) => {
 	const { user } = useUser();
 	const username = user?.username!;
 	const userId = user?.id!;
@@ -15,6 +15,7 @@ export const CommentsList = ({ task }: { task: TaskItem }) => {
 		task,
 		userId,
 		username,
+		userIdsArray,
 	});
 
 	return (

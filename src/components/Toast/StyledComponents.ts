@@ -8,7 +8,7 @@ export const ToastWrapper = styled(Box)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 5px;
+	padding: 1rem 2rem 1rem 1rem;
 	color: lightgray;
 	min-width: 500px;
 	height: ${TOAST_HEIGHT}px;

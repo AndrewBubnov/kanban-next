@@ -1,12 +1,18 @@
 'use server';
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
-import { getUser } from '@/actions/getUser';
 import { AddTaskAction } from '@/types';
 import { DASHBOARD } from '@/constants';
+import { addNotification } from '@/actions/addNotification';
 
 export const addTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
-	const user = await getUser();
+	const user = await prisma.user.findUnique({
+		where: { userId },
+		include: {
+			tasks: true,
+			notifications: true,
+		},
+	});
 
 	if (!user) return;
 
@@ -28,7 +34,7 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 		...newTask,
 		assignee: {
 			id,
-			userId: user.userId,
+			userId,
 			email,
 			username,
 			isAdmin,
@@ -40,6 +46,10 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 		where: { userId },
 		data: { tasks: { connect: { id: newTask.id } } },
 	});
+
+	const notification = `You've been assigned a task ${newTask.id.slice(0, 4)}`;
+
+	await addNotification(notification, userId);
 
 	revalidatePath(DASHBOARD);
 };

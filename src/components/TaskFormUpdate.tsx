@@ -58,7 +58,7 @@ export const TaskFormUpdate = ({
 	const cancelHandler = () => push(`${DASHBOARD}/${taskId}`);
 	const confirmHandler = async () => {
 		if (!title) return;
-		const updatedTaskData = { title, description, status, estimateDays: parseFloat(estimateDaysState) };
+		const updatedTaskData = { title, description, status, estimateDays: parseFloat(estimateDaysState) || 0 };
 		await updateSingleTask(assigneeId, taskId, updatedTaskData);
 		cancelHandler();
 	};
