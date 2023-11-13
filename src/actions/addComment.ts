@@ -3,6 +3,7 @@ import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { DASHBOARD } from '@/constants';
 import { AddCommentToTask } from '@/types';
+import { createTaggedComment } from '@/actions/createTaggedComment';
 
 export async function addComment({ taskId, username, userId, text }: AddCommentToTask) {
 	const task = await prisma.task.findUnique({
@@ -28,6 +29,8 @@ export async function addComment({ taskId, username, userId, text }: AddCommentT
 		where: { id: taskId },
 		data: { comments: { connect: { id: comment.id } } },
 	});
+
+	await createTaggedComment(taskId, text);
 
 	revalidatePath(`${DASHBOARD}/${taskId}`);
 }
