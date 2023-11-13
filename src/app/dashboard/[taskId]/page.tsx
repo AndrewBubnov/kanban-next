@@ -22,6 +22,7 @@ import { getStringDate } from '@/utils/getStringDate';
 import { CommentsList } from '@/components/CommentsList';
 import { EstimatedTime } from '@/components/EstimatedTime';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
+import { DetailsProvider } from '@/components/DetailsProvider';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
@@ -65,7 +66,9 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 						<DarkGreyText>Description</DarkGreyText>
 						<Typography mt={1}>{task?.description}</Typography>
 					</Module>
-					<CommentsList task={task} userIdsArray={userIdsArray} />
+					<DetailsProvider userIdsArray={userIdsArray}>
+						<CommentsList task={task} />
+					</DetailsProvider>
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>

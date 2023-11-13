@@ -9,6 +9,7 @@ import {
 	DraggableBoxProps,
 	EditPageLinkProps,
 	FlexContainerProps,
+	TaggedSpanProps,
 	ThemedActionButtonProps,
 	ThemedColumnNameProps,
 	ThemedIconProps,
@@ -327,6 +328,12 @@ export const ColumnName = styled(({ isLight, ...props }: ThemedColumnNameProps) 
 	color: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
 	font-size: 1.25rem;
 	text-align: center;
+`;
+
+export const TaggedSpan = styled((props: TaggedSpanProps) => <Box {...props} component="span" />)`
+	background: rgba(160, 160, 160, 0.4);
+	padding: 0 2px;
+	border-radius: 2px;
 `;
 export const CenterLoader = styled(Box)(() => ({
 	position: 'absolute',

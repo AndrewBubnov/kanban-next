@@ -36,6 +36,10 @@ export type TaskItem = {
 	estimateDays: number;
 };
 
+export interface DashboardPageProps {
+	searchParams: { username: string };
+}
+
 export type EditedTaskContent = Omit<TaskItem, 'id' | 'index' | 'assignee' | 'createdAt' | 'comments'>;
 
 export type TaskMiniProps = {
@@ -138,6 +142,14 @@ export interface DeskClientProps {
 	tasks: TaskItem[];
 }
 
+export interface DetailsContextProps {
+	userIdsArray: UserIdsArrayItem[];
+}
+
+export interface DetailsProviderProps {
+	userIdsArray: UserIdsArrayItem[];
+	children: ReactNode;
+}
 export interface DashboardContextProps {
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
@@ -206,7 +218,6 @@ export interface UseHandleCommentsProps {
 	task: TaskItem;
 	username: string;
 	userId: string;
-	userIdsArray: UserIdsArrayItem[];
 }
 
 export interface ThemedSelectProps extends SelectProps {
@@ -228,3 +239,5 @@ export interface ThemedTextFieldProps extends OutlinedTextFieldProps {
 export interface ThemedIconProps extends SvgIconProps {
 	isLight: boolean;
 }
+
+export interface TaggedSpanProps extends HTMLAttributes<HTMLSpanElement> {}

@@ -1,11 +1,13 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { deleteComment } from '@/actions/deleteComment';
 import { updateComment } from '@/actions/updateComment';
 import { addComment } from '@/actions/addComment';
 import { EditHandlerArgs, UseHandleCommentsProps } from '@/types';
 import { addNotification } from '@/actions/addNotification';
+import { DetailsContext } from '@/components/DetailsProvider';
 
-export const useHandleComments = ({ task, username, userId, userIdsArray = [] }: UseHandleCommentsProps) => {
+export const useHandleComments = ({ task, username, userId }: UseHandleCommentsProps) => {
+	const { userIdsArray } = useContext(DetailsContext);
 	const [text, setText] = useState<string>('');
 	const [commentId, setCommentId] = useState<string>('');
 

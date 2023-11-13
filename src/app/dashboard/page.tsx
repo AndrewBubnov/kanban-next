@@ -12,10 +12,7 @@ import { Desk } from '@/components/Desk';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
 import { getAndDeleteNotifications } from '@/actions/getAndDeleteNotifications';
 import { ToastEmitter } from '@/components/Toast/ToastEmitter';
-
-interface DashboardPageProps {
-	searchParams: { username: string };
-}
+import { DashboardPageProps } from '@/types';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {
 	const { isAdmin, userId } = await getUser();
@@ -23,8 +20,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 	const columnConfig = await getColumnList();
 	const tasksShown = await getTasksShown(username, userIdsArray);
 	const notifications = await getAndDeleteNotifications();
-	console.log({ tasksShown });
-	console.log({ userIdsArray });
+
 	return (
 		<MainContainer>
 			<Header userId={userId} />
