@@ -35,8 +35,8 @@ export const updateSingleTask = async (userId: string, taskId: string, updatedTa
 		});
 	}
 
-	const notification = `You've been assigned a task ${taskId.slice(0, 4)}`;
-	await addNotification(notification, userId);
+	const notification = `You've been assigned a task`;
+	await addNotification(notification, taskId, userId);
 
 	revalidatePath(DASHBOARD);
 };

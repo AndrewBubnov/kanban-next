@@ -5,12 +5,14 @@ export interface Move {
 export interface ToastProps {
 	moves: Move[];
 	text: string;
+	link: string;
 	onDelete(): void;
 }
 
 export interface NotificationMap {
 	[key: string]: {
 		text: string;
+		link: string;
 		moves: Move[];
 	};
 }

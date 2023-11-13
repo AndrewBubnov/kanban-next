@@ -47,9 +47,9 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 		data: { tasks: { connect: { id: newTask.id } } },
 	});
 
-	const notification = `You've been assigned a task ${newTask.id.slice(0, 4)}`;
+	const notification = `You've been assigned a task`;
 
-	await addNotification(notification, userId);
+	await addNotification(notification, newTask.id, userId);
 
 	revalidatePath(DASHBOARD);
 };

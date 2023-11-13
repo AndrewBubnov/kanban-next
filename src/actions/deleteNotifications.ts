@@ -2,10 +2,8 @@
 import { prisma } from '@/db';
 import { auth } from '@clerk/nextjs';
 
-export const getAndDeleteNotifications = async () => {
+export const deleteNotifications = async () => {
 	const userId = auth().userId as string;
-
-	const notifications = await prisma.notification.findMany({ where: { userId } });
 
 	await prisma.notification.deleteMany({ where: { userId } });
 
@@ -13,6 +11,4 @@ export const getAndDeleteNotifications = async () => {
 		where: { userId },
 		data: { notifications: { create: [] } },
 	});
-
-	return (notifications || []).map(el => el.text);
 };

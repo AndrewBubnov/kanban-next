@@ -12,7 +12,7 @@ export const createTaggedComment = async (taskId: string, text: string) => {
 
 		if (!taggedUserId) return;
 
-		const notificationText = `You've been mentioned in a comment "${rest.join(' ')}" to task ${taskId.slice(0, 4)}`;
-		await addNotification(notificationText, taggedUserId);
+		const notificationText = `You've been mentioned in a comment "${rest.join(' ')}" to task`;
+		await addNotification(notificationText, taskId, taggedUserId);
 	}
 };

@@ -10,7 +10,7 @@ import { DashboardProvider } from '@/components/DashboardProvider';
 import { getTasksShown } from '@/actions/getTasksShown';
 import { Desk } from '@/components/Desk';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
-import { getAndDeleteNotifications } from '@/actions/getAndDeleteNotifications';
+import { getNotifications } from '@/actions/getNotifications';
 import { ToastEmitter } from '@/components/Toast/ToastEmitter';
 import { DashboardPageProps } from '@/types';
 
@@ -19,7 +19,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 	const userIdsArray = await getMappedUserIds();
 	const columnConfig = await getColumnList();
 	const tasksShown = await getTasksShown(username, userIdsArray);
-	const notifications = await getAndDeleteNotifications();
+	const notifications = await getNotifications();
 
 	return (
 		<MainContainer>

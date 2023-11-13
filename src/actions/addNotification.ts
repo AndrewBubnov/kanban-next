@@ -1,7 +1,7 @@
 'use server';
 import { prisma } from '@/db';
 
-export const addNotification = async (text: string, userId: string) => {
+export const addNotification = async (text: string, link: string, userId: string) => {
 	const user = await prisma.user.findUnique({
 		where: { userId },
 		include: { notifications: true },
@@ -12,6 +12,7 @@ export const addNotification = async (text: string, userId: string) => {
 	const notification = await prisma.notification.create({
 		data: {
 			text,
+			link,
 			userId,
 		},
 	});

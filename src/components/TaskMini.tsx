@@ -15,7 +15,7 @@ import { TaskMiniProps } from '@/types';
 export const TaskMini = ({ id, title, description, username, email }: TaskMiniProps) => (
 	<StyledTaskMini>
 		<StyledCardContent>
-			<FlexContainer>
+			<FlexContainer justify>
 				<Assignee>
 					{username} {email}
 				</Assignee>
