@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -61,3 +61,4 @@ model ColumnList {
   id      String   @id @map("_id")
   columns Column[]
 }
+//mongodb+srv://kanbandb:mongo@cluster0.occtnod.mongodb.net/kanbandb?retryWrites=true&w=majority

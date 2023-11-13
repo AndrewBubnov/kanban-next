@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { DashboardContext } from '@/components/DashboardProvider';
 import { useTheme } from 'next-themes';
 import { LIGHT } from '@/constants';
+import { ToastEmitter } from '@/components/Toast/ToastEmitter';
 
 export function Desk({ tasks }: DeskClientProps) {
 	const { columnConfigState: columnConfig } = useContext(DashboardContext);
@@ -85,6 +86,7 @@ export function Desk({ tasks }: DeskClientProps) {
 			) : (
 				<HeroContainer>No tasks so far</HeroContainer>
 			)}
+			<ToastEmitter notifications={['zero', 'first', 'second', 'third', 'fourth']} />
 		</DeskContainer>
 	);
 }
