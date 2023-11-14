@@ -9,5 +9,5 @@ export function ModeProvider({ children }: { children: ReactNode }) {
 
 	if (!mounted) return null;
 
-	return <ThemeProvider>{children}</ThemeProvider>;
+	return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
 }

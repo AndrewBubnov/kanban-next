@@ -1,26 +1,19 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toast } from '@/components/Toast/Toast';
 import { LAUNCH_TOAST, TOAST_ANIMATION_AND_DELAY_TIME, TOAST_GAP, TOAST_HEIGHT } from './constants';
 import { filterDeletedNotifications, remapBackup, remapNotifications } from '@/components/Toast/utils';
+import { deleteNotification } from '@/actions/deleteNotification';
 import { NotificationMap } from './types';
-import { deleteNotifications } from '@/actions/deleteNotifications';
 
 export const ToastEmitter = ({ notifications }: { notifications: { text: string; link: string }[] }) => {
 	const [backup, setBackup] = useState<NotificationMap>({});
 	const [notificationMap, setNotificationMap] = useState<NotificationMap>({});
 
-	const notificationMapLength = useMemo(() => Object.keys(notificationMap).length, [notificationMap]);
-
-	useEffect(() => {
-		(async function () {
-			if (!notificationMapLength) await deleteNotifications();
-		})();
-	}, [notificationMapLength]);
-
-	const deleteHandler = (deletedKey: string) => () => {
+	const deleteHandler = (deletedKey: string) => async () => {
 		setNotificationMap(remapNotifications(deletedKey, backup));
 		setBackup(remapBackup(deletedKey));
+		await deleteNotification(+deletedKey);
 		setTimeout(() => setNotificationMap(filterDeletedNotifications(deletedKey)), TOAST_ANIMATION_AND_DELAY_TIME);
 	};
 

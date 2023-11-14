@@ -5,8 +5,7 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --background: rgba(225, 210, 200, 0.6);
-  --foreground: #1a1a1a;
+  --background: #1a1a1a;
   --delta-x: '';
   --delta-y: '';
 }
@@ -17,8 +16,9 @@
   margin: 0;
 }
 
-[data-theme='dark'] {
-  --background: #1a1a1a;
+[data-theme='light'] {
+  --background: rgba(225, 210, 200, 0.6);
+  --foreground: #1a1a1a;
 }
 
 html,
