@@ -18,7 +18,7 @@ Please explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/
   
 - **Comment Functionality**: Users can add comments to tasks. To edit or delete a comment, users must click on the "More" icon (three vertical dots). This functionality is available only to the author of the comment, ensuring control over contributions and fostering collaboration and communication within tasks.
 
-- **Tagged Comments**: Users can create tagged comments using the syntax **@<username>**. The mentioned user is highlighted in the comment text, and the tagged user receives a system notification about the comment. This feature enhances communication and collaboration within the application.
+- **Tagged Comments**: Users can create tagged comments using the syntax **"@<username>"**. The mentioned user is highlighted in the comment text, and the tagged user receives a system notification about the comment. This feature enhances communication and collaboration within the application.
 
 - **Lightweight Custom Notification System**: The application features a lightweight custom notification system. Users receive notifications when a task is assigned to them or when their username is mentioned in a task comment. These notifications are created without the use of third-party libraries and **contain a link** to the task for quick access. Notifications persist in the system until the user closes them or uses the link provided in the notification.
 
