@@ -10,8 +10,8 @@ import { DashboardProvider } from '@/components/DashboardProvider';
 import { getTasksShown } from '@/actions/getTasksShown';
 import { Desk } from '@/components/Desk';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
-import { getNotifications } from '@/actions/getNotifications';
-import { ToastEmitter } from '@/components/Toast/ToastEmitter';
+import { getNotifications } from '@/components/Toast/actions/getNotifications';
+import { ToastEmitter } from '@/components/Toast/components/ToastEmitter';
 import { DashboardPageProps } from '@/types';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {

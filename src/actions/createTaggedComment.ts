@@ -1,5 +1,5 @@
 'use server';
-import { addNotification } from '@/actions/addNotification';
+import { addNotification } from '@/components/Toast/actions/addNotification';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 
 export const createTaggedComment = async (taskId: string, text: string) => {

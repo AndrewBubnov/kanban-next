@@ -3,7 +3,7 @@ import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { AddTaskAction } from '@/types';
 import { DASHBOARD } from '@/constants';
-import { addNotification } from '@/actions/addNotification';
+import { addNotification } from '@/components/Toast/actions/addNotification';
 
 export const addTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
 	const user = await prisma.user.findUnique({

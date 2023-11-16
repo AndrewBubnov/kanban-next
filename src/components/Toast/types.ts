@@ -9,10 +9,4 @@ export interface ToastProps {
 	onDelete(): void;
 }
 
-export interface NotificationMap {
-	[key: string]: {
-		text: string;
-		link: string;
-		moves: Move[];
-	};
-}
+export type NotificationMap = Record<string, { text: string; link: string; moves: Move[] }>;
