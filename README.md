@@ -4,13 +4,13 @@
 
 ### Live Demo
 
-Explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/)
+Please explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/)
 
 ## Features
 
 - **Custom Drag-and-Drop:** The application includes a custom drag-and-drop system for moving and organizing task cards. No third-party drag-and-drop libraries are used, giving you full control over the user experience.
 
-- **Server Actions and Prisma**: This application utilizes server actions, a feature provided by Next.js 13, for direct database access, powered by the Prisma ORM. This enables efficient data operations and interactions with the backend.
+- **Server Actions and Prisma**: This application utilizes server actions, a feature provided by Next.js 13, for direct cloud Atlas database access, powered by the Prisma ORM. This enables efficient data operations and interactions with the backend.
 
 - **Task Management**: In addition to drag-and-drop functionality, users can view task details and edit them, providing a comprehensive task management experience. Administrators have the additional ability to reassign tasks to other users or delete them.
 
@@ -18,7 +18,7 @@ Explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/)
   
 - **Comment Functionality**: Users can add comments to tasks. To edit or delete a comment, users must click on the "More" icon (three vertical dots). This functionality is available only to the author of the comment, ensuring control over contributions and fostering collaboration and communication within tasks.
 
-- **Column Customization**: Users have the flexibility to choose which columns to display and hide. Additionally, administrators have the ability to add and delete custom columns (the relevant icon is shown on hover over the menu items). This feature enables a personalized Kanban board layout, tailored to individual preferences. The column configuration, including the available columns and their visibility status, is centrally stored on the server and remains consistent for all users.
+- **Column Customization**: Users have the flexibility to choose which columns to display and hide. Additionally, administrators have the ability to add and delete custom columns (the relevant icon is shown on hover over the menu items). This feature enables a personalized Kanban board layout, tailored to individual preferences. The column configuration, including the available columns and their visibility status, is centrally stored on the server and remains consistent for all users. To enhance the user experience, optimistic update is applied, ensuring that users don't have to wait for updated data from the database.
   
 - **Task Estimation and Tracking**: Users can estimate the time required to complete a task and track the remaining time until the task's completion in the task details view. Task estimation can be provided when creating a task, either by a regular user or an administrator. However, only administrators have the ability to edit this estimation. The system prevents the selection of a time period during editing that would result in a task completion date and time earlier than the current time. If the estimated time for a task has already elapsed, a warning is displayed. Administrators have the option to re-estimate the time required in case the initial estimation was incorrect or for other reasons.
 
