@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -44,7 +44,6 @@ model User {
   email         String         @unique
   username      String
   isAdmin       Boolean        @default(false)
-  lastVisitedAt DateTime       @default(now())
   notifications Notification[]
   tasks         Task[]
 }
@@ -71,5 +70,3 @@ model ColumnList {
   id      String   @id @map("_id")
   columns Column[]
 }
-
-//mongodb+srv://kanbandb:mongo@cluster0.occtnod.mongodb.net/kanbandb?retryWrites=true&w=majority
