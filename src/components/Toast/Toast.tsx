@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { StyledLink, ToastCloseIcon, ToastIconButton, ToastWrapper } from '@/components/Toast/StyledComponents';
 import { Box } from '@mui/material';
 import { DASHBOARD } from '@/constants';
-import { ToastProps } from './types';
+import { Move, ToastProps } from './types';
 
 export const Toast = ({ moves, text, link, onDelete }: ToastProps) => {
 	const [style, setStyle] = useState({});
 
+	const stringMoves = useMemo(() => JSON.stringify(moves), [moves]);
+
 	useEffect(() => {
-		moves.forEach(({ move, timeout }) => {
+		(JSON.parse(stringMoves) as Move[]).forEach(({ move, timeout }) => {
 			setTimeout(() => setStyle({ transform: move }), timeout);
 		});
-	}, [moves]);
+	}, [stringMoves]);
 
 	const closeHandler = () => {
 		const transformY = moves.at(-1)?.move.split(',')[1];
