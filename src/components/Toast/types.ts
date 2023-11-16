@@ -1,5 +1,5 @@
 export interface Move {
-	move: string;
+	move: 'up' | 'left' | 'right' | `down${string}`;
 	timeout: number;
 }
 export interface ToastProps {
