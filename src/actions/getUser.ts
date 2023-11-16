@@ -43,7 +43,6 @@ export const getUser = async () => {
 			email: createUser.email,
 			username: createUser.username,
 			isAdmin: createUser.isAdmin,
-			lastVisitedAt: new Date(),
 			tasks: [],
 			notifications: [],
 		};
