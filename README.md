@@ -4,7 +4,7 @@
 
 ### Live Demo
 
-Please explore the live demo: [kanban-next](https://kanban-next-iota.vercel.app/)
+Please explore the live demo: [kanban-next](https://kanban-next-blue.vercel.app/)
 
 ## Features
 
