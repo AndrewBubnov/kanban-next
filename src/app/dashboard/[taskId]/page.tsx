@@ -1,30 +1,32 @@
-import { getTaskById } from '@/actions/getTaskById';
+import { getTaskById } from '@/app/dashboard/[taskId]/edit/actions/getTaskById';
 import {
 	DarkGreyText,
-	TitleContainer,
-	IconContainer,
-	StyledTaskDetails,
 	Wrapper,
 	Module,
-	TitleText,
 	FlexContainer,
-	TitleInnerContainer,
 	DateContainer,
-	FlexStartWrapper,
 	StyledBackIcon,
-	StyledEditIcon,
 	FlexWrapper,
-} from '@/modules/StyledComponents';
+} from '@/modules/Shared/styled';
 import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
-import { TaskIdParam } from '@/types';
-import { DASHBOARD } from '@/constants';
-import { getStringDate } from '@/utils/getStringDate';
-import { CommentsList } from '@/modules/CommentsList';
-import { EstimatedTime } from '@/modules/EstimatedTime';
-import { getMappedUserIds } from '@/actions/getMappedUserIds';
-import { DetailsProvider } from '@/modules/DetailsProvider';
-import { UserPhoto } from '@/modules/UserPhoto';
+import { getStringDate } from '@/app/dashboard/[taskId]/utils/getStringDate';
+import { CommentsList } from '@/modules/Comments/components/CommentsList';
+import { EstimatedTime } from '@/app/dashboard/[taskId]/components/EstimatedTime';
+import { getMappedUserIds } from '@/modules/Shared/actions/getMappedUserIds';
+import { DetailsProvider } from '@/modules/Providers/DetailsProvider';
+import { UserPhoto } from '@/modules/Shared/components/UserPhoto';
+import {
+	FlexStartWrapper,
+	IconContainer,
+	StyledEditIcon,
+	StyledTaskDetails,
+	TitleContainer,
+	TitleInnerContainer,
+	TitleText,
+} from '@/app/dashboard/[taskId]/styled';
+import { DASHBOARD } from '@/modules/Shared/constants';
+import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);

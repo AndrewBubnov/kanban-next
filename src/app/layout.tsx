@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
-import { ModeProvider } from '@/modules/ModeProvider';
+import { ModeProvider } from '@/modules/Providers/ModeProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });

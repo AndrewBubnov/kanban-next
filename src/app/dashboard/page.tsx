@@ -1,18 +1,18 @@
-import { Header } from '@/modules/Header';
-import { CreateTask } from '@/modules/CreateTask';
-import { ControlsContainer, MainContainer } from '@/modules/StyledComponents';
-import { UserSelect } from '@/modules/UserSelect';
-import { getMappedUserIds } from '@/actions/getMappedUserIds';
-import { getUser } from '@/actions/getUser';
-import { ColumnSelect } from '@/modules/ColumnSelect';
-import { getColumnList } from '@/actions/getColumnList';
-import { DashboardProvider } from '@/modules/DashboardProvider';
-import { getTasksShown } from '@/actions/getTasksShown';
-import { Desk } from '@/modules/Desk';
-import { ThemeSwitch } from '@/modules/ThemeSwitch';
-import { DashboardPageProps } from '@/types';
+import { Header } from '@/modules/Header/components/Header';
+import { CreateTask } from '@/modules/CreateAndUpdateTask/components/CreateTask';
+import { UserSelect } from '@/modules/UserSelect/components/UserSelect';
+import { getMappedUserIds } from '@/modules/Shared/actions/getMappedUserIds';
+import { getUser } from '@/app/dashboard/[taskId]/edit/actions/getUser';
+import { StatusSelect } from '@/modules/StatusSelect/components/StatusSelect';
+import { getColumnList } from '@/app/dashboard/actions/getColumnList';
+import { DashboardProvider } from '@/modules/Providers/DashboardProvider';
+import { getTasksShown } from '@/app/dashboard/actions/getTasksShown';
+import { Desk } from '@/modules/Desk/components/Desk';
+import { ThemeSwitch } from '@/modules/ThemeSwitch/components/ThemeSwitch';
 import { getNotifications } from '@/modules/Toast/actions/getNotifications';
 import { ToastEmitter } from '@/modules/Toast/components/ToastEmitter';
+import { DashboardPageProps } from '@/app/dashboard/types';
+import { ControlsContainer, MainContainer } from '@/app/dashboard/styled';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {
 	const { isAdmin, userId } = await getUser();
@@ -27,7 +27,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} columnConfig={columnConfig}>
 				<ControlsContainer>
 					<CreateTask />
-					{tasksShown.length ? <ColumnSelect /> : null}
+					{tasksShown.length ? <StatusSelect /> : null}
 					<UserSelect />
 					<ThemeSwitch />
 				</ControlsContainer>

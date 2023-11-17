@@ -1,6 +1,7 @@
 import { authMiddleware } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import { DASHBOARD } from '@/constants';
+
+import { DASHBOARD } from '@/modules/Shared/constants';
 
 export default authMiddleware({
 	afterAuth(auth, req, evt) {

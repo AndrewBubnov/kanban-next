@@ -1,12 +1,14 @@
-import { IconContainer, StyledBackIcon, StyledTableIcon, StyledTaskDetails, Wrapper } from '@/modules/StyledComponents';
+import { StyledBackIcon, Wrapper } from '@/modules/Shared/styled';
 import Link from 'next/link';
 import { CardContent, Grid } from '@mui/material';
-import { TaskIdParam } from '@/types';
-import { getTaskById } from '@/actions/getTaskById';
-import { TaskUpdateForm } from '@/modules/TaskUpdateForm';
-import { getUser } from '@/actions/getUser';
-import { getMappedUserIds } from '@/actions/getMappedUserIds';
-import { DASHBOARD } from '@/constants';
+import { getTaskById } from '@/app/dashboard/[taskId]/edit/actions/getTaskById';
+import { TaskUpdateForm } from '@/modules/CreateAndUpdateTask/components/TaskUpdateForm';
+import { getUser } from '@/app/dashboard/[taskId]/edit/actions/getUser';
+import { getMappedUserIds } from '@/modules/Shared/actions/getMappedUserIds';
+import { IconContainer, StyledTaskDetails } from '@/app/dashboard/[taskId]/styled';
+import { DASHBOARD } from '@/modules/Shared/constants';
+import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
+import { StyledTableIcon } from '@/app/dashboard/[taskId]/edit/styled';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 	const { isAdmin } = await getUser();
