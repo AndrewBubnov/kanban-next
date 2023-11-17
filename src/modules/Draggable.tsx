@@ -1,5 +1,5 @@
 import { DragEvent, CSSProperties } from 'react';
-import { CenterLoader, DraggableBox, LoadingIndicator } from '@/components/StyledComponents';
+import { CenterLoader, DraggableBox, LoadingIndicator } from '@/modules/StyledComponents';
 import { DELTA_X, DELTA_Y } from '@/constants';
 import { DraggableProps } from '@/types';
 

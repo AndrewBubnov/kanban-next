@@ -3,7 +3,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { CardEstimateSelectProps } from '@/types';
 import { estimation, timeUnits } from '@/constants';
-import { ConditionalFullWidth } from '@/components/StyledComponents';
+import { ConditionalFullWidth } from '@/modules/StyledComponents';
 
 export const CardEstimateSelect = ({
 	createdAt,

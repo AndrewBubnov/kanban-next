@@ -1,6 +1,6 @@
 import { useState, MouseEvent, ReactElement } from 'react';
 import Popover from '@mui/material/Popover';
-import { SmallEditIcon, SmallIconButton, SmallMoreIcon } from '@/components/StyledComponents';
+import { SmallEditIcon, SmallIconButton, SmallMoreIcon } from '@/modules/StyledComponents';
 
 interface FunctionalPopoverProps {
 	children: ReactElement;

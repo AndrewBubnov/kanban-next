@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { HeroContainer, StyledActionButton } from '@/components/StyledComponents';
-
+import { HeroContainer, StyledActionButton } from '@/modules/StyledComponents';
 
 export default function Error({ reset, error }: { reset(): void; error: Error & { digest?: string } }) {
 	useEffect(() => console.error(error), [error]);
@@ -10,7 +9,9 @@ export default function Error({ reset, error }: { reset(): void; error: Error & 
 		<div>
 			<HeroContainer>
 				Sorry, something went wrong..
-				<StyledActionButton onClick={reset} isLight>Try again</StyledActionButton>
+				<StyledActionButton onClick={reset} isLight>
+					Try again
+				</StyledActionButton>
 			</HeroContainer>
 		</div>
 	);

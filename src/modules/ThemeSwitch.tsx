@@ -1,7 +1,7 @@
 'use client';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { DarkModeIcon, LightModeIcon, StyledSwitch, SwitchWrapper } from '@/components/StyledComponents';
+import { DarkModeIcon, LightModeIcon, StyledSwitch, SwitchWrapper } from '@/modules/StyledComponents';
 import { DARK, LIGHT } from '@/constants';
 
 export const ThemeSwitch = () => {

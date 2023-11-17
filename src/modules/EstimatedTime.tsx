@@ -1,4 +1,4 @@
-import { DarkGreyText, EditTaskLink, FlexWrapper, RemainingTimeWrapper } from '@/components/StyledComponents';
+import { DarkGreyText, EditTaskLink, FlexWrapper, RemainingTimeWrapper } from '@/modules/StyledComponents';
 import { Box, Grid, Typography } from '@mui/material';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 import { EstimatedTimeProps } from '@/types';

@@ -1,10 +1,10 @@
 'use client';
-import { AddCommentTextField, CommentsContainer, DarkGreyText, Module } from '@/components/StyledComponents';
+import { AddCommentTextField, CommentsContainer, DarkGreyText, Module } from '@/modules/StyledComponents';
 import { TaskItem } from '@/types';
 import { useUser } from '@clerk/nextjs';
 import { sortComments } from '@/utils/sortComments';
 import { Box } from '@mui/material';
-import { SingleComment } from '@/components/SingleComment';
+import { SingleComment } from '@/modules/SingleComment';
 import { useHandleComments } from '@/hooks/useHandleComments';
 
 export const CommentsList = ({ task }: { task: TaskItem }) => {

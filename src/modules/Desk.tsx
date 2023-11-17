@@ -1,12 +1,12 @@
 'use client';
 import { useDrag } from '@/hooks/useDrag';
-import { Draggable } from '@/components/Draggable';
-import { TaskMini } from '@/components/TaskMini';
-import { Column, ColumnName, DeskContainer, HeroContainer, LoadingIndicator } from '@/components/StyledComponents';
-import { DraggableImage } from '@/components/DraggableImage';
+import { Draggable } from '@/modules/Draggable';
+import { TaskMini } from '@/modules/TaskMini';
+import { Column, ColumnName, DeskContainer, HeroContainer, LoadingIndicator } from '@/modules/StyledComponents';
+import { DraggableImage } from '@/modules/DraggableImage';
 import { ColumnType, DeskClientProps } from '@/types';
 import { useContext } from 'react';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { DashboardContext } from '@/modules/DashboardProvider';
 import { useTheme } from 'next-themes';
 import { LIGHT } from '@/constants';
 

@@ -9,10 +9,10 @@ import {
 	Assignee,
 	CenteredLink,
 	FlexWrapper,
-} from '@/components/StyledComponents';
+} from '@/modules/StyledComponents';
 import { DASHBOARD } from '@/constants';
 import { TaskMiniProps } from '@/types';
-import { UserPhoto } from '@/components/UserPhoto';
+import { UserPhoto } from '@/modules/UserPhoto';
 
 export const TaskMini = ({ id, title, description, username, imageUrl, email }: TaskMiniProps) => (
 	<StyledTaskMini>

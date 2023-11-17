@@ -7,7 +7,7 @@ import { getInitParameters } from '@/utils/getInitParameters';
 import { updateConfig } from '@/utils/updateConfig';
 import { updateAllTasks } from '@/actions/updateAllTasks';
 import { useLatest } from '@/hooks/useLatest';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { DashboardContext } from '@/modules/DashboardProvider';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const { isLoading, setIsLoading } = useContext(DashboardContext);

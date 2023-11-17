@@ -1,6 +1,6 @@
 'use server';
-import { addNotification } from '@/components/Toast/actions/addNotification';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
+import { createNotification } from '@/modules/Toast/actions/createNotification';
 
 export const createTaggedComment = async (taskId: string, text: string) => {
 	const userIdsArray = await getMappedUserIds();
@@ -13,6 +13,7 @@ export const createTaggedComment = async (taskId: string, text: string) => {
 		if (!taggedUserId) return;
 
 		const notificationText = `You've been mentioned in a comment "${rest.join(' ')}" to task`;
-		await addNotification(notificationText, taskId, taggedUserId);
+
+		await createNotification(notificationText, taskId, taggedUserId);
 	}
 };

@@ -14,7 +14,7 @@ export type Assignee = {
 	email: string;
 	username: string;
 	isAdmin: boolean;
-	imageUrl?: string;
+	imageUrl: string | null;
 };
 
 export type Comment = {
@@ -50,7 +50,7 @@ export type TaskMiniProps = {
 	id: string;
 	username: string;
 	email: string;
-	imageUrl?: string;
+	imageUrl: string | null;
 };
 
 export interface DraggableProps {
@@ -247,5 +247,5 @@ export interface UserPhotoStubProps extends HTMLAttributes<HTMLDivElement> {
 export interface UserPhotoProps {
 	size: 'small' | 'big';
 	username: string;
-	imageUrl?: string;
+	imageUrl: string | null;
 }

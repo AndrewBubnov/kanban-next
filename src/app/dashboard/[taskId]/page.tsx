@@ -14,17 +14,17 @@ import {
 	StyledBackIcon,
 	StyledEditIcon,
 	FlexWrapper,
-} from '@/components/StyledComponents';
+} from '@/modules/StyledComponents';
 import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import { TaskIdParam } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { getStringDate } from '@/utils/getStringDate';
-import { CommentsList } from '@/components/CommentsList';
-import { EstimatedTime } from '@/components/EstimatedTime';
+import { CommentsList } from '@/modules/CommentsList';
+import { EstimatedTime } from '@/modules/EstimatedTime';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
-import { DetailsProvider } from '@/components/DetailsProvider';
-import { UserPhoto } from '@/components/UserPhoto';
+import { DetailsProvider } from '@/modules/DetailsProvider';
+import { UserPhoto } from '@/modules/UserPhoto';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);

@@ -3,7 +3,7 @@ import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
 import { AddTaskAction } from '@/types';
 import { DASHBOARD } from '@/constants';
-import { addNotification } from '@/components/Toast/actions/addNotification';
+import { createNotification } from '@/modules/Toast/actions/createNotification';
 
 export const createTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
 	const user = await prisma.user.findUnique({
@@ -50,7 +50,7 @@ export const createTask = async ({ userId, title, description, estimateDays }: A
 
 	const notification = `You've been assigned a task`;
 
-	await addNotification(notification, newTask.id, userId);
+	await createNotification(notification, newTask.id, userId);
 
 	revalidatePath(DASHBOARD);
 };

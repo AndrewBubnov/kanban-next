@@ -3,7 +3,7 @@ import { prisma } from '@/db';
 import { EditedTaskContent } from '@/types';
 import { revalidatePath } from 'next/cache';
 import { DASHBOARD } from '@/constants';
-import { addNotification } from '@/components/Toast/actions/addNotification';
+import { createNotification } from '@/modules/Toast/actions/createNotification';
 
 export const updateSingleTask = async (userId: string, taskId: string, updatedTaskData: EditedTaskContent) => {
 	const existingTask = await prisma.task.findFirst({
@@ -37,7 +37,7 @@ export const updateSingleTask = async (userId: string, taskId: string, updatedTa
 
 	const notification = "You've been assigned a task";
 
-	await addNotification(notification, taskId, userId);
+	await createNotification(notification, taskId, userId);
 
 	revalidatePath(DASHBOARD);
 };

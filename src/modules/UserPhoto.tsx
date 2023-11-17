@@ -1,4 +1,4 @@
-import { UserPhotoImage, UserPhotoStub } from '@/components/StyledComponents';
+import { UserPhotoImage, UserPhotoStub } from '@/modules/StyledComponents';
 import { UserPhotoProps } from '@/types';
 
 export const UserPhoto = ({ size, username, imageUrl }: UserPhotoProps) =>

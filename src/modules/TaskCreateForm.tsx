@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { ButtonContainer, FlexContainer, FlexWrapper, StyledButton } from '@/components/StyledComponents';
+import { ButtonContainer, FlexContainer, FlexWrapper, StyledButton } from '@/modules/StyledComponents';
 import { CardFormCreateProps } from '@/types';
 import { createTask } from '@/actions/createTask';
-import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
+import { CardAssigneeSelect } from '@/modules/CardAssigneeSelect';
 import { useUser } from '@clerk/nextjs';
-import { CardEstimateSelect } from '@/components/CardEstimateSelect';
+import { CardEstimateSelect } from '@/modules/CardEstimateSelect';
 
 export const TaskCreateForm = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
 	const { user } = useUser();

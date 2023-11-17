@@ -1,9 +1,9 @@
 'use client';
 import { ChangeEvent, useCallback, useMemo, useState, MouseEvent, useContext } from 'react';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { DashboardContext } from '@/modules/DashboardProvider';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { Select } from '@/components/Select';
+import { Select } from '@/modules/Select';
 import { SelectChangeEvent } from '@mui/material/Select';
 import {
 	CreateColumnInput,
@@ -13,7 +13,7 @@ import {
 	NewColumnLabel,
 	SmallDeleteIcon,
 	SmallIconTransparentButton,
-} from '@/components/StyledComponents';
+} from '@/modules/StyledComponents';
 
 export const ColumnSelect = () => {
 	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn, isLight } =

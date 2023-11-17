@@ -1,10 +1,10 @@
 'use client';
 import { useContext, useState } from 'react';
-import { DashboardContext } from '@/components/DashboardProvider';
+import { DashboardContext } from '@/modules/DashboardProvider';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
-import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/components/StyledComponents';
-import { TaskCreateForm } from '@/components/TaskCreateForm';
+import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/modules/StyledComponents';
+import { TaskCreateForm } from '@/modules/TaskCreateForm';
 
 export const CreateTask = () => {
 	const { userIdsArray, isAdmin, isLight } = useContext(DashboardContext);

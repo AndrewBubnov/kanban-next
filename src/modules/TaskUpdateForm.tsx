@@ -8,7 +8,7 @@ import {
 	FlexContainer,
 	FlexWrapper,
 	StyledButton,
-} from '@/components/StyledComponents';
+} from '@/modules/StyledComponents';
 import { ChangeEvent, useState } from 'react';
 import { CardFormUpdateProps } from '@/types';
 import { updateSingleTask } from '@/actions/updateSingleTask';
@@ -18,10 +18,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { columns, DASHBOARD, estimation } from '@/constants';
-import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
+import { CardAssigneeSelect } from '@/modules/CardAssigneeSelect';
 import { deleteTask } from '@/actions/deleteTask';
-import { ConfirmDialog } from '@/components/ConfirmDialog';
-import { CardEstimateSelect } from '@/components/CardEstimateSelect';
+import { ConfirmDialog } from '@/modules/ConfirmDialog';
+import { CardEstimateSelect } from '@/modules/CardEstimateSelect';
 
 export const TaskUpdateForm = ({
 	task: {

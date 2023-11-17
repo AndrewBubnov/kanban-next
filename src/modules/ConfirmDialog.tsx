@@ -5,7 +5,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { ConfirmDialogProps } from '@/types';
-import { StyledButton } from '@/components/StyledComponents';
+import { StyledButton } from '@/modules/StyledComponents';
 import { DialogContentText } from '@mui/material';
 import DialogContent from '@mui/material/DialogContent';
 

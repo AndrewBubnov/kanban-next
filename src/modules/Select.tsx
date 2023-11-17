@@ -1,5 +1,5 @@
 'use client';
-import { LightInputLabel, ThemedSelect, StyledFormControl } from '@/components/StyledComponents';
+import { LightInputLabel, ThemedSelect, StyledFormControl } from '@/modules/StyledComponents';
 import { SelectProps } from '@mui/material';
 import { useTheme } from 'next-themes';
 import { LIGHT } from '@/constants';

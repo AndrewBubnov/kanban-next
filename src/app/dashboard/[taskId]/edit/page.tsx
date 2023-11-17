@@ -1,15 +1,9 @@
-import {
-	IconContainer,
-	StyledBackIcon,
-	StyledTableIcon,
-	StyledTaskDetails,
-	Wrapper,
-} from '@/components/StyledComponents';
+import { IconContainer, StyledBackIcon, StyledTableIcon, StyledTaskDetails, Wrapper } from '@/modules/StyledComponents';
 import Link from 'next/link';
 import { CardContent, Grid } from '@mui/material';
 import { TaskIdParam } from '@/types';
 import { getTaskById } from '@/actions/getTaskById';
-import { TaskUpdateForm } from '@/components/TaskUpdateForm';
+import { TaskUpdateForm } from '@/modules/TaskUpdateForm';
 import { getUser } from '@/actions/getUser';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 import { DASHBOARD } from '@/constants';

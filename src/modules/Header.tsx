@@ -1,5 +1,5 @@
 import { UserButton } from '@clerk/nextjs';
-import { HeaderContainer, HeaderLink } from '@/components/StyledComponents';
+import { HeaderContainer, HeaderLink } from '@/modules/StyledComponents';
 
 export const Header = ({ userId }: { userId: string }) => {
 	return (

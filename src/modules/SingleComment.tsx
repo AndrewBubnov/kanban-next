@@ -9,15 +9,15 @@ import {
 	FunctionalButtonWrapper,
 	FlexContainer,
 	TaggedSpan,
-} from '@/components/StyledComponents';
-import FunctionalPopover from '@/components/FunctionalPopover';
+} from '@/modules/StyledComponents';
+import FunctionalPopover from '@/modules/FunctionalPopover';
 import { Box, Divider } from '@mui/material';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { getElapsedTime } from '@/utils/getElapsedTime';
 import { SingleCommentProps } from '@/types';
 import { ReactNode, useContext } from 'react';
-import { DetailsContext } from '@/components/DetailsProvider';
+import { DetailsContext } from '@/modules/DetailsProvider';
 import { useUser } from '@clerk/nextjs';
 
 export const SingleComment = ({

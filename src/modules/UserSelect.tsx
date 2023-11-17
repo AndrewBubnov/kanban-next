@@ -1,7 +1,7 @@
 'use client';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { DashboardContext } from '@/components/DashboardProvider';
-import { Select } from '@/components/Select';
+import { DashboardContext } from '@/modules/DashboardProvider';
+import { Select } from '@/modules/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { ALL_USERNAMES_SELECTED, ALL_USERS, DASHBOARD, SELECT_ALL_USERS } from '@/constants';
