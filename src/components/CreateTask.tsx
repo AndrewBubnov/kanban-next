@@ -6,7 +6,7 @@ import { Grid } from '@mui/material';
 import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/components/StyledComponents';
 import { TaskCreateForm } from '@/components/TaskCreateForm';
 
-export const AddTask = () => {
+export const CreateTask = () => {
 	const { userIdsArray, isAdmin, isLight } = useContext(DashboardContext);
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const toggleOpenHandler = () => setOpenModal(prevState => !prevState);
@@ -15,7 +15,7 @@ export const AddTask = () => {
 		<>
 			<Grid container>
 				<StyledActionButton variant="outlined" onClick={toggleOpenHandler} isLight={isLight}>
-					Add new
+					Create new
 				</StyledActionButton>
 			</Grid>
 			<StyledDialog open={openModal} onClose={toggleOpenHandler}>

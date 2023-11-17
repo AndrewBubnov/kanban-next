@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { AddTask } from '@/components/AddTask';
+import { CreateTask } from '@/components/CreateTask';
 import { ControlsContainer, MainContainer } from '@/components/StyledComponents';
 import { UserSelect } from '@/components/UserSelect';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
@@ -26,7 +26,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 			<Header userId={userId} />
 			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} columnConfig={columnConfig}>
 				<ControlsContainer>
-					<AddTask />
+					<CreateTask />
 					{tasksShown.length ? <ColumnSelect /> : null}
 					<UserSelect />
 					<ThemeSwitch />
