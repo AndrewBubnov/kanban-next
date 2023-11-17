@@ -1,6 +1,6 @@
 'use server';
 import { getMappedUserIds } from '@/modules/Shared/actions/getMappedUserIds';
-import { createNotification } from '@/modules/Toast/actions/createNotification';
+import { createNotification } from '@/modules/Notification/actions/createNotification';
 
 export const createTaggedComment = async (taskId: string, text: string) => {
 	const userIdsArray = await getMappedUserIds();

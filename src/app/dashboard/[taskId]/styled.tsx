@@ -1,3 +1,4 @@
+'use client';
 import { styled } from '@mui/material/styles';
 import { Box, Card, Grid } from '@mui/material';
 import Link from 'next/link';

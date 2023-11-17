@@ -1,5 +1,5 @@
-import { TOAST_ANIMATION_AND_DELAY_TIME } from '@/modules/Toast/constants';
-import { Move, NotificationMap } from '@/modules/Toast/types';
+import { Move, NotificationMap } from '@/modules/Notification/types';
+import { TOAST_ANIMATION_AND_DELAY_TIME } from '@/modules/Notification/constants';
 
 export const remapNotifications = (deletedKey: string) => (prevState: NotificationMap) => {
 	return Object.keys(prevState).reduce((acc, cur) => {

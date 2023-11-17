@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
 import Link from 'next/link';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
-import { TOAST_HEIGHT } from '@/modules/Toast/constants';
+import { TOAST_HEIGHT } from '@/modules/Notification/constants';
 
 export const ToastWrapper = styled(Box)`
 	position: absolute;

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Box } from '@mui/material';
 import { Move, ToastProps } from '../types';
-import { LAUNCH_TOAST, TOAST_GAP, TOAST_HEIGHT } from '@/modules/Toast/constants';
-import { StyledLink, ToastCloseIcon, ToastIconButton, ToastWrapper } from '@/modules/Toast/styled';
 import { DASHBOARD } from '@/modules/Shared/constants';
+import { LAUNCH_TOAST, TOAST_GAP, TOAST_HEIGHT } from '@/modules/Notification/constants';
+import { StyledLink, ToastCloseIcon, ToastIconButton, ToastWrapper } from '@/modules/Notification/styled';
 
 export const Toast = ({ moves, text, link, onDelete }: ToastProps) => {
 	const [vertical, setVertical] = useState<number>(0);

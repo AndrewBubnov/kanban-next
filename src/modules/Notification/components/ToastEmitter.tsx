@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { deleteNotification } from '@/modules/Toast/actions/deleteNotification';
-import { createNotificationMap, filterDeletedNotifications, remapNotifications } from '@/modules/Toast/utils';
-import { Toast } from '@/modules/Toast/components/Toast';
 import { TOAST_ANIMATION_AND_DELAY_TIME } from '../constants';
 import { NotificationMap } from '../types';
+import { createNotificationMap, filterDeletedNotifications, remapNotifications } from '@/modules/Notification/utils';
+import { deleteNotification } from '@/modules/Notification/actions/deleteNotification';
+import { Toast } from '@/modules/Notification/components/Toast';
 
 export const ToastEmitter = ({ notifications }: { notifications: { text: string; link: string }[] }) => {
 	const [notificationMap, setNotificationMap] = useState<NotificationMap>({});

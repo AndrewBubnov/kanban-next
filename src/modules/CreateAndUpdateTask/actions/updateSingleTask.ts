@@ -1,9 +1,9 @@
 'use server';
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
-import { createNotification } from '@/modules/Toast/actions/createNotification';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { EditedTaskContent } from '@/modules/CreateAndUpdateTask/types';
+import { createNotification } from '@/modules/Notification/actions/createNotification';
 
 export const updateSingleTask = async (userId: string, taskId: string, updatedTaskData: EditedTaskContent) => {
 	const existingTask = await prisma.task.findFirst({

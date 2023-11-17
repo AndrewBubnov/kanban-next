@@ -9,10 +9,10 @@ import { DashboardProvider } from '@/modules/Providers/DashboardProvider';
 import { getTasksShown } from '@/app/dashboard/actions/getTasksShown';
 import { Desk } from '@/modules/Desk/components/Desk';
 import { ThemeSwitch } from '@/modules/ThemeSwitch/components/ThemeSwitch';
-import { getNotifications } from '@/modules/Toast/actions/getNotifications';
-import { ToastEmitter } from '@/modules/Toast/components/ToastEmitter';
 import { DashboardPageProps } from '@/app/dashboard/types';
 import { ControlsContainer, MainContainer } from '@/app/dashboard/styled';
+import { getNotifications } from '@/modules/Notification/actions/getNotifications';
+import { ToastEmitter } from '@/modules/Notification/components/ToastEmitter';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {
 	const { isAdmin, userId } = await getUser();

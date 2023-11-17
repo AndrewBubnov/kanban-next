@@ -1,9 +1,9 @@
 'use server';
 import { prisma } from '@/db';
-import { createNotification } from '@/modules/Toast/actions/createNotification';
 import { revalidatePath } from 'next/cache';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { AddTaskAction } from '@/modules/CreateAndUpdateTask/types';
+import { createNotification } from '@/modules/Notification/actions/createNotification';
 
 export const createTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
 	const user = await prisma.user.findUnique({
