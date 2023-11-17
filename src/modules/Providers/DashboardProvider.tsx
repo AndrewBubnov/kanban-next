@@ -8,7 +8,13 @@ import { DashboardContextProps, DashboardProviderProps } from '@/modules/Provide
 
 export const DashboardContext = createContext<DashboardContextProps>({} as DashboardContextProps);
 
-export const DashboardProvider = ({ children, userIdsArray, isAdmin, columnConfig }: DashboardProviderProps) => {
+export const DashboardProvider = ({
+	children,
+	userIdsArray,
+	isAdmin,
+	columnConfig,
+	emptyColumnNames,
+}: DashboardProviderProps) => {
 	const { columnConfigState, toggleColumnState, addCustomColumn, removeColumn } = useStatusConfig(columnConfig);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { theme } = useTheme();
@@ -25,6 +31,7 @@ export const DashboardProvider = ({ children, userIdsArray, isAdmin, columnConfi
 				isLoading,
 				setIsLoading,
 				isLight,
+				emptyColumnNames,
 			}}
 		>
 			{children}

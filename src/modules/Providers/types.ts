@@ -15,16 +15,13 @@ export interface DashboardContextProps {
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	columnConfigState: ColumnType[];
-
 	toggleColumnState(name?: string): Promise<void>;
-
 	addCustomColumn(name: string): void;
-
 	removeColumn(name: string): void;
-
 	isLoading: boolean;
 	setIsLoading: Dispatch<SetStateAction<boolean>>;
 	isLight: boolean;
+	emptyColumnNames: string[];
 }
 
 export interface DashboardProviderProps {
@@ -32,4 +29,5 @@ export interface DashboardProviderProps {
 	isAdmin: boolean;
 	columnConfig: ColumnType[];
 	children: ReactNode;
+	emptyColumnNames: string[];
 }

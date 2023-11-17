@@ -13,18 +13,27 @@ import { DashboardPageProps } from '@/app/dashboard/types';
 import { ControlsContainer, MainContainer } from '@/app/dashboard/styled';
 import { getNotifications } from '@/modules/Notification/actions/getNotifications';
 import { ToastEmitter } from '@/modules/Notification/components/ToastEmitter';
+import { getEmptyColumnNames } from '@/app/dashboard/actions/getEmptyColumns';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {
 	const { isAdmin, userId } = await getUser();
 	const userIdsArray = await getMappedUserIds();
-	const columnConfig = await getColumnList();
-	const tasksShown = await getTasksShown(username, userIdsArray);
-	const notifications = await getNotifications();
+	const [columnConfig, tasksShown, notifications, emptyColumnNames] = await Promise.all([
+		getColumnList(),
+		getTasksShown(username, userIdsArray),
+		getNotifications(),
+		getEmptyColumnNames(),
+	]);
 
 	return (
 		<MainContainer>
 			<Header userId={userId} />
-			<DashboardProvider userIdsArray={userIdsArray} isAdmin={isAdmin} columnConfig={columnConfig}>
+			<DashboardProvider
+				userIdsArray={userIdsArray}
+				isAdmin={isAdmin}
+				columnConfig={columnConfig}
+				emptyColumnNames={emptyColumnNames}
+			>
 				<ControlsContainer>
 					<CreateTask />
 					{tasksShown.length ? <StatusSelect /> : null}

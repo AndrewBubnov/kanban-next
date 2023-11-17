@@ -16,7 +16,7 @@ import {
 } from '@/modules/StatusSelect/styled';
 
 export const StatusSelect = () => {
-	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn, isLight } =
+	const { columnConfigState, isAdmin, toggleColumnState, addCustomColumn, removeColumn, isLight, emptyColumnNames } =
 		useContext(DashboardContext);
 	const [customColumnName, setCustomColumnName] = useState<string>('');
 
@@ -51,7 +51,7 @@ export const StatusSelect = () => {
 			<HoverSensitiveMenuItem key={column.name} value={column.name}>
 				<Checkbox checked={column.shown} />
 				<ListItemText primary={column.name} />
-				{isAdmin ? (
+				{isAdmin && emptyColumnNames.includes(column.name) ? (
 					<SmallIconTransparentButton onClick={deleteHandler(column.name)}>
 						<SmallDeleteIcon />
 					</SmallIconTransparentButton>
@@ -77,7 +77,7 @@ export const StatusSelect = () => {
 				</form>
 			</NewColumnInputWrapper>
 		);
-	}, [columnConfigState, createColumn, customColumnName, deleteHandler, isAdmin, isLight]);
+	}, [columnConfigState, createColumn, customColumnName, deleteHandler, emptyColumnNames, isAdmin, isLight]);
 
 	return (
 		<Select

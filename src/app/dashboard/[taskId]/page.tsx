@@ -29,9 +29,8 @@ import { DASHBOARD } from '@/modules/Shared/constants';
 import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
-	const task = await getTaskById(taskId);
+	const [task, userIdsArray] = await Promise.all([getTaskById(taskId), getMappedUserIds()]);
 	const editPage = `${DASHBOARD}/${taskId}/edit`;
-	const userIdsArray = await getMappedUserIds();
 
 	return (
 		<Wrapper>

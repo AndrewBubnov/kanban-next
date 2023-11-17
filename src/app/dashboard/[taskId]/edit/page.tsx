@@ -12,10 +12,12 @@ import { StyledTableIcon } from '@/app/dashboard/[taskId]/edit/styled';
 import { getColumnList } from '@/app/dashboard/actions/getColumnList';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
-	const { isAdmin } = await getUser();
-	const task = await getTaskById(taskId);
-	const userIdsArray = await getMappedUserIds();
-	const statusList = await getColumnList();
+	const [{ isAdmin }, task, userIdsArray, statusList] = await Promise.all([
+		getUser(),
+		getTaskById(taskId),
+		getMappedUserIds(),
+		getColumnList(),
+	]);
 
 	return (
 		<Wrapper>

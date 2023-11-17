@@ -1,7 +1,8 @@
 'use server';
 import { prisma } from '@/db';
 import { ColumnType } from '@/modules/Shared/types';
-import { SINGLE_ID } from '@/modules/Shared/constants';
+import { DASHBOARD, SINGLE_ID } from '@/modules/Shared/constants';
+import { revalidatePath } from 'next/cache';
 
 export const updateColumns = async (columns: ColumnType[]) => {
 	await prisma.column.deleteMany({
@@ -19,4 +20,5 @@ export const updateColumns = async (columns: ColumnType[]) => {
 			},
 		});
 	}
+	revalidatePath(DASHBOARD);
 };
