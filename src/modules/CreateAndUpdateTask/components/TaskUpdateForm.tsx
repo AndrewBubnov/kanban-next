@@ -13,7 +13,7 @@ import { CardAssigneeSelect } from '@/modules/CreateAndUpdateTask/components/Car
 import { deleteTask } from '@/modules/CreateAndUpdateTask/actions/deleteTask';
 import { ConfirmDialog } from '@/modules/CreateAndUpdateTask/components/ConfirmDialog';
 import { CardEstimateSelect } from '@/modules/CreateAndUpdateTask/components/CardEstimateSelect';
-import { columns, estimation } from '@/modules/CreateAndUpdateTask/constants';
+import { estimation } from '@/modules/CreateAndUpdateTask/constants';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { CardFormUpdateProps } from '@/modules/CreateAndUpdateTask/types';
 import { ButtonContainer, DeleteButton, StyledButton } from '@/modules/CreateAndUpdateTask/styled';
@@ -30,6 +30,7 @@ export const TaskUpdateForm = ({
 	},
 	isAdmin,
 	userIdsArray,
+	statusList,
 }: CardFormUpdateProps) => {
 	const { push } = useRouter();
 	const [assigneeId, setAssigneeId] = useState<string>(userId);
@@ -78,9 +79,9 @@ export const TaskUpdateForm = ({
 					<FormControl fullWidth>
 						<InputLabel id="status">Status</InputLabel>
 						<Select value={status} label="Status" onChange={statusHandler}>
-							{columns.map(el => (
-								<MenuItem key={el} value={el}>
-									{el}
+							{statusList.map(el => (
+								<MenuItem key={el.name} value={el.name}>
+									{el.name}
 								</MenuItem>
 							))}
 						</Select>

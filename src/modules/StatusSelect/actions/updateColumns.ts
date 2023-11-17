@@ -1,7 +1,7 @@
 'use server';
 import { prisma } from '@/db';
-import { SINGLE_ID } from '@/modules/StatusSelect/constants';
 import { ColumnType } from '@/modules/Shared/types';
+import { SINGLE_ID } from '@/modules/Shared/constants';
 
 export const updateColumns = async (columns: ColumnType[]) => {
 	await prisma.column.deleteMany({

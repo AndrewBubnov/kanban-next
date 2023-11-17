@@ -9,11 +9,13 @@ import { IconContainer, StyledTaskDetails } from '@/app/dashboard/[taskId]/style
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
 import { StyledTableIcon } from '@/app/dashboard/[taskId]/edit/styled';
+import { getColumnList } from '@/app/dashboard/actions/getColumnList';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 	const { isAdmin } = await getUser();
 	const task = await getTaskById(taskId);
 	const userIdsArray = await getMappedUserIds();
+	const statusList = await getColumnList();
 
 	return (
 		<Wrapper>
@@ -29,7 +31,7 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 							</Link>
 						</IconContainer>
 					</Grid>
-					<TaskUpdateForm task={task} isAdmin={isAdmin} userIdsArray={userIdsArray} />
+					<TaskUpdateForm task={task} isAdmin={isAdmin} statusList={statusList} userIdsArray={userIdsArray} />
 				</CardContent>
 			</StyledTaskDetails>
 		</Wrapper>

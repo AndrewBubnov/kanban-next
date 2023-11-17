@@ -1,4 +1,3 @@
-export const columns = ['New', 'In progress', 'Pending', 'Done'];
 export const timeUnits = {
 	year: 24 * 60 * 60 * 1000 * 365,
 	month: (24 * 60 * 60 * 1000 * 365) / 12,

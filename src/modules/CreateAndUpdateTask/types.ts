@@ -11,10 +11,17 @@ export interface CardFormCreateProps {
 	onCancel: () => void;
 }
 
+export interface StatusColumn {
+	name: string;
+	shown: boolean;
+	columnListId: string | null;
+}
+
 export interface CardFormUpdateProps {
 	task: TaskItem;
 	isAdmin: boolean;
 	userIdsArray: UserIdsArrayItem[];
+	statusList: StatusColumn[];
 }
 
 export type AddTaskAction = {
