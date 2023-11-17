@@ -23,7 +23,7 @@ import { deleteTask } from '@/actions/deleteTask';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { CardEstimateSelect } from '@/components/CardEstimateSelect';
 
-export const TaskFormUpdate = ({
+export const TaskUpdateForm = ({
 	task: {
 		id: taskId,
 		title: initTitle,

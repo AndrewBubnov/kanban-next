@@ -8,7 +8,7 @@ import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { useUser } from '@clerk/nextjs';
 import { CardEstimateSelect } from '@/components/CardEstimateSelect';
 
-export const TaskFormCreate = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
+export const TaskCreateForm = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
 	const { user } = useUser();
 
 	const userId = user?.id || '';

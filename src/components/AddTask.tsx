@@ -4,7 +4,7 @@ import { DashboardContext } from '@/components/DashboardProvider';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Grid } from '@mui/material';
 import { StyledDialog, StyledActionButton, StyledDialogContent } from '@/components/StyledComponents';
-import { TaskFormCreate } from '@/components/TaskFormCreate';
+import { TaskCreateForm } from '@/components/TaskCreateForm';
 
 export const AddTask = () => {
 	const { userIdsArray, isAdmin, isLight } = useContext(DashboardContext);
@@ -21,7 +21,7 @@ export const AddTask = () => {
 			<StyledDialog open={openModal} onClose={toggleOpenHandler}>
 				<DialogTitle>Create a new task</DialogTitle>
 				<StyledDialogContent>
-					<TaskFormCreate userIdsArray={userIdsArray} isAdmin={isAdmin} onCancel={toggleOpenHandler} />
+					<TaskCreateForm userIdsArray={userIdsArray} isAdmin={isAdmin} onCancel={toggleOpenHandler} />
 				</StyledDialogContent>
 			</StyledDialog>
 		</>

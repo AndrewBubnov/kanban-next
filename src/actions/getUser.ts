@@ -1,11 +1,12 @@
 'use server';
 import { prisma } from '@/db';
-import { auth, currentUser } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs';
 import { getAdminList } from '@/actions/getAdminList';
 
 export const getUser = async () => {
-	const userId = auth().userId as string;
 	const user = await currentUser();
+	const userId = user?.id as string;
+	const imageUrl = user?.imageUrl as string;
 	const adminList = await getAdminList();
 	const username = user?.username || '';
 	const email = user?.emailAddresses[0].emailAddress || '';
@@ -24,6 +25,7 @@ export const getUser = async () => {
 				userId,
 				email,
 				username,
+				imageUrl,
 				isAdmin: adminList.includes(email),
 				tasks: {
 					create: [],
@@ -42,6 +44,7 @@ export const getUser = async () => {
 			userId: createUser.userId,
 			email: createUser.email,
 			username: createUser.username,
+			imageUrl: createUser.imageUrl,
 			isAdmin: createUser.isAdmin,
 			tasks: [],
 			notifications: [],

@@ -18,13 +18,16 @@ import { getElapsedTime } from '@/utils/getElapsedTime';
 import { SingleCommentProps } from '@/types';
 import { ReactNode, useContext } from 'react';
 import { DetailsContext } from '@/components/DetailsProvider';
+import { useUser } from '@clerk/nextjs';
 
 export const SingleComment = ({
 	comment: { username, text, userId: authorId, createdAt },
-	userId,
 	deleteHandler,
 	editHandler,
 }: SingleCommentProps) => {
+	const { user } = useUser();
+
+	const userId = user?.id!;
 	const { userIdsArray } = useContext(DetailsContext);
 	let commentText: ReactNode = text;
 	if (text.startsWith('@')) {

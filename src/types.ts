@@ -192,7 +192,7 @@ export interface ConfirmDialogProps {
 
 export type AdminList = { admins: { email: string; adminListId: number | null }[] };
 
-export type AddCommentToTask = { taskId: string; username: string; userId: string; text: string };
+export type AddCommentToTask = { taskId: string; text: string };
 
 export type EditHandlerArgs = { id: string; text: string };
 
@@ -209,17 +209,9 @@ export interface EstimatedTimeProps {
 
 export interface SingleCommentProps {
 	comment: Comment;
-	userId: string;
 	deleteHandler(): Promise<void>;
 	editHandler(): void;
 }
-
-export interface UseHandleCommentsProps {
-	task: TaskItem;
-	username: string;
-	userId: string;
-}
-
 export interface ThemedSelectProps extends SelectProps {
 	isLight: boolean;
 }

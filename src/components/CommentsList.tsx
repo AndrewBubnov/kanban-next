@@ -8,14 +8,7 @@ import { SingleComment } from '@/components/SingleComment';
 import { useHandleComments } from '@/hooks/useHandleComments';
 
 export const CommentsList = ({ task }: { task: TaskItem }) => {
-	const { user } = useUser();
-	const username = user?.username!;
-	const userId = user?.id!;
-	const { editHandler, deleteHandler, changeHandler, submitHandler, commentId, text } = useHandleComments({
-		task,
-		userId,
-		username,
-	});
+	const { editHandler, deleteHandler, changeHandler, submitHandler, commentId, text } = useHandleComments(task);
 
 	return (
 		<>
@@ -27,7 +20,6 @@ export const CommentsList = ({ task }: { task: TaskItem }) => {
 							{task.comments.sort(sortComments).map(comment => (
 								<SingleComment
 									comment={comment}
-									userId={userId}
 									deleteHandler={deleteHandler(comment.id)}
 									editHandler={editHandler({ text: comment.text, id: comment.id })}
 									key={comment.id}

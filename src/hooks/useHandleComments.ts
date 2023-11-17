@@ -2,9 +2,9 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { deleteComment } from '@/actions/deleteComment';
 import { updateComment } from '@/actions/updateComment';
 import { addComment } from '@/actions/addComment';
-import { EditHandlerArgs, UseHandleCommentsProps } from '@/types';
+import { EditHandlerArgs, TaskItem } from '@/types';
 
-export const useHandleComments = ({ task, username, userId }: UseHandleCommentsProps) => {
+export const useHandleComments = (task: TaskItem) => {
 	const [text, setText] = useState<string>('');
 	const [commentId, setCommentId] = useState<string>('');
 
@@ -30,7 +30,7 @@ export const useHandleComments = ({ task, username, userId }: UseHandleCommentsP
 		if (commentId) {
 			await updateComment(task.id, commentId, { text });
 		} else {
-			await addComment({ taskId: task.id, username, userId, text });
+			await addComment({ taskId: task.id, text });
 		}
 		setText('');
 	};
