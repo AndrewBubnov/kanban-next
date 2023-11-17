@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { deleteComment } from '@/actions/deleteComment';
 import { updateComment } from '@/actions/updateComment';
-import { addComment } from '@/actions/addComment';
+import { createComment } from '@/actions/createComment';
 import { EditHandlerArgs, TaskItem } from '@/types';
 
 export const useHandleComments = (task: TaskItem) => {
@@ -30,7 +30,7 @@ export const useHandleComments = (task: TaskItem) => {
 		if (commentId) {
 			await updateComment(task.id, commentId, { text });
 		} else {
-			await addComment({ taskId: task.id, text });
+			await createComment({ taskId: task.id, text });
 		}
 		setText('');
 	};

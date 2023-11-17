@@ -13,6 +13,7 @@ import {
 	FlexStartWrapper,
 	StyledBackIcon,
 	StyledEditIcon,
+	FlexWrapper,
 } from '@/components/StyledComponents';
 import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ import { CommentsList } from '@/components/CommentsList';
 import { EstimatedTime } from '@/components/EstimatedTime';
 import { getMappedUserIds } from '@/actions/getMappedUserIds';
 import { DetailsProvider } from '@/components/DetailsProvider';
+import { UserPhoto } from '@/components/UserPhoto';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const task = await getTaskById(taskId);
@@ -34,7 +36,10 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 			<StyledTaskDetails>
 				<CardContent>
 					<FlexContainer justify>
-						<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
+						<FlexWrapper>
+							<UserPhoto imageUrl={task.assignee.imageUrl} username={task.assignee.username} size="big" />
+							<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
+						</FlexWrapper>
 						<IconContainer>
 							<Link href={editPage}>
 								<StyledEditIcon />

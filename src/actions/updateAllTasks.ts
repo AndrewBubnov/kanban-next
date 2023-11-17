@@ -1,5 +1,4 @@
 'use server';
-import { auth } from '@clerk/nextjs';
 import { getUser } from '@/actions/getUser';
 import { prisma } from '@/db';
 import { TaskItem } from '@/types';

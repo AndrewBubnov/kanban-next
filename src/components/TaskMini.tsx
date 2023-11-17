@@ -8,17 +8,22 @@ import {
 	ShowFullViewIcon,
 	Assignee,
 	CenteredLink,
+	FlexWrapper,
 } from '@/components/StyledComponents';
 import { DASHBOARD } from '@/constants';
 import { TaskMiniProps } from '@/types';
+import { UserPhoto } from '@/components/UserPhoto';
 
-export const TaskMini = ({ id, title, description, username, email }: TaskMiniProps) => (
+export const TaskMini = ({ id, title, description, username, imageUrl, email }: TaskMiniProps) => (
 	<StyledTaskMini>
 		<StyledCardContent>
 			<FlexContainer justify>
-				<Assignee>
-					{username} {email}
-				</Assignee>
+				<FlexWrapper>
+					<UserPhoto imageUrl={imageUrl} username={username} size="small" />
+					<Assignee>
+						{username} {email}
+					</Assignee>
+				</FlexWrapper>
 				<CenteredLink href={`${DASHBOARD}/${id}`}>
 					<ShowFullViewIcon />
 				</CenteredLink>

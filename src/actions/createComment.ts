@@ -6,7 +6,7 @@ import { AddCommentToTask } from '@/types';
 import { createTaggedComment } from '@/actions/createTaggedComment';
 import { currentUser } from '@clerk/nextjs';
 
-export async function addComment({ taskId, text }: AddCommentToTask) {
+export async function createComment({ taskId, text }: AddCommentToTask) {
 	const user = await currentUser();
 	const userId = user?.id!;
 	const username = user?.username!;

@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { ButtonContainer, FlexContainer, FlexWrapper, StyledButton } from '@/components/StyledComponents';
 import { CardFormCreateProps } from '@/types';
-import { addTask } from '@/actions/addTask';
+import { createTask } from '@/actions/createTask';
 import { CardAssigneeSelect } from '@/components/CardAssigneeSelect';
 import { useUser } from '@clerk/nextjs';
 import { CardEstimateSelect } from '@/components/CardEstimateSelect';
@@ -19,7 +19,7 @@ export const TaskCreateForm = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 		const title = data.get('title') as string;
 		const description = data.get('description') as string;
 		if (!title) return;
-		await addTask({ title, description, userId: assigneeId, estimateDays });
+		await createTask({ title, description, userId: assigneeId, estimateDays });
 		onCancel();
 	};
 

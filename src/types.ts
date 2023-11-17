@@ -6,6 +6,7 @@ import { InputLabelProps } from '@mui/material/InputLabel/InputLabel';
 import { BoxProps } from '@mui/material/Box/Box';
 import { OutlinedTextFieldProps } from '@mui/material/TextField/TextField';
 import { SvgIconProps } from '@mui/material/SvgIcon/SvgIcon';
+import { ImageProps } from 'next/image';
 
 export type Assignee = {
 	id: string;
@@ -13,6 +14,7 @@ export type Assignee = {
 	email: string;
 	username: string;
 	isAdmin: boolean;
+	imageUrl?: string;
 };
 
 export type Comment = {
@@ -48,6 +50,7 @@ export type TaskMiniProps = {
 	id: string;
 	username: string;
 	email: string;
+	imageUrl?: string;
 };
 
 export interface DraggableProps {
@@ -233,3 +236,16 @@ export interface ThemedIconProps extends SvgIconProps {
 }
 
 export interface TaggedSpanProps extends HTMLAttributes<HTMLSpanElement> {}
+
+export interface UserPhotoImageProps extends ImageProps {
+	size: 'small' | 'big';
+}
+export interface UserPhotoStubProps extends HTMLAttributes<HTMLDivElement> {
+	size: 'small' | 'big';
+}
+
+export interface UserPhotoProps {
+	size: 'small' | 'big';
+	username: string;
+	imageUrl?: string;
+}

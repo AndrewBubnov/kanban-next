@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { Box, Card, CardContent, Grid, IconButton, Switch, SwitchProps } from '@mui/material';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
 	ConditionalFullWidthProps,
 	DraggableBoxProps,
@@ -16,6 +17,8 @@ import {
 	ThemedInputLabelProps,
 	ThemedSelectProps,
 	ThemedTextFieldProps,
+	UserPhotoImageProps,
+	UserPhotoStubProps,
 } from '@/types';
 import { COMMON_TRANSITION, COMMON_TRANSLATE, DRAGGED_TRANSLATE } from '@/constants';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
@@ -496,6 +499,25 @@ export const Assignee = styled(Box)(() => ({
 	color: 'darkgrey',
 	fontSize: '0.7rem',
 }));
+
+export const UserPhotoImage = styled(({ size, ...props }: UserPhotoImageProps) => (
+	<Image width={size === 'small' ? 24 : 40} height={size === 'small' ? 24 : 40} {...props} alt={props.alt} />
+))(() => ({
+	borderRadius: '50%',
+	marginRight: '0.5rem',
+}));
+
+export const UserPhotoStub = styled(({ size, ...props }: UserPhotoStubProps) => <Box {...props} />)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: ${({ size }) => (size === 'small' ? '24px' : '40px')};
+	height: ${({ size }) => (size === 'small' ? '24px' : '40px')};
+	background: #708090ff;
+	color: #fff;
+	border-radius: 50%;
+	margin-right: 0.5rem;
+`;
 
 export const HeroContainer = styled(Grid)(() => ({
 	display: 'flex',

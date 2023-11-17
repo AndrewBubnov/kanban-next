@@ -5,7 +5,7 @@ import { AddTaskAction } from '@/types';
 import { DASHBOARD } from '@/constants';
 import { addNotification } from '@/components/Toast/actions/addNotification';
 
-export const addTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
+export const createTask = async ({ userId, title, description, estimateDays }: AddTaskAction) => {
 	const user = await prisma.user.findUnique({
 		where: { userId },
 		include: {
@@ -16,7 +16,7 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 
 	if (!user) return;
 
-	const { id, isAdmin, username, email } = user;
+	const { id, isAdmin, username, email, imageUrl } = user;
 
 	const newTask = await prisma.task.create({
 		data: {
@@ -37,6 +37,7 @@ export const addTask = async ({ userId, title, description, estimateDays }: AddT
 			userId,
 			email,
 			username,
+			imageUrl,
 			isAdmin,
 		},
 	};

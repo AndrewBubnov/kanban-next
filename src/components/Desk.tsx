@@ -44,7 +44,7 @@ export function Desk({ tasks }: DeskClientProps) {
 			</ColumnName>
 			{config
 				.filter(card => card.status === column.name)
-				.map(({ title, description, id, assignee: { email, username } }) => {
+				.map(({ title, description, id, assignee: { email, username, imageUrl } }) => {
 					const cardId = `${column.name}:${id}`;
 					const isDragged = id === draggedId;
 					const imageParameters = parameters[draggedId];
@@ -70,6 +70,7 @@ export function Desk({ tasks }: DeskClientProps) {
 									id={id}
 									email={email}
 									username={username}
+									imageUrl={imageUrl}
 								/>
 							)}
 						</Draggable>
