@@ -153,7 +153,7 @@ export const MainContainer = styled(Box)(() => ({
 
 export const FlexContainer = styled(
 	({ isReverse = true, marginTop = false, justify = true, ...props }: FlexContainerProps) => <Box {...props} />
-)<FlexContainerProps>`
+)`
 	display: flex;
 	flex-direction: ${({ isReverse }) => (isReverse ? 'row-reverse' : 'row')};
 	margin-top: ${({ marginTop }) => (marginTop ? '1rem' : 'unset')};
@@ -164,7 +164,7 @@ export const FlexContainer = styled(
 
 export const ConditionalFullWidth = styled(({ fullWidth, ...props }: ConditionalFullWidthProps) => (
 	<FormControl {...props} />
-))<ConditionalFullWidthProps>`
+))`
 	width: ${({ fullWidth }) => (fullWidth ? '100%' : '48%')};
 `;
 
@@ -308,7 +308,7 @@ export const SmallDeleteIcon = styled(DeleteIcon)(() => ({
 
 export const DraggableBox = styled(({ isDragged, isConfigUpdated, isSaved, ...props }: DraggableBoxProps) => (
 	<Box {...props} />
-))<DraggableBoxProps>`
+))`
 	position: relative;
 	user-select: none;
 	transform: ${({ isDragged, isConfigUpdated }) => {
@@ -480,7 +480,7 @@ export const DarkGreyText = styled(Box)(() => ({
 
 export const EditTaskLink = styled(({ color, paddingTop, ...props }: EditPageLinkProps) => (
 	<Link {...props} />
-))<EditPageLinkProps>`
+))`
 	font-size: 0.9rem;
 	line-height: 1rem;
 	color: ${({ color }) => (color ? color : 'currentColor')};
