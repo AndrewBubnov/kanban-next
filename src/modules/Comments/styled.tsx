@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Divider } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import IdentityIcon from '@mui/icons-material/PermIdentity';
 import Button from '@mui/material/Button';
@@ -51,8 +51,8 @@ export const FunctionalButtonWrapper = styled(Box)(() => ({
 }));
 export const FunctionalButton = styled(Button)(() => ({
 	'textTransform': 'none',
-	'background': 'rgba(211,211,211,0.4)',
-	'color': '#00000080',
+	'background': '#708090',
+	'color': 'lightgray',
 	'padding': '3px 7px',
 	'border': 'none',
 	'&:focus': {
@@ -61,7 +61,7 @@ export const FunctionalButton = styled(Button)(() => ({
 	'&:hover': {
 		border: 'none',
 		color: '#fff',
-		background: '#00000080',
+		background: '#434D57FF',
 	},
 }));
 export const CommentText = styled(Box)(() => ({
@@ -86,3 +86,5 @@ export const TaggedSpan = styled((props: TaggedSpanProps) => <Box {...props} com
 	padding: 0 2px;
 	border-radius: 2px;
 `;
+
+export const StyledDivider = () => <Divider orientation="vertical" flexItem sx={{ background: '#708090' }} />;

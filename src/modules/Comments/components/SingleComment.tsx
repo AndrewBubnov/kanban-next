@@ -1,6 +1,6 @@
 import { DateContainer, FlexWrapper, FlexContainer } from '@/modules/Shared/styled';
 import FunctionalPopover from '@/modules/Comments/components/FunctionalPopover';
-import { Box, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { getElapsedTime } from '@/modules/Comments/utils/getElapsedTime';
@@ -14,6 +14,7 @@ import {
 	FunctionalButton,
 	FunctionalButtonWrapper,
 	GrayIcon,
+	StyledDivider,
 	TaggedSpan,
 } from '@/modules/Comments/styled';
 import { SingleCommentProps } from '@/modules/Comments/types';
@@ -59,7 +60,7 @@ export const SingleComment = ({
 							<FunctionalButton onClick={editHandler} size="small" startIcon={<EditIcon />}>
 								Edit
 							</FunctionalButton>
-							<Divider orientation="vertical" flexItem />
+							<StyledDivider />
 							<FunctionalButton onClick={deleteHandler} size="small" startIcon={<DeleteIcon />}>
 								Delete
 							</FunctionalButton>
