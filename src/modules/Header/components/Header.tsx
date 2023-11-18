@@ -1,17 +1,25 @@
-import { UserButton } from '@clerk/nextjs';
-import { HeaderContainer, HeaderLink } from '@/modules/Header/styled';
+import { auth, UserButton } from '@clerk/nextjs';
+import { HeaderContainer, HeaderLink, UserButtonWrapper } from '@/modules/Header/styled';
+import { ThemeSwitch } from '@/modules/ThemeSwitch/components/ThemeSwitch';
+import { FlexWrapper } from '@/modules/Shared/styled';
 
-export const Header = ({ userId }: { userId: string }) => {
+export const Header = () => {
+	const { userId } = auth();
 	return (
 		<HeaderContainer>
-			{userId ? (
-				<UserButton afterSignOutUrl="/" />
-			) : (
-				<>
-					<HeaderLink href="/sign-in">Sign in</HeaderLink>
-					<HeaderLink href="/sign-up">Sign up</HeaderLink>
-				</>
-			)}
+			<FlexWrapper>
+				<ThemeSwitch />
+				{userId ? (
+					<UserButtonWrapper>
+						<UserButton afterSignOutUrl="/" />
+					</UserButtonWrapper>
+				) : (
+					<>
+						<HeaderLink href="/sign-in">Sign in</HeaderLink>
+						<HeaderLink href="/sign-up">Sign up</HeaderLink>
+					</>
+				)}
+			</FlexWrapper>
 		</HeaderContainer>
 	);
 };

@@ -140,7 +140,6 @@ export const HeroContainer = styled(Grid)(() => ({
 	alignItems: 'center',
 	gap: '3rem',
 	width: '100%',
-	color: '#fff',
 	fontSize: '1.5rem',
 	marginTop: '10rem',
 }));

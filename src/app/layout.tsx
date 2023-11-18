@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ModeProvider } from '@/modules/Providers/ModeProvider';
 import './globals.css';
+import { Header } from '@/modules/Header/components/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<ClerkProvider>
 			<html lang="en" suppressHydrationWarning>
 				<body className={inter.className}>
-					<ModeProvider>{children}</ModeProvider>
+					<ModeProvider>
+						<Header />
+						{children}
+					</ModeProvider>
 				</body>
 			</html>
 		</ClerkProvider>

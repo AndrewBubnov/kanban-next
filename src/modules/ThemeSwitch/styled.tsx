@@ -50,7 +50,7 @@ export const SwitchWrapper = styled(Box)(() => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	marginLeft: '1rem',
+	marginRight: '2rem',
 }));
 export const LightModeIcon = styled(({ isLight, ...props }: ThemedIconProps) => <LightModeMuiIcon {...props} />)`
 	fill: ${({ isLight }) => (isLight ? '#1a1a1a' : 'lightgray')};
