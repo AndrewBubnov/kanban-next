@@ -15,7 +15,8 @@ export const Toast = ({ moves, text, link, onDelete }: ToastProps) => {
 	const stringMoves = useMemo(() => JSON.stringify(moves), [moves]);
 
 	useEffect(() => {
-		if (!mountNumber) return;
+		if (process.env.NODE_ENV === 'development' && !mountNumber) return;
+
 		(JSON.parse(stringMoves) as Move[]).forEach(({ move, timeout }) => {
 			setTimeout(() => {
 				if (move === 'up') setVertical(prevState => prevState - TOAST_HEIGHT - TOAST_GAP);
