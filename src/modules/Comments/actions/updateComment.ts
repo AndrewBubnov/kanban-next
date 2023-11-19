@@ -3,7 +3,7 @@ import { prisma } from '@/db';
 import { Prisma } from '.prisma/client';
 import { revalidatePath } from 'next/cache';
 import { DASHBOARD } from '@/modules/Shared/constants';
-import { createTaggedComment } from '@/modules/Comments/actions/createComment';
+import { createTaggedComment } from '@/modules/CreateAndUpdateTask/actions/createTaggedComment';
 
 export const updateComment = async (
 	taskId: string,
