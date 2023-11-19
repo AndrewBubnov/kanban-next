@@ -2,7 +2,6 @@
 import { createContext, useState } from 'react';
 import { useStatusConfig } from '@/modules/StatusSelect/hooks/useStatusConfig';
 import { useTheme } from 'next-themes';
-
 import { LIGHT } from '@/modules/ThemeSwitch/constants';
 import { DashboardContextProps, DashboardProviderProps } from '@/modules/Providers/types';
 

@@ -7,7 +7,7 @@ export function ModeProvider({ children }: { children: ReactNode }) {
 
 	useEffect(() => setMounted(true), []);
 
-	if (!mounted) return null;
+	if (!mounted) return children;
 
 	return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
 }
