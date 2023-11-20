@@ -4,7 +4,7 @@
 
 ### Live Demo
 
-Please explore the live demo: [kanban-next](https://kanban-next-psi.vercel.app/))
+Please explore the live demo: [kanban-next](https://kanban-next-psi.vercel.app/)
 
 ## Features
 
