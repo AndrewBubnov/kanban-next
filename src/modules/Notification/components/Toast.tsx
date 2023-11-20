@@ -4,18 +4,18 @@ import { Move, ToastProps } from '../types';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { LAUNCH_TOAST, TOAST_GAP, TOAST_HEIGHT } from '@/modules/Notification/constants';
 import { StyledLink, ToastCloseIcon, ToastIconButton, ToastWrapper } from '@/modules/Notification/styled';
-import { useIsDomLoaded } from '@/modules/Shared/hooks/useIsDomLoaded';
 
 export const Toast = ({ moves, text, link, onDelete }: ToastProps) => {
 	const [vertical, setVertical] = useState<number>(0);
 	const [horizontal, setHorizontal] = useState<string>('0px');
+	const [mountNumber, setMountNumber] = useState<number>(0);
 
-	const isDomLoaded = useIsDomLoaded();
+	useEffect(() => () => setMountNumber(prevState => prevState + 1), []);
 
 	const stringMoves = useMemo(() => JSON.stringify(moves), [moves]);
 
 	useEffect(() => {
-		if (process.env.NODE_ENV === 'development' && !isDomLoaded) return;
+		if (process.env.NODE_ENV === 'development' && !mountNumber) return;
 
 		(JSON.parse(stringMoves) as Move[]).forEach(({ move, timeout }) => {
 			setTimeout(() => {
@@ -25,7 +25,7 @@ export const Toast = ({ moves, text, link, onDelete }: ToastProps) => {
 				if (move.startsWith('down')) setVertical(prevState => prevState + TOAST_HEIGHT + TOAST_GAP);
 			}, timeout);
 		});
-	}, [stringMoves, isDomLoaded]);
+	}, [stringMoves, mountNumber]);
 
 	return (
 		<>
