@@ -1,11 +1,12 @@
-import { useState, MouseEvent, ReactElement } from 'react';
+import { useState, MouseEvent } from 'react';
 import Popover from '@mui/material/Popover';
 import { SmallIconButton, SmallMoreIcon } from '@/modules/Comments/styled';
+import { FunctionalPopoverProps } from '@/modules/Comments/types';
 
-export default function FunctionalPopover({ children }: { children: ReactElement }) {
+export default function FunctionalPopover({ children }: FunctionalPopoverProps) {
 	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 	const clickHandler = (event: MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget);
-	const closeHandler = () => setAnchorEl(null);
+	const onClose = () => setAnchorEl(null);
 
 	const open = Boolean(anchorEl);
 
@@ -17,7 +18,7 @@ export default function FunctionalPopover({ children }: { children: ReactElement
 			<Popover
 				open={open}
 				anchorEl={anchorEl}
-				onClose={closeHandler}
+				onClose={onClose}
 				anchorOrigin={{
 					vertical: 'top',
 					horizontal: 'left',
@@ -27,7 +28,7 @@ export default function FunctionalPopover({ children }: { children: ReactElement
 					horizontal: 'left',
 				}}
 			>
-				{children}
+				{children({ onClose })}
 			</Popover>
 		</div>
 	);

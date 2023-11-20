@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactElement } from 'react';
 
 export type Comment = {
 	id: string;
@@ -15,10 +15,22 @@ export type EditHandlerArgs = { id: string; text: string };
 
 export interface SingleCommentProps {
 	comment: Comment;
-
-	deleteHandler(): Promise<void>;
-
-	editHandler(): void;
+	onDelete(): Promise<void>;
+	onEdit(): void;
 }
 
 export interface TaggedSpanProps extends HTMLAttributes<HTMLSpanElement> {}
+
+export interface PopoverContentInjectedProps {
+	onClose(): void;
+}
+
+export interface FunctionalPopoverProps {
+	children: ({ onClose }: PopoverContentInjectedProps) => ReactElement;
+}
+
+export interface PopoverContentProps {
+	onDelete(): Promise<void>;
+	onEdit(): void;
+	onClose(): void;
+}

@@ -1,6 +1,5 @@
 'use client';
 import { DarkGreyText, Module } from '@/modules/Shared/styled';
-import { useUser } from '@clerk/nextjs';
 import { sortComments } from '@/modules/Comments/utils/sortComments';
 import { Box } from '@mui/material';
 import { SingleComment } from '@/modules/Comments/components/SingleComment';
@@ -21,8 +20,8 @@ export const CommentsList = ({ task }: { task: TaskItem }) => {
 							{task.comments.sort(sortComments).map(comment => (
 								<SingleComment
 									comment={comment}
-									deleteHandler={deleteHandler(comment.id)}
-									editHandler={editHandler({ text: comment.text, id: comment.id })}
+									onDelete={deleteHandler(comment.id)}
+									onEdit={editHandler({ text: comment.text, id: comment.id })}
 									key={comment.id}
 								/>
 							))}

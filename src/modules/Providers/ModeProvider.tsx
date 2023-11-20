@@ -1,13 +1,12 @@
 'use client';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import { ThemeProvider } from 'next-themes';
+import { useIsDomLoaded } from '@/modules/Shared/hooks/useIsDomLoaded';
 
 export function ModeProvider({ children }: { children: ReactNode }) {
-	const [mounted, setMounted] = useState<boolean>(false);
+	const isDomLoaded = useIsDomLoaded();
 
-	useEffect(() => setMounted(true), []);
-
-	if (!mounted) return children;
+	if (!isDomLoaded) return children;
 
 	return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
 }

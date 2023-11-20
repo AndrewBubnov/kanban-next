@@ -1,30 +1,23 @@
-import { DateContainer, FlexWrapper, FlexContainer } from '@/modules/Shared/styled';
+import { ReactNode, useContext, useEffect, useRef } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { DetailsContext } from '@/modules/Providers/DetailsProvider';
+import { FlexWrapper, FlexContainer } from '@/modules/Shared/styled';
 import FunctionalPopover from '@/modules/Comments/components/FunctionalPopover';
 import { Box } from '@mui/material';
-import EditIcon from '@mui/icons-material/EditOutlined';
-import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { getElapsedTime } from '@/modules/Comments/utils/getElapsedTime';
-import { ReactNode, useContext } from 'react';
-import { DetailsContext } from '@/modules/Providers/DetailsProvider';
-import { useUser } from '@clerk/nextjs';
-import {
-	CommentText,
-	CommentWrapper,
-	DarkGreyUsername,
-	FunctionalButton,
-	FunctionalButtonWrapper,
-	GrayIcon,
-	StyledDivider,
-	TaggedSpan,
-} from '@/modules/Comments/styled';
-import { SingleCommentProps } from '@/modules/Comments/types';
+import { CommentText, CommentWrapper, DarkGreyUsername, GrayIcon, TaggedSpan } from '@/modules/Comments/styled';
+import { ElapsedTime } from '@/modules/Comments/components/ElapsedTime';
+import { PopoverContent } from '@/modules/Comments/components/PopoverContent';
+import { PopoverContentInjectedProps, SingleCommentProps } from '@/modules/Comments/types';
 
 export const SingleComment = ({
 	comment: { username, text, userId: authorId, createdAt },
-	deleteHandler,
-	editHandler,
+	onDelete,
+	onEdit,
 }: SingleCommentProps) => {
 	const { user } = useUser();
+	const ref = useRef<HTMLDivElement>(null);
+
+	useEffect(() => ref.current?.scrollIntoView({ behavior: 'smooth' }), []);
 
 	const userId = user?.id!;
 	const { userIdsArray } = useContext(DetailsContext);
@@ -43,28 +36,20 @@ export const SingleComment = ({
 			);
 	}
 	return (
-		<CommentWrapper>
+		<CommentWrapper ref={ref}>
 			<FlexWrapper>
 				<FlexWrapper>
 					<GrayIcon />
 					<DarkGreyUsername component="span">{username}</DarkGreyUsername>
 				</FlexWrapper>
-				<FlexWrapper>
-					<DateContainer component="span">{getElapsedTime(createdAt)}</DateContainer>
-				</FlexWrapper>
+				<ElapsedTime createdAt={createdAt} />
 			</FlexWrapper>
 			<FlexContainer>
 				{userId === authorId && (
 					<FunctionalPopover>
-						<FunctionalButtonWrapper>
-							<FunctionalButton onClick={editHandler} size="small" startIcon={<EditIcon />}>
-								Edit
-							</FunctionalButton>
-							<StyledDivider />
-							<FunctionalButton onClick={deleteHandler} size="small" startIcon={<DeleteIcon />}>
-								Delete
-							</FunctionalButton>
-						</FunctionalButtonWrapper>
+						{({ onClose }: PopoverContentInjectedProps) => (
+							<PopoverContent onEdit={onEdit} onDelete={onDelete} onClose={onClose} />
+						)}
 					</FunctionalPopover>
 				)}
 				<CommentText>{commentText}</CommentText>

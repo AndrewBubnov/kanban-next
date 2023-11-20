@@ -1,4 +1,4 @@
-import { timeUnits } from '@/modules/CreateAndUpdateTask/constants';
+import { timeUnits } from '@/modules/Shared/constants';
 
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 

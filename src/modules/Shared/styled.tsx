@@ -103,6 +103,7 @@ export const DateContainer = styled(Box)(() => ({
 	color: 'darkgray',
 	fontWeight: 600,
 	marginLeft: '1rem',
+	textAlign: 'right',
 }));
 
 export const Module = styled(Box)(() => ({

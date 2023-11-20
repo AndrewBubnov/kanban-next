@@ -7,11 +7,22 @@ import { EditHandlerArgs } from '@/modules/Comments/types';
 
 export const useHandleComments = (task: TaskItem) => {
 	const [text, setText] = useState<string>('');
+	const [submittedText, setSubmittedText] = useState<string>('');
 	const [commentId, setCommentId] = useState<string>('');
 
 	useEffect(() => {
-		if (!text) setCommentId('');
-	}, [text]);
+		if (!submittedText) return;
+		setText('');
+		setSubmittedText('');
+		setCommentId('');
+		(async function () {
+			if (commentId) {
+				await updateComment(task.id, commentId, { text: submittedText });
+			} else {
+				await createComment({ taskId: task.id, text: submittedText });
+			}
+		})();
+	}, [commentId, submittedText, task.id]);
 
 	const editHandler =
 		({ id, text }: EditHandlerArgs) =>
@@ -27,13 +38,7 @@ export const useHandleComments = (task: TaskItem) => {
 
 	const submitHandler = async () => {
 		if (!text) return;
-
-		if (commentId) {
-			await updateComment(task.id, commentId, { text });
-		} else {
-			await createComment({ taskId: task.id, text });
-		}
-		setText('');
+		setSubmittedText(text);
 	};
 
 	return { editHandler, deleteHandler, changeHandler, submitHandler, commentId, text };

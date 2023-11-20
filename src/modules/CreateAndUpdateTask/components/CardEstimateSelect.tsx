@@ -1,9 +1,10 @@
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { estimation, timeUnits } from '@/modules/CreateAndUpdateTask/constants';
+import { estimation } from '@/modules/CreateAndUpdateTask/constants';
 import { CardEstimateSelectProps } from '@/modules/CreateAndUpdateTask/types';
 import { ConditionalFullWidth } from '@/modules/CreateAndUpdateTask/styled';
+import { timeUnits } from '@/modules/Shared/constants';
 
 export const CardEstimateSelect = ({
 	createdAt,

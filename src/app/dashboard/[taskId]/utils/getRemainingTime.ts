@@ -1,4 +1,4 @@
-import { timeUnits } from '@/modules/CreateAndUpdateTask/constants';
+import { timeUnits } from '@/modules/Shared/constants';
 
 export const getRemainingTime = (createdAt: Date, days: number) => {
 	if (!days) return { isExpired: false, remainingTimeString: '' };
