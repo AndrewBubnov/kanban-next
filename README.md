@@ -1,6 +1,6 @@
 ## kanban-next
 
-**kanban-next** is a robust Kanban-style task management application built with Next.js 14, Prisma ORM, Atlas MongoDB, and Material-UI, utilizing a modular architecture. The application features a custom drag-and-drop system, user authentication, and direct access to the database for efficient data operations. It supports user roles, task management, comments, column customization, task estimation, filtering, light and dark themes, and more. During the development process, the application was initially built on Next.js 13 and later migrated to Next.js 14.
+**kanban-next** is a robust Kanban-style task management application built with Next.js 14, Prisma ORM, Atlas MongoDB, and Material-UI, utilizing a modular architecture. The application features a custom drag-and-drop system, user authentication, and server actions for efficient data operations. It supports user roles, task management, comments, column customization, task estimation, filtering, light and dark themes, and more. During the development process, the application was initially built on Next.js 13 and later migrated to Next.js 14.
 
 ### Live Demo
 
