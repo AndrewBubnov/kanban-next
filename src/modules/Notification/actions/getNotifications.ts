@@ -7,5 +7,5 @@ export const getNotifications = async () => {
 
 	const notifications = await prisma.notification.findMany({ where: { userId } });
 
-	return (notifications || []).map(el => ({ text: el.text, link: el.link }));
+	return (notifications || []).map(el => ({ text: el.text, link: el.link, id: el.id }));
 };

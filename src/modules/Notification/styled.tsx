@@ -3,6 +3,7 @@ import { Box, IconButton } from '@mui/material';
 import Link from 'next/link';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
 import { TOAST_HEIGHT } from '@/modules/Notification/constants';
+import { ToastSpanProps } from '@/modules/Notification/types';
 
 export const ToastWrapper = styled(Box)`
 	position: absolute;
@@ -34,4 +35,8 @@ export const ToastCloseIcon = styled(CloseIcon)`
 `;
 export const StyledLink = styled(Link)`
 	text-decoration: underline;
+`;
+
+export const ToastSpan = styled((props: ToastSpanProps) => <Box component="span" {...props} />)`
+	text-align: center;
 `;

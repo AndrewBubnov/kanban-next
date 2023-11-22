@@ -1,5 +1,6 @@
 import { StyledBackIcon, Wrapper } from '@/modules/Shared/styled';
 import Link from 'next/link';
+import { NotFoundPage } from '@/modules/Shared/components/NotFoundPage';
 import { CardContent, Grid } from '@mui/material';
 import { getTaskById } from '@/app/dashboard/[taskId]/edit/actions/getTaskById';
 import { TaskUpdateForm } from '@/modules/CreateAndUpdateTask/components/TaskUpdateForm';
@@ -18,6 +19,8 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 		getMappedUserIds(),
 		getColumnList(),
 	]);
+
+	if (!task) return <NotFoundPage />;
 
 	return (
 		<Wrapper>

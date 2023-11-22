@@ -8,6 +8,7 @@ import {
 	StyledBackIcon,
 	FlexWrapper,
 } from '@/modules/Shared/styled';
+import { NotFoundPage } from '@/modules/Shared/components/NotFoundPage';
 import { Box, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 import { getStringDate } from '@/app/dashboard/[taskId]/utils/getStringDate';
@@ -32,14 +33,20 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const [task, userIdsArray] = await Promise.all([getTaskById(taskId), getMappedUserIds()]);
 	const editPage = `${DASHBOARD}/${taskId}/edit`;
 
+	if (!task) return <NotFoundPage />;
+
 	return (
 		<Wrapper>
 			<StyledTaskDetails>
 				<CardContent>
 					<FlexContainer justify>
 						<FlexWrapper>
-							<UserPhoto imageUrl={task.assignee.imageUrl} username={task.assignee.username} size="big" />
-							<DarkGreyText>{`${task.assignee.username} ${task.assignee.email}`}</DarkGreyText>
+							<UserPhoto
+								imageUrl={task.assignee?.imageUrl}
+								username={task.assignee?.username}
+								size="big"
+							/>
+							<DarkGreyText>{`${task.assignee?.username} ${task.assignee?.email}`}</DarkGreyText>
 						</FlexWrapper>
 						<IconContainer>
 							<Link href={editPage}>

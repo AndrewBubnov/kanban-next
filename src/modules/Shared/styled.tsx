@@ -1,7 +1,7 @@
 'use client';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import { FlexContainerProps, UserPhotoImageProps, UserPhotoStubProps } from '@/modules/Shared/types';
 import { ThemedActionButtonProps, ThemedInputLabelProps, ThemedSelectProps } from '@/modules/ThemeSwitch/types';
+import Link from 'next/link';
 
 export const StyledActionButton = styled(({ isLight = false, ...props }: ThemedActionButtonProps) => (
 	<Button {...props} />
@@ -143,4 +144,12 @@ export const HeroContainer = styled(Grid)(() => ({
 	width: '100%',
 	fontSize: '1.5rem',
 	marginTop: '10rem',
+}));
+
+export const NotFoundPageText = styled(Typography)(() => ({
+	fontSize: '2rem',
+}));
+
+export const NotFoundPageLink = styled(Link)(() => ({
+	textDecoration: 'underline',
 }));

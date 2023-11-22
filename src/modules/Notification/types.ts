@@ -1,12 +1,26 @@
-export interface Move {
-	move: 'up' | 'left' | 'right' | `down${string}`;
-	timeout: number;
+import { HTMLAttributes } from 'react';
+
+export enum Move {
+	UP = 'up',
+	LEFT = 'left',
+	RIGHT = 'right',
+	DOWN = 'down',
 }
+
 export interface ToastProps {
-	moves: Move[];
+	move: Move;
 	text: string;
 	link: string;
+	row: number;
 	onDelete(): void;
 }
 
-export type NotificationMap = Record<string, { text: string; link: string; moves: Move[] }>;
+export type MoveStateItem = { id: string; move: Move; text: string; link: string; row: number };
+
+export type Notification = { text: string; link: string; id: string };
+
+export interface ToastEmitterProps {
+	notifications: Notification[];
+}
+
+export type ToastSpanProps = HTMLAttributes<HTMLSpanElement>;

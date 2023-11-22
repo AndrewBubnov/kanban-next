@@ -2,17 +2,17 @@
 import { prisma } from '@/db';
 import { auth } from '@clerk/nextjs';
 
-export const deleteNotification = async (deletedIndex: number) => {
+export const deleteNotification = async (deletedId: string) => {
 	const userId = auth().userId as string;
 
 	const notifications = await prisma.notification.findMany({ where: { userId } });
 
-	const updated = [...notifications.slice(0, deletedIndex), ...notifications.slice(deletedIndex + 1)].map(
-		({ text, link }) => ({
+	const updated = notifications
+		.filter(el => el.id !== deletedId)
+		.map(({ text, link }) => ({
 			text,
 			link,
-		})
-	);
+		}));
 
 	await prisma.notification.deleteMany({ where: { userId } });
 

@@ -19,7 +19,7 @@ export interface SingleCommentProps {
 	onEdit(): void;
 }
 
-export interface TaggedSpanProps extends HTMLAttributes<HTMLSpanElement> {}
+export type TaggedSpanProps = HTMLAttributes<HTMLSpanElement>;
 
 export interface PopoverContentInjectedProps {
 	onClose(): void;
