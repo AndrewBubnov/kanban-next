@@ -108,6 +108,7 @@ export const DateContainer = styled(Box)(() => ({
 }));
 
 export const Module = styled(Box)(() => ({
+	position: 'relative',
 	marginBottom: '1.5rem',
 }));
 

@@ -17,7 +17,7 @@ export const SingleComment = ({
 	const { user } = useUser();
 	const ref = useRef<HTMLDivElement>(null);
 
-	useEffect(() => ref.current?.scrollIntoView({ behavior: 'smooth' }), []);
+	useEffect(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), []);
 
 	const userId = user?.id!;
 	const { userIdsArray } = useContext(DetailsContext);

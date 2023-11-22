@@ -11,7 +11,7 @@ export const CommentsContainer = styled(Box)(() => ({
 	'height': 130,
 	'borderRadius': 4,
 	'padding': 5,
-	'background': '#d3d3d345',
+	'background': 'rgba(211,211,211,0.4)',
 	'overflowY': 'auto',
 	'&::-webkit-scrollbar': {
 		width: 6,

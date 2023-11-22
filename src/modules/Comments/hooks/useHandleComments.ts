@@ -9,18 +9,21 @@ export const useHandleComments = (task: TaskItem) => {
 	const [text, setText] = useState<string>('');
 	const [submittedText, setSubmittedText] = useState<string>('');
 	const [commentId, setCommentId] = useState<string>('');
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!submittedText) return;
 		setText('');
 		setSubmittedText('');
 		setCommentId('');
+		setIsLoading(true);
 		(async function () {
 			if (commentId) {
 				await updateComment(task.id, commentId, { text: submittedText });
 			} else {
 				await createComment({ taskId: task.id, text: submittedText });
 			}
+			setIsLoading(false);
 		})();
 	}, [commentId, submittedText, task.id]);
 
@@ -37,9 +40,9 @@ export const useHandleComments = (task: TaskItem) => {
 	const changeHandler = (evt: ChangeEvent<HTMLInputElement>) => setText(evt.target.value);
 
 	const submitHandler = async () => {
-		if (!text) return;
+		if (isLoading || !text) return;
 		setSubmittedText(text);
 	};
 
-	return { editHandler, deleteHandler, changeHandler, submitHandler, commentId, text };
+	return { editHandler, deleteHandler, changeHandler, submitHandler, commentId, text, isLoading };
 };
