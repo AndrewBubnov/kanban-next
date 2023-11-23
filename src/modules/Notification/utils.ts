@@ -18,8 +18,9 @@ export const onDeleteNotification = (deletedKey: string) => (prevState: MoveStat
 	});
 };
 
-export const createTimerState = (notifications: Notification[]) =>
-	Array(notifications.length)
+export const createTimerState = (state: MoveStateItem[][], notifications: Notification[]) => {
+	if (state.length === notifications.length) return state;
+	return Array(notifications.length)
 		.fill(null)
 		.map((_, counter) =>
 			notifications
@@ -33,3 +34,4 @@ export const createTimerState = (notifications: Notification[]) =>
 					id: el.id,
 				}))
 		);
+};

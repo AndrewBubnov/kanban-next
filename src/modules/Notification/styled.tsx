@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Box, IconButton } from '@mui/material';
 import Link from 'next/link';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
-import { TOAST_HEIGHT } from '@/modules/Notification/constants';
+import { TOAST_ANIMATION_AND_DELAY_TIME, TOAST_HEIGHT } from '@/modules/Notification/constants';
 import { ToastSpanProps } from '@/modules/Notification/types';
 
 export const ToastWrapper = styled(Box)`
@@ -18,7 +18,7 @@ export const ToastWrapper = styled(Box)`
 	bottom: 100px;
 	left: 100%;
 	border-radius: 5px;
-	transition: transform 0.3s ease-in-out;
+	transition: transform ${TOAST_ANIMATION_AND_DELAY_TIME}ms ease-in-out;
 `;
 export const ToastIconButton = styled(IconButton)`
 	position: absolute;

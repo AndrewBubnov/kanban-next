@@ -9,7 +9,8 @@ export const deleteNotification = async (deletedId: string) => {
 
 	const updated = notifications
 		.filter(el => el.id !== deletedId)
-		.map(({ text, link }) => ({
+		.map(({ text, link, id }) => ({
+			id,
 			text,
 			link,
 		}));
