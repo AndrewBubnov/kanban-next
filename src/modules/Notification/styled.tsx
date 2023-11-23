@@ -18,7 +18,7 @@ export const ToastWrapper = styled(Box)`
 	bottom: 100px;
 	left: 100%;
 	border-radius: 5px;
-	transition: transform ${TOAST_ANIMATION_AND_DELAY_TIME}ms ease-in-out;
+	transition: transform ${TOAST_ANIMATION_AND_DELAY_TIME}ms ease-out;
 `;
 export const ToastIconButton = styled(IconButton)`
 	position: absolute;

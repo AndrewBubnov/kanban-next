@@ -1,37 +1,55 @@
 import { Move, MoveStateItem, Notification } from '@/modules/Notification/types';
+import { TOAST_ANIMATION_AND_DELAY_TIME } from '@/modules/Notification/constants';
 
 export const onDeleteNotification = (deletedKey: string) => (prevState: MoveStateItem[]) => {
-	const deletedRow = prevState.find(el => el.id === deletedKey)?.row || 0;
+	const deletedRow = prevState.find(el => el.id === deletedKey)?.moves.at(-1)?.row || 0;
 	return prevState.map(el => {
-		if (el.id === deletedKey)
-			return {
-				...el,
-				move: Move.RIGHT,
-			};
-		if (el.row > deletedRow)
-			return {
-				...el,
-				move: Move.DOWN,
-				row: el.row - 1,
-			};
+		const lastRow = el.moves.at(-1)?.row || 0;
+		if (el.id === deletedKey) {
+			return { ...el, moves: [{ move: Move.RIGHT, row: lastRow, timeout: 0 }] };
+		}
+		if (el.moves.at(-1)?.row || 0 > deletedRow) {
+			return { ...el, moves: [{ move: Move.UP, row: lastRow - 1, timeout: 0 }] };
+		}
 		return el;
 	});
 };
 
-export const createTimerState = (state: MoveStateItem[][], notifications: Notification[]) => {
-	if (state.length === notifications.length) return state;
-	return Array(notifications.length)
-		.fill(null)
-		.map((_, counter) =>
-			notifications
-				.slice(0, counter + 1)
-				.reverse()
-				.map((el, index, { length }) => ({
-					move: length === 1 ? Move.LEFT : index ? Move.UP : Move.LEFT,
-					text: el.text,
-					link: el.link,
-					row: index,
-					id: el.id,
-				}))
-		);
+export const createMoveState = (state: MoveStateItem[], notifications: Notification[]) => {
+	if (state.length >= notifications.length) return state;
+	if (!state.length) {
+		return notifications.reduce((acc, cur, index) => {
+			const verticalMoves = Array.from({ length: notifications.length - 1 - index }, (_, arrayIndex) => ({
+				move: Move.UP,
+				timeout: (index + arrayIndex + 1) * TOAST_ANIMATION_AND_DELAY_TIME,
+				row: arrayIndex + 1,
+			}));
+			const moves = [
+				{ move: Move.LEFT, timeout: index * TOAST_ANIMATION_AND_DELAY_TIME, row: 0 },
+				...verticalMoves,
+			];
+			acc.push({
+				moves,
+				text: cur.text,
+				link: cur.link,
+				id: cur.id,
+			});
+			return acc;
+		}, [] as MoveStateItem[]);
+	}
+	if (state.length < notifications.length) {
+		const existed = Object.values(state).map(el => ({
+			...el,
+			moves: [{ move: 'up', timeout: 0, row: (el.moves.at(-1)?.row || 0) + 1 }],
+		}));
+		return [
+			...existed,
+			{
+				moves: [{ move: 'left', timeout: 0, row: 0 }],
+				id: notifications.at(-1)?.id || '',
+				text: notifications.at(-1)?.text || '',
+				link: notifications.at(-1)?.link || '',
+			},
+		];
+	}
 };

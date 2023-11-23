@@ -8,14 +8,19 @@ export enum Move {
 }
 
 export interface ToastProps {
-	move: Move;
+	moves: ToastMove[];
 	text: string;
 	link: string;
-	row: number;
 	onDelete(): void;
 }
 
-export type MoveStateItem = { id: string; move: Move; text: string; link: string; row: number };
+export interface ToastMove {
+	move: Move;
+	timeout: number;
+	row: number;
+}
+
+export type MoveStateItem = { id: string; moves: ToastMove[]; text: string; link: string };
 
 export type Notification = { text: string; link: string; id: string };
 
