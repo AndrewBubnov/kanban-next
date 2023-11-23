@@ -154,3 +154,22 @@ export const NotFoundPageText = styled(Typography)(() => ({
 export const NotFoundPageLink = styled(Link)(() => ({
 	textDecoration: 'underline',
 }));
+
+export const customScrollCSS = {
+	'&::-webkit-scrollbar': {
+		width: 6,
+	},
+
+	'&::-webkit-scrollbar-track': {
+		width: 6,
+		backgroundColor: 'transparent',
+		border: 'solid 1px transparent',
+	},
+
+	'&::-webkit-scrollbar-thumb': {
+		backgroundColor: 'darkgray',
+		border: 'solid 1px transparent',
+		borderRadius: 6,
+		backgroundClip: 'padding-box',
+	},
+};

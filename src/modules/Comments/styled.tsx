@@ -6,29 +6,15 @@ import Button from '@mui/material/Button';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 import { TaggedSpanProps } from '@/modules/Comments/types';
+import { customScrollCSS } from '@/modules/Shared/styled';
 
 export const CommentsContainer = styled(Box)(() => ({
-	'height': 130,
-	'borderRadius': 4,
-	'padding': 5,
-	'background': 'rgba(211,211,211,0.4)',
-	'overflowY': 'auto',
-	'&::-webkit-scrollbar': {
-		width: 6,
-	},
-
-	'&::-webkit-scrollbar-track': {
-		width: 6,
-		backgroundColor: 'transparent',
-		border: 'solid 1px transparent',
-	},
-
-	'&::-webkit-scrollbar-thumb': {
-		backgroundColor: 'darkgray',
-		border: 'solid 1px transparent',
-		borderRadius: 6,
-		backgroundClip: 'padding-box',
-	},
+	height: 130,
+	borderRadius: 4,
+	padding: 5,
+	background: 'rgba(211,211,211,0.4)',
+	overflowY: 'auto',
+	...customScrollCSS,
 }));
 export const AddCommentTextField = styled(TextField)(() => ({
 	paddingBottom: '0.5rem',
