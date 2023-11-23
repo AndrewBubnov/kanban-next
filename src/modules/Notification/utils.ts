@@ -16,7 +16,6 @@ export const onDeleteNotification = (deletedKey: string) => (prevState: MoveStat
 };
 
 export const createMoveState = (state: MoveStateItem[], notifications: Notification[]) => {
-	if (state.length >= notifications.length) return state;
 	if (!state.length) {
 		return notifications.reduce((acc, cur, index) => {
 			const verticalMoves = Array.from({ length: notifications.length - 1 - index }, (_, arrayIndex) => ({
@@ -40,16 +39,17 @@ export const createMoveState = (state: MoveStateItem[], notifications: Notificat
 	if (state.length < notifications.length) {
 		const existed = Object.values(state).map(el => ({
 			...el,
-			moves: [{ move: 'up', timeout: 0, row: (el.moves.at(-1)?.row || 0) + 1 }],
+			moves: [{ move: Move.UP, timeout: 0, row: (el.moves.at(-1)?.row || 0) + 1 }],
 		}));
 		return [
 			...existed,
 			{
-				moves: [{ move: 'left', timeout: 0, row: 0 }],
+				moves: [{ move: Move.LEFT, timeout: 0, row: 0 }],
 				id: notifications.at(-1)?.id || '',
 				text: notifications.at(-1)?.text || '',
 				link: notifications.at(-1)?.link || '',
 			},
 		];
 	}
+	return state;
 };

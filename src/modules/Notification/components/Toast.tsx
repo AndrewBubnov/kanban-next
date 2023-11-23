@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyledLink, ToastCloseIcon, ToastIconButton, ToastSpan, ToastWrapper } from '@/modules/Notification/styled';
-import { DASHBOARD } from '@/modules/Shared/constants';
 import { LAUNCH_TOAST, TOAST_GAP, TOAST_HEIGHT } from '@/modules/Notification/constants';
+import { DASHBOARD } from '@/modules/Shared/constants';
 import { Move, ToastProps } from '../types';
 
 export const Toast = ({ moves, onDelete, text, link }: ToastProps) => {
