@@ -13,7 +13,11 @@ import { CardAssigneeSelect } from '@/modules/CreateAndUpdateTask/components/Car
 import { deleteTask } from '@/modules/CreateAndUpdateTask/actions/deleteTask';
 import { ConfirmDialog } from '@/modules/CreateAndUpdateTask/components/ConfirmDialog';
 import { CardEstimateSelect } from '@/modules/CreateAndUpdateTask/components/CardEstimateSelect';
-import { DELETE_TASK_ERROR_MESSAGE, estimation } from '@/modules/CreateAndUpdateTask/constants';
+import {
+	DELETE_TASK_ERROR_MESSAGE,
+	estimation,
+	UPDATE_TASK_ERROR_MESSAGE,
+} from '@/modules/CreateAndUpdateTask/constants';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { CardFormUpdateProps } from '@/modules/CreateAndUpdateTask/types';
 import { ButtonContainer, DeleteButton, StyledButton } from '@/modules/CreateAndUpdateTask/styled';
@@ -65,7 +69,7 @@ export const TaskUpdateForm = ({
 			await updateSingleTask(assigneeId, taskId, updatedTaskData);
 			cancelHandler();
 		} catch {
-			emitErrorNotification('Failed to update task. Please retry.');
+			emitErrorNotification(UPDATE_TASK_ERROR_MESSAGE);
 		}
 	};
 
