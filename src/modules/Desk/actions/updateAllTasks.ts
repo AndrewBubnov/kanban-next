@@ -2,7 +2,6 @@
 import { getUser } from '@/app/dashboard/[taskId]/edit/actions/getUser';
 import { prisma } from '@/db';
 import { revalidatePath } from 'next/cache';
-
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { TaskItem } from '@/modules/Shared/types';
 

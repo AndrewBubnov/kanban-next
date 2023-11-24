@@ -11,7 +11,6 @@ import { DASHBOARD } from '@/modules/Shared/constants';
 import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
 import { StyledTableIcon } from '@/app/dashboard/[taskId]/edit/styled';
 import { getColumnList } from '@/app/dashboard/actions/getColumnList';
-import { ErrorNotificationEmitter } from '@/modules/Notification/components/ErrorNotificationEmitter';
 
 const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 	const [{ isAdmin }, task, userIdsArray, statusList] = await Promise.all([
@@ -24,31 +23,23 @@ const TaskEdit = async ({ params: { taskId } }: TaskIdParam) => {
 	if (!task) return <NotFoundPage />;
 
 	return (
-		<>
-			<Wrapper>
-				<StyledTaskDetails>
-					<CardContent>
-						<Grid container flexDirection="row-reverse">
-							<IconContainer>
-								<Link href={DASHBOARD}>
-									<StyledTableIcon />
-								</Link>
-								<Link href={`${DASHBOARD}/${taskId}`}>
-									<StyledBackIcon />
-								</Link>
-							</IconContainer>
-						</Grid>
-						<TaskUpdateForm
-							task={task}
-							isAdmin={isAdmin}
-							statusList={statusList}
-							userIdsArray={userIdsArray}
-						/>
-					</CardContent>
-				</StyledTaskDetails>
-			</Wrapper>
-			<ErrorNotificationEmitter />
-		</>
+		<Wrapper>
+			<StyledTaskDetails>
+				<CardContent>
+					<Grid container flexDirection="row-reverse">
+						<IconContainer>
+							<Link href={DASHBOARD}>
+								<StyledTableIcon />
+							</Link>
+							<Link href={`${DASHBOARD}/${taskId}`}>
+								<StyledBackIcon />
+							</Link>
+						</IconContainer>
+					</Grid>
+					<TaskUpdateForm task={task} isAdmin={isAdmin} statusList={statusList} userIdsArray={userIdsArray} />
+				</CardContent>
+			</StyledTaskDetails>
+		</Wrapper>
 	);
 };
 
