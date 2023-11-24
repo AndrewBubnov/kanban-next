@@ -29,3 +29,20 @@ export interface ToastEmitterProps {
 }
 
 export type ToastSpanProps = HTMLAttributes<HTMLSpanElement>;
+
+export interface ErrorToastProgressProps extends HTMLAttributes<HTMLDivElement> {
+	width: number;
+}
+
+export interface ErrorToastProps {
+	isShown: boolean;
+	message: string;
+	onDelete(): void;
+	onTransitionEnd(): void;
+}
+
+declare global {
+	interface WindowEventMap {
+		customError: CustomEvent;
+	}
+}

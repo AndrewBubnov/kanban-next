@@ -12,6 +12,7 @@ import { ControlsContainer, MainContainer } from '@/app/dashboard/styled';
 import { getNotifications } from '@/modules/Notification/actions/getNotifications';
 import { ToastEmitter } from '@/modules/Notification/components/ToastEmitter';
 import { getEmptyColumnNames } from '@/app/dashboard/actions/getEmptyColumns';
+import { ErrorNotificationEmitter } from '@/modules/Notification/components/ErrorNotificationEmitter';
 
 export default async function Dashboard({ searchParams: { username } }: DashboardPageProps) {
 	const { isAdmin } = await getUser();
@@ -38,6 +39,7 @@ export default async function Dashboard({ searchParams: { username } }: Dashboar
 				</ControlsContainer>
 				<Desk tasks={tasksShown} />
 				<ToastEmitter notifications={notifications} />
+				<ErrorNotificationEmitter />
 			</DashboardProvider>
 		</MainContainer>
 	);

@@ -15,7 +15,7 @@ export interface DashboardContextProps {
 	userIdsArray: UserIdsArrayItem[];
 	isAdmin: boolean;
 	columnConfigState: ColumnType[];
-	toggleColumnState(name?: string): Promise<void>;
+	toggleColumnState(name?: string): void;
 	addCustomColumn(name: string): void;
 	removeColumn(name: string): void;
 	isLoading: boolean;

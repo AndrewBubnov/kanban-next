@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLatest } from '@/modules/Shared/hooks/useLatest';
 import { updateColumns } from '@/modules/StatusSelect/actions/updateColumns';
-
+import { emitErrorNotification } from '@/modules/Notification/components/ErrorNotificationEmitter';
+import { STATUS_SELECT_ERROR_MESSAGE } from '@/modules/StatusSelect/constants';
 import { ColumnType } from '@/modules/Shared/types';
 
 export const useStatusConfig = (columnConfig: ColumnType[]) => {
@@ -14,7 +15,11 @@ export const useStatusConfig = (columnConfig: ColumnType[]) => {
 		if (!isStateUpdated) return;
 		setIsStateUpdated(false);
 		(async function () {
-			await updateColumns(updatedStateRef.current);
+			try {
+				await updateColumns(updatedStateRef.current);
+			} catch {
+				emitErrorNotification(STATUS_SELECT_ERROR_MESSAGE);
+			}
 		})();
 	}, [isStateUpdated, updatedStateRef]);
 
@@ -24,7 +29,7 @@ export const useStatusConfig = (columnConfig: ColumnType[]) => {
 	}, []);
 
 	const toggleColumnState = useCallback(
-		async (name?: string) => {
+		(name?: string) => {
 			if (!name) return;
 			const updatedState = state.map(el => {
 				return el.name === name ? { ...el, shown: !el.shown } : el;

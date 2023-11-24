@@ -28,6 +28,7 @@ import {
 } from '@/app/dashboard/[taskId]/styled';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { TaskIdParam } from '@/app/dashboard/[taskId]/edit/types';
+import { ErrorNotificationEmitter } from '@/modules/Notification/components/ErrorNotificationEmitter';
 
 const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	const [task, userIdsArray] = await Promise.all([getTaskById(taskId), getMappedUserIds()]);
@@ -36,55 +37,58 @@ const Details = async ({ params: { taskId } }: TaskIdParam) => {
 	if (!task) return <NotFoundPage />;
 
 	return (
-		<Wrapper>
-			<StyledTaskDetails>
-				<CardContent>
-					<FlexContainer justify>
-						<FlexWrapper>
-							<UserPhoto
-								imageUrl={task.assignee?.imageUrl}
-								username={task.assignee?.username}
-								size="big"
-							/>
-							<DarkGreyText>{`${task.assignee?.username} ${task.assignee?.email}`}</DarkGreyText>
-						</FlexWrapper>
-						<IconContainer>
-							<Link href={editPage}>
-								<StyledEditIcon />
-							</Link>
-							<Link href={DASHBOARD}>
-								<StyledBackIcon />
-							</Link>
-						</IconContainer>
-					</FlexContainer>
-					<Module>
-						<TitleContainer>
-							<TitleInnerContainer>
-								<DarkGreyText>{task?.id.slice(0, 4)}&nbsp;</DarkGreyText>
-								<TitleText>{task?.title}</TitleText>
-							</TitleInnerContainer>
-							<DateContainer>{getStringDate(task.createdAt)}</DateContainer>
-						</TitleContainer>
-					</Module>
-					<Module>
-						<FlexStartWrapper>
-							<Box>
-								<DarkGreyText>Status</DarkGreyText>
-								<Typography mt={1}>{task?.status}</Typography>
-							</Box>
-							<EstimatedTime task={task} editPage={editPage} />
-						</FlexStartWrapper>
-					</Module>
-					<Module>
-						<DarkGreyText>Description</DarkGreyText>
-						<Typography mt={1}>{task?.description}</Typography>
-					</Module>
-					<DetailsProvider userIdsArray={userIdsArray}>
-						<CommentsList task={task} />
-					</DetailsProvider>
-				</CardContent>
-			</StyledTaskDetails>
-		</Wrapper>
+		<>
+			<Wrapper>
+				<StyledTaskDetails>
+					<CardContent>
+						<FlexContainer justify>
+							<FlexWrapper>
+								<UserPhoto
+									imageUrl={task.assignee?.imageUrl}
+									username={task.assignee?.username}
+									size="big"
+								/>
+								<DarkGreyText>{`${task.assignee?.username} ${task.assignee?.email}`}</DarkGreyText>
+							</FlexWrapper>
+							<IconContainer>
+								<Link href={editPage}>
+									<StyledEditIcon />
+								</Link>
+								<Link href={DASHBOARD}>
+									<StyledBackIcon />
+								</Link>
+							</IconContainer>
+						</FlexContainer>
+						<Module>
+							<TitleContainer>
+								<TitleInnerContainer>
+									<DarkGreyText>{task?.id.slice(0, 4)}&nbsp;</DarkGreyText>
+									<TitleText>{task?.title}</TitleText>
+								</TitleInnerContainer>
+								<DateContainer>{getStringDate(task.createdAt)}</DateContainer>
+							</TitleContainer>
+						</Module>
+						<Module>
+							<FlexStartWrapper>
+								<Box>
+									<DarkGreyText>Status</DarkGreyText>
+									<Typography mt={1}>{task?.status}</Typography>
+								</Box>
+								<EstimatedTime task={task} editPage={editPage} />
+							</FlexStartWrapper>
+						</Module>
+						<Module>
+							<DarkGreyText>Description</DarkGreyText>
+							<Typography mt={1}>{task?.description}</Typography>
+						</Module>
+						<DetailsProvider userIdsArray={userIdsArray}>
+							<CommentsList task={task} />
+						</DetailsProvider>
+					</CardContent>
+				</StyledTaskDetails>
+			</Wrapper>
+			<ErrorNotificationEmitter />
+		</>
 	);
 };
 export default Details;

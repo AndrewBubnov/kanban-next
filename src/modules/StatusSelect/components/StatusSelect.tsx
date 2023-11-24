@@ -20,9 +20,9 @@ export const StatusSelect = () => {
 		useContext(DashboardContext);
 	const [customColumnName, setCustomColumnName] = useState<string>('');
 
-	const changeHandler = async (event: SelectChangeEvent<unknown>) => {
+	const changeHandler = (event: SelectChangeEvent<unknown>) => {
 		const value = (event.target.value as string[]).at(-1);
-		await toggleColumnState(value);
+		toggleColumnState(value);
 	};
 	const customColumnHandler = (evt: ChangeEvent<HTMLInputElement>) => setCustomColumnName(evt.target.value);
 

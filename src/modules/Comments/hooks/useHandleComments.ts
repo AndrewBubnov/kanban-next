@@ -4,6 +4,8 @@ import { updateComment } from '@/modules/Comments/actions/updateComment';
 import { createComment } from '@/modules/Comments/actions/createComment';
 import { TaskItem } from '@/modules/Shared/types';
 import { EditHandlerArgs } from '@/modules/Comments/types';
+import { emitErrorNotification } from '@/modules/Notification/components/ErrorNotificationEmitter';
+import { getErrorMessage } from '@/modules/Comments/utils';
 
 export const useHandleComments = (task: TaskItem) => {
 	const [text, setText] = useState<string>('');
@@ -18,12 +20,17 @@ export const useHandleComments = (task: TaskItem) => {
 		setCommentId('');
 		setIsLoading(true);
 		(async function () {
-			if (commentId) {
-				await updateComment(task.id, commentId, { text: submittedText });
-			} else {
-				await createComment({ taskId: task.id, text: submittedText });
+			try {
+				if (commentId) {
+					await updateComment(task.id, commentId, { text: submittedText });
+				} else {
+					await createComment({ taskId: task.id, text: submittedText });
+				}
+			} catch {
+				emitErrorNotification(getErrorMessage(commentId));
+			} finally {
+				setIsLoading(false);
 			}
-			setIsLoading(false);
 		})();
 	}, [commentId, submittedText, task.id]);
 
