@@ -6,9 +6,10 @@ import { updateConfig } from '@/modules/Desk/utils/updateConfig';
 import { updateAllTasks } from '@/modules/Desk/actions/updateAllTasks';
 import { useLatest } from '@/modules/Shared/hooks/useLatest';
 import { DashboardContext } from '@/modules/Providers/DashboardProvider';
-import { INTERSECTION_RATIO } from '@/modules/Desk/constants';
+import { DESK_ERROR_MESSAGE, INTERSECTION_RATIO } from '@/modules/Desk/constants';
 import { TaskItem } from '@/modules/Shared/types';
 import { ColCoords, Parameters } from '@/modules/Desk/types';
+import { emitErrorNotification } from '@/modules/Notification/components/ErrorNotificationEmitter';
 
 export const useDrag = (tasks: TaskItem[]) => {
 	const { isLoading, setIsLoading } = useContext(DashboardContext);
@@ -104,7 +105,11 @@ export const useDrag = (tasks: TaskItem[]) => {
 
 	const dropHandler = useCallback(async () => {
 		setIsSaved(true);
-		await updateAllTasks(updateConfig(tasks, parameters, draggedId, updatedStatus.current));
+		try {
+			await updateAllTasks(updateConfig(tasks, parameters, draggedId, updatedStatus.current));
+		} catch {
+			emitErrorNotification(DESK_ERROR_MESSAGE);
+		}
 	}, [tasks, parameters, draggedId, updatedStatus]);
 
 	return {

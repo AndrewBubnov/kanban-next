@@ -13,10 +13,11 @@ import { CardAssigneeSelect } from '@/modules/CreateAndUpdateTask/components/Car
 import { deleteTask } from '@/modules/CreateAndUpdateTask/actions/deleteTask';
 import { ConfirmDialog } from '@/modules/CreateAndUpdateTask/components/ConfirmDialog';
 import { CardEstimateSelect } from '@/modules/CreateAndUpdateTask/components/CardEstimateSelect';
-import { estimation } from '@/modules/CreateAndUpdateTask/constants';
+import { DELETE_TASK_ERROR_MESSAGE, estimation } from '@/modules/CreateAndUpdateTask/constants';
 import { DASHBOARD } from '@/modules/Shared/constants';
 import { CardFormUpdateProps } from '@/modules/CreateAndUpdateTask/types';
 import { ButtonContainer, DeleteButton, StyledButton } from '@/modules/CreateAndUpdateTask/styled';
+import { emitErrorNotification } from '@/modules/Notification/components/ErrorNotificationEmitter';
 
 export const TaskUpdateForm = ({
 	task: {
@@ -44,8 +45,13 @@ export const TaskUpdateForm = ({
 
 	const deleteCancelHandler = () => setOpen(false);
 	const deleteConfirmHandler = async () => {
-		await deleteTask(taskId);
-		push(DASHBOARD);
+		try {
+			await deleteTask(taskId);
+			push(DASHBOARD);
+		} catch {
+			setOpen(false);
+			emitErrorNotification(DELETE_TASK_ERROR_MESSAGE);
+		}
 	};
 	const deleteClickHandler = () => setOpen(true);
 	const titleHandler = (evt: ChangeEvent<HTMLInputElement>) => setTitle(evt.target.value);
@@ -55,8 +61,12 @@ export const TaskUpdateForm = ({
 	const confirmHandler = async () => {
 		if (!title) return;
 		const updatedTaskData = { title, description, status, estimateDays: parseFloat(estimateDaysState) || 0 };
-		await updateSingleTask(assigneeId, taskId, updatedTaskData);
-		cancelHandler();
+		try {
+			await updateSingleTask(assigneeId, taskId, updatedTaskData);
+			cancelHandler();
+		} catch {
+			emitErrorNotification('Failed to update task. Please retry.');
+		}
 	};
 
 	return (
@@ -105,7 +115,7 @@ export const TaskUpdateForm = ({
 							Cancel
 						</StyledButton>
 						<StyledButton type="submit" size="small" variant="outlined">
-							Confirm
+							Update
 						</StyledButton>
 					</ButtonContainer>
 				</FlexContainer>

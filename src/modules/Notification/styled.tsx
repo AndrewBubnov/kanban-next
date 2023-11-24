@@ -31,6 +31,7 @@ export const ErrorToastWrapper = styled(Box)`
 	width: 500px;
 	height: ${TOAST_HEIGHT}px;
 	background: tomato;
+	font-size: 0.9rem;
 	bottom: 100px;
 	left: -100%;
 	border-radius: 5px;

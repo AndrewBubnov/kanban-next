@@ -7,3 +7,4 @@ export const COMMON_TRANSLATE = 'translateY(var(--delta-y))';
 export const TASK_MINI_HEIGHT = 150;
 export const GAP = 16;
 export const SINGLE_VERTICAL_MOVE = TASK_MINI_HEIGHT + GAP;
+export const DESK_ERROR_MESSAGE = 'Failed to save tasks. Please refresh the page.';

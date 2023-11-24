@@ -8,6 +8,8 @@ import { CardEstimateSelect } from '@/modules/CreateAndUpdateTask/components/Car
 import { createTask } from '@/modules/CreateAndUpdateTask/actions/createTask';
 import { CardFormCreateProps } from '@/modules/CreateAndUpdateTask/types';
 import { ButtonContainer, StyledButton } from '@/modules/CreateAndUpdateTask/styled';
+import { emitErrorNotification } from '@/modules/Notification/components/ErrorNotificationEmitter';
+import { CREATE_TASK_ERROR_MESSAGE } from '@/modules/CreateAndUpdateTask/constants';
 
 export const TaskCreateForm = ({ userIdsArray, isAdmin, onCancel }: CardFormCreateProps) => {
 	const { user } = useUser();
@@ -20,8 +22,13 @@ export const TaskCreateForm = ({ userIdsArray, isAdmin, onCancel }: CardFormCrea
 		const title = data.get('title') as string;
 		const description = data.get('description') as string;
 		if (!title) return;
-		await createTask({ title, description, userId: assigneeId, estimateDays });
-		onCancel();
+		try {
+			await createTask({ title, description, userId: assigneeId, estimateDays });
+		} catch {
+			emitErrorNotification(CREATE_TASK_ERROR_MESSAGE);
+		} finally {
+			onCancel();
+		}
 	};
 
 	return (
